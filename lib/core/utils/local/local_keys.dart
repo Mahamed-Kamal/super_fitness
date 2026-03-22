@@ -1,0 +1,3 @@
+class LocalKeys {
+  LocalKeys._();
+}
