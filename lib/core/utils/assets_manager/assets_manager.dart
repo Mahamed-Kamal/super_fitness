@@ -8,7 +8,10 @@ abstract final class AssetsManager {
   static const String onBoarding1Gif = 'assets/images/on_boarding1.gif';
   static const String robotSkippingGif = 'assets/images/robot_skipping.gif';
 
-  static const String onboardingBackground = 'assets/images/onboarding_bg.jpg';
+  static const String authBackground = 'assets/images/auth_background.png';
+  static const String chatBackground = 'assets/images/chat_background.jpg';
+  static const String homeBackground = 'assets/images/home_background.jpg';
+  static const String profileBackground = 'assets/images/profile_background.jpg';
 
   // =============== Icons ===============
   static const String icGymSvg = 'assets/images/ic_gym.svg';
