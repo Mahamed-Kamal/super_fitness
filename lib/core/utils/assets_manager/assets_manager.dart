@@ -11,7 +11,8 @@ abstract final class AssetsManager {
   static const String authBackground = 'assets/images/auth_background.png';
   static const String chatBackground = 'assets/images/chat_background.jpg';
   static const String homeBackground = 'assets/images/home_background.jpg';
-  static const String profileBackground = 'assets/images/profile_background.jpg';
+  static const String profileBackground =
+      'assets/images/profile_background.jpg';
 
   // =============== Icons ===============
   static const String icGymSvg = 'assets/images/ic_gym.svg';
