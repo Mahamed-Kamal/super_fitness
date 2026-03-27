@@ -1,1 +1,1 @@
-
+abstract interface class AuthDataSource {}

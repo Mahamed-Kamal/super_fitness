@@ -8,7 +8,6 @@ abstract final class AssetsManager {
   static const String onBoarding1Gif = 'assets/images/on_boarding1.gif';
   static const String robotSkippingGif = 'assets/images/robot_skipping.gif';
 
-  /// خلفية onboarding (صورة نقطية). ضع الملف تحت `assets/images/` بنفس الاسم.
   static const String onboardingBackground = 'assets/images/onboarding_bg.jpg';
 
   // =============== Icons ===============

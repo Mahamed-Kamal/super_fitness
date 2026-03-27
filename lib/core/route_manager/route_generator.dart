@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
-import 'package:super_fitness/features/on_boarding/on_boarding_view.dart';
+import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 
 class RouteGenerator {
   static Route<dynamic>? getRoute(RouteSettings setting) {
