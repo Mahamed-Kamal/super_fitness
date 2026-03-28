@@ -7,38 +7,39 @@ import 'package:super_fitness/features/auth/domain/entities/user_goal.dart';
 
 void main() {
   group("UserMapper test", () {
+    test(
+      "should map UserDto to UserEntity correctly when all fields are valid",
+      () {
+        // Arrange
+        final dto = UserDto(
+          firstName: "Mohamed",
+          lastName: "Ehab",
+          email: "test@test.com",
+          gender: "male",
+          age: 25,
+          weight: 75,
+          height: 180,
+          activityLevel: "level3",
+          goal: "gainWeight",
+          profilePicture: "image.png",
+        );
 
-    test("should map UserDto to UserEntity correctly when all fields are valid",
-            () {
-          // Arrange
-          final dto = UserDto(
-            firstName: "Mohamed",
-            lastName: "Ehab",
-            email: "test@test.com",
-            gender: "male",
-            age: 25,
-            weight: 75,
-            height: 180,
-            activityLevel: "level3",
-            goal: "gainWeight",
-            profilePicture: "image.png",
-          );
+        // Act
+        final result = dto.toUserEntity();
 
-          // Act
-          final result = dto.toUserEntity();
-
-          // Assert
-          expect(result.firstName, "Mohamed");
-          expect(result.lastName, "Ehab");
-          expect(result.email, "test@test.com");
-          expect(result.gender, UserGender.male);
-          expect(result.age, 25);
-          expect(result.weight, 75);
-          expect(result.height, 180);
-          expect(result.activityLevel, ActivityLevel.intermediate);
-          expect(result.goal, UserGoal.gainWeight);
-          expect(result.profilePicture, "image.png");
-        });
+        // Assert
+        expect(result.firstName, "Mohamed");
+        expect(result.lastName, "Ehab");
+        expect(result.email, "test@test.com");
+        expect(result.gender, UserGender.male);
+        expect(result.age, 25);
+        expect(result.weight, 75);
+        expect(result.height, 180);
+        expect(result.activityLevel, ActivityLevel.intermediate);
+        expect(result.goal, UserGoal.gainWeight);
+        expect(result.profilePicture, "image.png");
+      },
+    );
 
     test("should map gender to female when value is not male", () {
       // Arrange
@@ -73,10 +74,7 @@ void main() {
 
     test("should map activity level and goal using mappers", () {
       // Arrange
-      final dto = UserDto(
-        activityLevel: "level5",
-        goal: "learnTheBasics",
-      );
+      final dto = UserDto(activityLevel: "level5", goal: "learnTheBasics");
 
       // Act
       final result = dto.toUserEntity();

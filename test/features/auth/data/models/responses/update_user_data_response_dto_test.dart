@@ -74,8 +74,14 @@ void main() {
     });
 
     test('should support value equality via Equatable', () {
-      const model1 = UpdateUserDataResponseDto(message: "Success", user: mockUser);
-      const model2 = UpdateUserDataResponseDto(message: "Success", user: mockUser);
+      const model1 = UpdateUserDataResponseDto(
+        message: "Success",
+        user: mockUser,
+      );
+      const model2 = UpdateUserDataResponseDto(
+        message: "Success",
+        user: mockUser,
+      );
 
       expect(model1, model2);
     });

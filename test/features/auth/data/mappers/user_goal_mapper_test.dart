@@ -4,7 +4,6 @@ import 'package:super_fitness/features/auth/data/mappers/user_goal_mapper.dart';
 
 void main() {
   group("UserGoalMapper test", () {
-
     test("should map loseWeight correctly", () {
       final result = "loseWeight".toUserGoal();
       expect(result, UserGoal.loseWeight);
