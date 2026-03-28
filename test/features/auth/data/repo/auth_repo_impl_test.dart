@@ -11,6 +11,7 @@ import 'package:super_fitness/features/auth/data/models/response/forgot_password
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
+import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 import 'package:super_fitness/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:super_fitness/features/auth/domain/entity/forget_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/reset_password_entity.dart';
@@ -37,6 +38,7 @@ void main() {
   late VerifyResetCodeEntity verifyResetCodeEntity;
   late ForgotPasswordEntity forgotPasswordEntity;
   late String errorMessage;
+  late AuthRepoImpl authRepo;
 
   setUpAll(() {
     provideDummy<Result<ForgotPasswordResponse>>(
@@ -52,6 +54,7 @@ void main() {
 
   setUp(() {
     mockAuthDataSource = MockAuthDataSource();
+    authRepo = AuthRepoImpl(mockAuthDataSource);
     authRepoImpl = AuthRepoImpl(mockAuthDataSource);
 
     forgotPasswordRequest = ForgotPasswordRequest(email: "email");
@@ -69,6 +72,19 @@ void main() {
     errorMessage = "error";
   });
 
+  group("Register test", () {
+    final firstName = "Mohamed";
+    final lastName = "Ehab";
+    final email = "test@test.com";
+    final password = "123456";
+    final rePassword = "123456";
+    final gender = "male";
+    final height = 180;
+    final weight = 75;
+    final age = 25;
+    final goal = "fitness";
+    final activityLevel = "high";
+    final token = "token";
   // ══════════════════════════════════════════════════════════
   //  Login
   // ══════════════════════════════════════════════════════════
@@ -77,6 +93,16 @@ void main() {
     late SuccessResponse<LoginResponseDto> successResponse;
     late FailureResponse<LoginResponseDto> errorResponse;
 
+    test(
+      "when i call register from repo,"
+      "it's calls data source with correct model and return token successfully",
+      () async {
+        // Arrange
+        final successResponse = SuccessResponse<String>(data: token);
+        provideDummy<Result<String>>(successResponse);
+        when(
+          mockAuthDataSource.register(any),
+        ).thenAnswer((_) async => successResponse);
     setUp(() {
       loginResponseDto = LoginResponseDto(
         message: "mohamed",
@@ -97,11 +123,30 @@ void main() {
         mockAuthDataSource.login(email: testEmail, password: testPassword),
       ).thenAnswer((_) async => successResponse);
 
+        // Act
+        final result =
+            await authRepo.register(
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  password: password,
+                  rePassword: rePassword,
+                  gender: gender,
+                  height: height,
+                  weight: weight,
+                  age: age,
+                  goal: goal,
+                  activityLevel: activityLevel,
+                )
+                as SuccessResponse<String>;
       final result = await authRepoImpl.login(
         email: testEmail,
         password: testPassword,
       );
 
+        final captured =
+            verify(mockAuthDataSource.register(captureAny)).captured.single
+                as RegisterRequestModel;
       expect(
         (result as SuccessResponse<LoginResponseDto>).data.token,
         equals(loginResponseDto.token),
@@ -112,6 +157,21 @@ void main() {
       verifyNoMoreInteractions(mockAuthDataSource);
     });
 
+        // Assert
+        expect(result.data, token);
+        expect(captured.firstName, firstName);
+        expect(captured.lastName, lastName);
+        expect(captured.email, email);
+        expect(captured.password, password);
+        expect(captured.rePassword, rePassword);
+        expect(captured.gender, gender);
+        expect(captured.height, height);
+        expect(captured.weight, weight);
+        expect(captured.age, age);
+        expect(captured.goal, goal);
+        expect(captured.activityLevel, activityLevel);
+      },
+    );
     test("when login fails it should return FailureResponse", () async {
       provideDummy<Result<LoginResponseDto>>(errorResponse);
       when(
@@ -139,8 +199,14 @@ void main() {
   // ══════════════════════════════════════════════════════════
   group("test forgotPassword", () {
     test(
+      "when i call register from repo, it's returns failure and verify call",
       'when call forgotPassword it should return success with the correct data',
       () async {
+        // Arrange
+        const errorMessage = "error";
+        when(mockAuthDataSource.register(any)).thenAnswer((_) async {
+          return FailureResponse<String>(errorMessage: errorMessage);
+        });
         when(
           mockAuthDataSource.forgotPassword(
             forgotPassword: forgotPasswordRequest,
@@ -256,6 +322,22 @@ void main() {
     });
   });
 
+        // Act
+        final result =
+            await authRepo.register(
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  password: password,
+                  rePassword: rePassword,
+                  gender: gender,
+                  height: height,
+                  weight: weight,
+                  age: age,
+                  goal: goal,
+                  activityLevel: activityLevel,
+                )
+                as FailureResponse<String>;
   // ══════════════════════════════════════════════════════════
   //  Reset Password
   // ══════════════════════════════════════════════════════════
@@ -273,6 +355,12 @@ void main() {
         newPassword: resetPasswordRequest.newPassword ?? "",
       );
 
+        // Assert
+        expect(result.errorMessage, errorMessage);
+        verify(mockAuthDataSource.register(any)).called(1);
+        verifyNoMoreInteractions(mockAuthDataSource);
+      },
+    );
       expect(
         result,
         SuccessResponse<ResetPasswordEntity>(data: resetPasswordEntity),

@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:super_fitness/core/api/api_client.dart';
 import 'package:super_fitness/core/api/models/user/user_dto.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
 import 'package:super_fitness/features/auth/data/data_source/auth_data_source_impl.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
@@ -13,6 +14,9 @@ import 'package:super_fitness/features/auth/data/models/response/forgot_password
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
+import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
+import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
+import 'package:super_fitness/core/api/models/user_dto.dart';
 
 import 'auth_data_source_impl_test.mocks.dart';
 
@@ -34,12 +38,15 @@ void main() {
   late DioException dioException;
 
   late String errorMessage;
+  late AuthDataSource authDataSource;
 
+  setUpAll(() {
   const testEmail = 'mohamedkamal@gmail.com';
   const testPassword = 'Mohamed@123';
 
   setUp(() {
     mockApiClient = MockApiClient();
+    authDataSource = AuthDataSourceImpl(mockApiClient);
     authDataSourceImpl = AuthDataSourceImpl(mockApiClient);
 
     forgotPasswordRequest = ForgotPasswordRequest(email: "email");
@@ -66,6 +73,11 @@ void main() {
     errorMessage = "error";
   });
 
+  group("Register test", () {
+    final firstName = "Mohamed";
+    final lastName = "Ehab";
+    final successMsg = "success";
+    final token = "token";
   // ══════════════════════════════════════════════════════════
   //  Login
   // ══════════════════════════════════════════════════════════
@@ -75,11 +87,20 @@ void main() {
         mockApiClient.login(email: testEmail, password: testPassword),
       ).thenAnswer((_) async => responseLoginDto);
 
+    final registerRequestModel = RegisterRequestModel(
+      firstName: firstName,
+      lastName: lastName,
+    );
       final result = await authDataSourceImpl.login(
         email: testEmail,
         password: testPassword,
       );
 
+    final registerResponse = RegisterResponseDto(
+      message: successMsg,
+      user: UserDto(firstName: firstName, lastName: lastName),
+      token: token,
+    );
       expect(
         (result as SuccessResponse<LoginResponseDto>).data.token,
         equals(responseLoginDto.token),
@@ -91,17 +112,34 @@ void main() {
     });
 
     test(
+      "when i call register from data source,"
+      "it's calls api client with correct request and return token successfully",
       "when login throws exception it should return ErrorResponse",
       () async {
+        // Arrange
+        when(mockApiClient.register(any)).thenAnswer((_) async {
+          return registerResponse;
+        });
         when(
           mockApiClient.login(email: testEmail, password: testPassword),
         ).thenThrow(dioException);
 
+        // Act
+        final result =
+            await authDataSource.register(registerRequestModel)
+                as SuccessResponse<String>;
+        final verification = verify(mockApiClient.register(captureAny));
+        final captured = verification.captured.single as RegisterRequestModel;
         final result = await authDataSourceImpl.login(
           email: testEmail,
           password: testPassword,
         );
 
+        // Assert
+        expect(result.data, token);
+        expect(captured.firstName, firstName);
+        expect(captured.lastName, lastName);
+        verification.called(1);
         expect(
           (result as FailureResponse).errorMessage,
           equals('errors.connectionError'),
@@ -114,6 +152,18 @@ void main() {
     );
   });
 
+    test(
+      "when i call register from data source, it's return empty string if token is null",
+      () async {
+        // Arrange
+        final responseWithNullToken = RegisterResponseDto(
+          message: successMsg,
+          user: UserDto(firstName: firstName, lastName: lastName),
+          token: null,
+        );
+        when(mockApiClient.register(any)).thenAnswer((_) async {
+          return responseWithNullToken;
+        });
   // ══════════════════════════════════════════════════════════
   //  Forgot Password
   // ══════════════════════════════════════════════════════════
@@ -127,6 +177,17 @@ void main() {
         forgotPassword: forgotPasswordRequest,
       );
 
+        // Act
+        final result =
+            await authDataSource.register(registerRequestModel)
+                as SuccessResponse<String>;
+
+        // Assert
+        expect(result.data, "");
+        verify(mockApiClient.register(any)).called(1);
+        verifyNoMoreInteractions(mockApiClient);
+      },
+    );
       expect(
         result,
         SuccessResponse<ForgotPasswordResponse>(data: forgotPasswordResponse),
@@ -211,10 +272,19 @@ void main() {
         mockApiClient.resetPassword(resetPassword: resetPasswordRequest),
       ).thenAnswer((_) async => resetPasswordResponse);
 
+    test("when i call register from data source,"
+        "it's return error message if there is an exception", () async {
+      // Arrange
+      final errorMessage = "errors.unexpected";
+      when(mockApiClient.register(any)).thenThrow(Exception());
       final result = await authDataSourceImpl.resetPassword(
         resetPassword: resetPasswordRequest,
       );
 
+      // Act
+      final result =
+          await authDataSource.register(registerRequestModel)
+              as FailureResponse<String>;
       expect(
         result,
         SuccessResponse<ResetPasswordResponse>(data: resetPasswordResponse),
@@ -225,6 +295,9 @@ void main() {
       verifyNoMoreInteractions(mockApiClient);
     });
 
+      // Assert
+      expect(result.errorMessage, errorMessage);
+      verify(mockApiClient.register(any)).called(1);
     test('when call resetPassword it should return failure', () async {
       when(
         mockApiClient.resetPassword(resetPassword: resetPasswordRequest),

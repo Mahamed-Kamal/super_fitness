@@ -19,6 +19,11 @@ import '../../features/auth/data/data_source/auth_data_source_impl.dart'
     as _i985;
 import '../../features/auth/data/repo/auth_repo_impl.dart' as _i984;
 import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
+import '../../features/auth/data/data_source/auth_data_source.dart' as _i364;
+import '../../features/auth/data/data_source/auth_data_source_impl.dart'
+    as _i985;
+import '../../features/auth/data/repo/auth_repo_impl.dart' as _i984;
+import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
 import '../../features/auth/domain/use_cases/forgot_password_use_case.dart'
     as _i897;
 import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
@@ -70,6 +75,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i897.ForgetPasswordUseCase>(),
         gh<_i449.VerifyResetCodeUseCase>(),
       ),
+    );
+    gh.factory<_i364.AuthDataSource>(
+      () => _i985.AuthDataSourceImpl(gh<_i277.ApiClient>()),
+    );
+    gh.factory<_i170.AuthRepo>(
+      () => _i984.AuthRepoImpl(gh<_i364.AuthDataSource>()),
     );
     return this;
   }

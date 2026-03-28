@@ -17,4 +17,17 @@ abstract interface class AuthRepo {
     required String email,
     required String newPassword,
   });
+  Future<Result<String>> register({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String rePassword,
+    required String gender,
+    required int height,
+    required int weight,
+    required int age,
+    required String goal,
+    required String activityLevel,
+  });
 }

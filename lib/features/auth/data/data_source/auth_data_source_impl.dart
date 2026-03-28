@@ -3,6 +3,7 @@ import 'package:super_fitness/core/api/api_client.dart';
 import 'package:super_fitness/core/api/execute_api.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
+import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
@@ -51,4 +52,10 @@ class AuthDataSourceImpl implements AuthDataSource {
     var response = await _apiClient.resetPassword(resetPassword: resetPassword);
     return response;
   });
+  @override
+  Future<Result<String>> register(RegisterRequestModel registerRequestModel) =>
+      executeApi(() async {
+        var result = await _apiClient.register(registerRequestModel);
+        return result.token ?? "";
+      });
 }
