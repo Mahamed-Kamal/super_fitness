@@ -3,4 +3,5 @@ abstract final class EndPoints {
 
   static const String login = 'auth/signup';
   static const String register = 'auth/signup';
+  static const String updateUserData = 'auth/editProfile';
 }
