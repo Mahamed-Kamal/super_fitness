@@ -15,8 +15,10 @@ import 'package:super_fitness/features/auth/data/models/response/reset_password_
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
+import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
 
 import 'auth_data_source_impl_test.mocks.dart';
 
@@ -314,6 +316,120 @@ void main() {
       expect(result.errorMessage, contains(errorMessage));
       verify(
         mockApiClient.resetPassword(resetPassword: resetPasswordRequest),
+      ).called(1);
+      verifyNoMoreInteractions(mockApiClient);
+    });
+  });
+
+  group("Update user data test", () {
+    final firstName = "Mohamed";
+    final lastName = "Ehab";
+
+    final updateUserDataRequest = UpdateUserDataRequest(
+      firstName: firstName,
+      lastName: lastName,
+    );
+
+    final userDto = UserDto(firstName: firstName, lastName: lastName);
+    final updateUserDataResponse = UpdateUserDataResponseDto(user: userDto);
+    final token = "Bearer token";
+
+    test(
+      "when i call updateUserData from data source,"
+      "it's calls api client with correct request and return UserDto successfully",
+      () async {
+        // Arrange
+        when(
+          mockApiClient.updateUserData(
+            token: anyNamed('token'),
+            updateUserDataRequest: anyNamed('updateUserDataRequest'),
+          ),
+        ).thenAnswer((_) async => updateUserDataResponse);
+
+        // Act
+        final result =
+            await authDataSource.updateUserData(
+                  token: token,
+                  updateUserDataRequest: updateUserDataRequest,
+                )
+                as SuccessResponse<UserDto>;
+
+        final verification = verify(
+          mockApiClient.updateUserData(
+            token: anyNamed('token'),
+            updateUserDataRequest: captureAnyNamed('updateUserDataRequest'),
+          ),
+        );
+        final captured = verification.captured.single as UpdateUserDataRequest;
+
+        // Assert
+        expect(result.data.firstName, firstName);
+        expect(result.data.lastName, lastName);
+        expect(captured.firstName, firstName);
+        expect(captured.lastName, lastName);
+        verification.called(1);
+        verifyNoMoreInteractions(mockApiClient);
+      },
+    );
+
+    test("when i call updateUserData from data source,"
+        "it's return empty UserDto if user in response is null", () async {
+      // Arrange
+      final responseWithNullUser = UpdateUserDataResponseDto(user: null);
+
+      when(
+        mockApiClient.updateUserData(
+          token: anyNamed('token'),
+          updateUserDataRequest: anyNamed('updateUserDataRequest'),
+        ),
+      ).thenAnswer((_) async => responseWithNullUser);
+
+      // Act
+      final result =
+          await authDataSource.updateUserData(
+                token: token,
+                updateUserDataRequest: updateUserDataRequest,
+              )
+              as SuccessResponse<UserDto>;
+
+      // Assert
+      expect(result.data, UserDto());
+      verify(
+        mockApiClient.updateUserData(
+          token: captureAnyNamed('token'),
+          updateUserDataRequest: anyNamed('updateUserDataRequest'),
+        ),
+      ).called(1);
+      verifyNoMoreInteractions(mockApiClient);
+    });
+
+    test("when i call updateUserData from data source,"
+        "it's return error message if there is an exception", () async {
+      // Arrange
+      final errorMessage = "errors.unexpected";
+
+      when(
+        mockApiClient.updateUserData(
+          token: anyNamed('token'),
+          updateUserDataRequest: anyNamed('updateUserDataRequest'),
+        ),
+      ).thenThrow(Exception());
+
+      // Act
+      final result =
+          await authDataSource.updateUserData(
+                token: token,
+                updateUserDataRequest: updateUserDataRequest,
+              )
+              as FailureResponse<UserDto>;
+
+      // Assert
+      expect(result.errorMessage, errorMessage);
+      verify(
+        mockApiClient.updateUserData(
+          token: captureAnyNamed('token'),
+          updateUserDataRequest: anyNamed('updateUserDataRequest'),
+        ),
       ).called(1);
       verifyNoMoreInteractions(mockApiClient);
     });

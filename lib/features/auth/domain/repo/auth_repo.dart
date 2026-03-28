@@ -3,6 +3,7 @@ import 'package:super_fitness/features/auth/data/models/login/login_response_dto
 import 'package:super_fitness/features/auth/domain/entity/forget_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/reset_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/verify_reset_code_entity.dart';
+import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
 
 abstract interface class AuthRepo {
   Future<Result<LoginResponseDto>> login({
@@ -29,5 +30,18 @@ abstract interface class AuthRepo {
     required int age,
     required String goal,
     required String activityLevel,
+  });
+
+  Future<Result<UserEntity>> updateUserData({
+    String token = "",
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? gender,
+    int? height,
+    int? weight,
+    int? age,
+    String? goal,
+    String? activityLevel,
   });
 }
