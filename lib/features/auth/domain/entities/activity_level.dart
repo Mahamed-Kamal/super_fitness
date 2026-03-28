@@ -1,1 +1,1 @@
-enum ActivityLevel { level1, level2, level3, level4, level5 }
+enum ActivityLevel { rookie, beginner, intermediate, advanced, expert }

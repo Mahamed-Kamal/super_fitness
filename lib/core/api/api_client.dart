@@ -3,7 +3,9 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:super_fitness/core/api/constants/end_points.dart';
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
+import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
+import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
 
 part 'api_client.g.dart';
 
@@ -16,4 +18,10 @@ abstract class ApiClient {
   Future<RegisterResponseDto> register(
     @Body() RegisterRequestModel registerRequestModel,
   );
+
+  @POST(EndPoints.updateUserData)
+  Future<UpdateUserDataResponseDto> updateUserData({
+    @Header("Authorization") String? token,
+    @Body() required UpdateUserDataRequest updateUserDataRequest,
+  });
 }
