@@ -4,7 +4,6 @@ import 'package:super_fitness/features/auth/data/mappers/activity_level_mapper.d
 
 void main() {
   group("ActivityLevelMapper test", () {
-
     test("should map level1 to rookie", () {
       final result = "level1".toActivityLevel();
       expect(result, ActivityLevel.rookie);
