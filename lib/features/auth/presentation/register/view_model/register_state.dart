@@ -2,30 +2,35 @@ part of 'register_view_model.dart';
 
 class RegisterState extends BaseState<String> {
   final RegisterFormData formData;
+  final int currentStep;
 
-  final RegisterStep currentStep;
+  final bool hasCompletedForm;
 
   const RegisterState({
     required super.requestState,
     super.errorMessage,
     super.data,
     this.formData = const RegisterFormData(),
-    this.currentStep = RegisterStep.registerForm,
+    this.currentStep = 0,
+    this.hasCompletedForm = false,
   });
 
   factory RegisterState.init() => const RegisterState(
     requestState: RequestState.init,
     formData: RegisterFormData(),
-    currentStep: RegisterStep.registerForm,
+    currentStep: 0,
+    hasCompletedForm: false,
   );
 
   factory RegisterState.loading({
     RegisterFormData? formData,
-    RegisterStep? currentStep,
+    int? currentStep,
+    bool hasCompletedForm = false,
   }) => RegisterState(
     requestState: RequestState.loading,
     formData: formData ?? const RegisterFormData(),
-    currentStep: currentStep ?? RegisterStep.registerForm,
+    currentStep: currentStep ?? 0,
+    hasCompletedForm: hasCompletedForm,
   );
 
   factory RegisterState.loaded(String data) =>
@@ -39,12 +44,14 @@ class RegisterState extends BaseState<String> {
     String? errorMessage,
     String? data,
     RegisterFormData? formData,
-    RegisterStep? currentStep,
+    int? currentStep,
+    bool? hasCompletedForm,
   }) => RegisterState(
     requestState: requestState ?? this.requestState,
     errorMessage: errorMessage ?? this.errorMessage,
     data: data ?? this.data,
     formData: formData ?? this.formData,
     currentStep: currentStep ?? this.currentStep,
+    hasCompletedForm: hasCompletedForm ?? this.hasCompletedForm,
   );
 }
