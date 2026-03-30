@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 abstract class BaseViewModel<T, I, E> extends Cubit<T> {
   BaseViewModel(super.initialState);
 
-  void doIntent(I intent);
-
   final StreamController<E> _eventController = StreamController<E>.broadcast();
 
   Stream<E> get eventStream => _eventController.stream;
@@ -16,6 +14,8 @@ abstract class BaseViewModel<T, I, E> extends Cubit<T> {
       _eventController.add(event);
     }
   }
+
+  void doIntent(I intent);
 
   @override
   Future<void> close() async {
