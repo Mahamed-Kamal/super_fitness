@@ -1,6 +1,6 @@
 part of 'register_view_model.dart';
 
-class RegisterState extends BaseState<String> {
+class RegisterState extends BaseState<String> with EquatableMixin {
   final RegisterFormData formData;
   final int currentStep;
 
@@ -54,4 +54,14 @@ class RegisterState extends BaseState<String> {
     currentStep: currentStep ?? this.currentStep,
     hasCompletedForm: hasCompletedForm ?? this.hasCompletedForm,
   );
+
+  @override
+  List<Object?> get props => [
+    requestState,
+    errorMessage ?? '',
+    data,
+    formData,
+    currentStep,
+    hasCompletedForm,
+  ];
 }

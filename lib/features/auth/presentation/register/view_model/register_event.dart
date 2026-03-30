@@ -26,7 +26,7 @@ class UserRegisterFailedEvent extends RegisterEvent with EquatableMixin {
   List<Object?> get props => [message];
 }
 
-class OnboardingCompletedEvent extends RegisterEvent with EquatableMixin {
+class RegisterCompletedEvent extends RegisterEvent with EquatableMixin {
   @override
   List<Object?> get props => [];
 }

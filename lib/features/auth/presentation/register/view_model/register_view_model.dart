@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/bloc/base_view_model.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
@@ -6,17 +7,12 @@ import 'package:super_fitness/features/auth/domain/entities/register_step.dart';
 import 'package:super_fitness/features/auth/domain/use_cases/register_use_case.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_event.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_intent.dart';
-// import 'package:super_fitness/features/auth/domain/use_cases/update_user_data_use_case.dart';
 
 part 'register_state.dart';
 
 class RegisterViewModel
     extends BaseViewModel<RegisterState, RegisterIntent, RegisterEvent> {
   final RegisterUseCase _registerUseCase;
-
-  // final UpdateUserDataUseCase _updateUserDataUseCase;
-
-  // String _authToken = '';
 
   RegisterViewModel(this._registerUseCase) : super(RegisterState.init());
 
@@ -32,7 +28,7 @@ class RegisterViewModel
       case RegisterButtonClickedIntent():
         state.hasCompletedForm
             ? _callRegisterApi()
-            : _saveFormAndProceed(
+            : _saveRegisterFormAndProceed(
                 intent.email,
                 intent.password,
                 intent.firstName,
@@ -63,7 +59,12 @@ class RegisterViewModel
 
   void _navToLogin() => emitEvent(NavigateFromRegisterToLoginEvent());
 
-  void _saveFormAndProceed(String email, password, firstName, lastName) {
+  void _saveRegisterFormAndProceed(
+    String email,
+    String password,
+    String firstName,
+    String lastName,
+  ) {
     _updateFormData(
       state.formData.copyWith(
         firstname: firstName,
@@ -125,11 +126,10 @@ class RegisterViewModel
 
     switch (result) {
       case SuccessResponse<String>():
-        // _authToken = result.data;
         emit(
           state.copyWith(requestState: RequestState.loaded, data: result.data),
         );
-        emitEvent(OnboardingCompletedEvent());
+        emitEvent(RegisterCompletedEvent());
 
       case FailureResponse<String>():
         emit(
@@ -151,33 +151,4 @@ class RegisterViewModel
       emitEvent(NavigateFromRegisterToLoginEvent());
     }
   }
-
-  // Future<void> _updateUserData() async {
-  //   emit(state.copyWith(requestState: RequestState.loading));
-  //
-  //   final result = await _updateUserDataUseCase.call(
-  //     token: _authToken,
-  //     gender: state.formData.gender,
-  //     height: state.formData.height,
-  //     weight: state.formData.weight,
-  //     age: state.formData.age,
-  //     goal: state.formData.goal,
-  //     activityLevel: state.formData.activityLevel,
-  //   );
-  //
-  //   switch (result) {
-  //     case SuccessResponse():
-  //       emit(state.copyWith(requestState: RequestState.loaded));
-  //       emitEvent(OnboardingCompletedEvent());
-  //
-  //     case FailureResponse():
-  //       emit(
-  //         state.copyWith(
-  //           requestState: RequestState.error,
-  //           errorMessage: result.errorMessage,
-  //         ),
-  //       );
-  //       emitEvent(UpdateUserDataFailedEvent(message: result.errorMessage));
-  //   }
-  // }
 }
