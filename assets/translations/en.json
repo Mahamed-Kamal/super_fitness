@@ -10,7 +10,6 @@
     "resourceExhausted": "Resource limit exceeded. Please try again later.",
     "aborted": "The operation was aborted. Please retry.",
     "internal": "An internal error occurred. Please try again.",
-
     "connectionTimeout": "Connection Timeout",
     "sendTimeout": "Send Timeout",
     "receiveTimeout": "Receive Timeout",
@@ -95,4 +94,18 @@
   "didnt recieve verification code?": "didnt recieve verification code?",
   "Resend Code?": "Resend Code?"
 }
+  "retry": "Retry",
+  "hey_there": "Hey There",
+  "create_an_account": "CREATE AN ACCOUNT",
+  "register": "Register",
+  "already_have_an_account": "Already have an account? ",
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "enter_email": "Enter Your Email",
+  "enter_password": "Enter Your Password",
+  "enter_first_name": "Enter Your First Name",
+  "enter_last_name": "Enter Your Last Name"
 }

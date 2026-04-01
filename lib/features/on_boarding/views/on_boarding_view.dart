@@ -182,6 +182,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       itemBuilder: (context, index) =>
           Image.asset(_onBoardingModel[index].image, height: 516),
     );
+    return Column();
   }
 }
 
