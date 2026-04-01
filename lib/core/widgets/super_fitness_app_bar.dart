@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/widgets/core_back_button.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
 
@@ -44,6 +45,7 @@ class SuperFitnessAppBar extends StatelessWidget
             ),
       centerTitle: centerTitle,
       actions: actions,
+      backgroundColor: context.appTheme.surface.withAlpha(0),
     );
   }
 }

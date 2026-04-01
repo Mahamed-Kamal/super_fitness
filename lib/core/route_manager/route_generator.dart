@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
+import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 
 class RouteGenerator {
@@ -7,6 +8,8 @@ class RouteGenerator {
     switch (setting.name) {
       case AppRoutes.onBoarding:
         return _buildRoute(const OnBoardingView());
+      case AppRoutes.registerAndCompleteRegistration:
+        return _buildRoute(const RegisterView());
       default:
         return null;
     }
