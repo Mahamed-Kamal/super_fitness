@@ -38,26 +38,45 @@ void main() {
     });
     test("when call Login it should return Success", () async {
       // Arrange
-      when(mockApiClient.login(email: testEmail, password: testPassword),
+      when(
+        mockApiClient.login(email: testEmail, password: testPassword),
       ).thenAnswer((_) async => responseLoginDto);
       // Act
-      final result = await authDataSourceImpl.login(email: testEmail, password: testPassword);
+      final result = await authDataSourceImpl.login(
+        email: testEmail,
+        password: testPassword,
+      );
       // Assert & Verify
-      expect((result as SuccessResponse<LoginResponseDto>).data.token, equals(responseLoginDto.token));
-      verify(mockApiClient.login(email: testEmail, password: testPassword),).called(1);
+      expect(
+        (result as SuccessResponse<LoginResponseDto>).data.token,
+        equals(responseLoginDto.token),
+      );
+      verify(
+        mockApiClient.login(email: testEmail, password: testPassword),
+      ).called(1);
       verifyNoMoreInteractions(mockApiClient);
     });
 
-    test("when login throws exception it should return ErrorResponse",() async {
+    test(
+      "when login throws exception it should return ErrorResponse",
+      () async {
         // Arrange
-        when(mockApiClient.login(email: testEmail, password: testPassword)).thenThrow(dioException);
+        when(
+          mockApiClient.login(email: testEmail, password: testPassword),
+        ).thenThrow(dioException);
         // Act
-        final result = await authDataSourceImpl.login(email: testEmail,password: testPassword);
-        // Assert & Verify
-        expect((result as FailureResponse).errorMessage,
-            equals('errors.connectionError')
+        final result = await authDataSourceImpl.login(
+          email: testEmail,
+          password: testPassword,
         );
-        verify(mockApiClient.login(email: testEmail, password: testPassword)).called(1);
+        // Assert & Verify
+        expect(
+          (result as FailureResponse).errorMessage,
+          equals('errors.connectionError'),
+        );
+        verify(
+          mockApiClient.login(email: testEmail, password: testPassword),
+        ).called(1);
         verifyNoMoreInteractions(mockApiClient);
       },
     );

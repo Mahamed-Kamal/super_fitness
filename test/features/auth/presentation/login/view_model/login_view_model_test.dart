@@ -18,7 +18,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   // Mock Method Channel للـ Secure Storage (مهم جداً)
-  const MethodChannel secureStorageChannel = MethodChannel('plugins.it_nomads.com/flutter_secure_storage');
+  const MethodChannel secureStorageChannel = MethodChannel(
+    'plugins.it_nomads.com/flutter_secure_storage',
+  );
 
   late MockLoginUseCase mockLoginUseCase;
   late LoginViewModel loginViewModel;
@@ -32,31 +34,29 @@ void main() {
     loginViewModel = LoginViewModel(mockLoginUseCase);
 
     // Mock كل مكالمات الـ Secure Storage عشان ما يرميش MissingPluginException
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      secureStorageChannel,
-          (MethodCall methodCall) async {
-        switch (methodCall.method) {
-          case 'write': // setSecuredString
-            return null; // أو true
-          case 'read':
-            return null;
-          case 'delete':
-            return null;
-          case 'deleteAll':
-            return null;
-          default:
-            return null;
-        }
-      },
-    );
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(secureStorageChannel, (
+          MethodCall methodCall,
+        ) async {
+          switch (methodCall.method) {
+            case 'write': // setSecuredString
+              return null; // أو true
+            case 'read':
+              return null;
+            case 'delete':
+              return null;
+            case 'deleteAll':
+              return null;
+            default:
+              return null;
+          }
+        });
   });
 
   tearDown(() async {
     // إزالة الـ mock بعد كل test
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
-      secureStorageChannel,
-      null,
-    );
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(secureStorageChannel, null);
     await loginViewModel.close();
   });
 
@@ -67,8 +67,12 @@ void main() {
       user: UserDto(id: "1"),
     );
 
-    final successResponse = SuccessResponse<LoginResponseDto>(data: loginResponseDto);
-    final errorResponse = FailureResponse<LoginResponseDto>(errorMessage: testErrorMessage);
+    final successResponse = SuccessResponse<LoginResponseDto>(
+      data: loginResponseDto,
+    );
+    final errorResponse = FailureResponse<LoginResponseDto>(
+      errorMessage: testErrorMessage,
+    );
 
     // ─── States Tests ───────────────────────────────────────────────
 
@@ -77,17 +81,17 @@ void main() {
       build: () => loginViewModel,
       setUp: () {
         provideDummy<Result<LoginResponseDto>>(successResponse);
-        when(mockLoginUseCase.call(
-          email: testEmail,
-          password: testPassword,
-        )).thenAnswer((_) async => successResponse);
+        when(
+          mockLoginUseCase.call(email: testEmail, password: testPassword),
+        ).thenAnswer((_) async => successResponse);
       },
-      act: (vm) => vm.doIntent(
-        LoginIntent(email: testEmail, password: testPassword),
-      ),
+      act: (vm) =>
+          vm.doIntent(LoginIntent(email: testEmail, password: testPassword)),
       expect: () => [
         LoginState(loginState: BaseState<LoginResponseDto>.loading()),
-        LoginState(loginState: BaseState<LoginResponseDto>.loaded(loginResponseDto)),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.loaded(loginResponseDto),
+        ),
       ],
     );
 
@@ -96,17 +100,17 @@ void main() {
       build: () => loginViewModel,
       setUp: () {
         provideDummy<Result<LoginResponseDto>>(errorResponse);
-        when(mockLoginUseCase.call(
-          email: testEmail,
-          password: testPassword,
-        )).thenAnswer((_) async => errorResponse);
+        when(
+          mockLoginUseCase.call(email: testEmail, password: testPassword),
+        ).thenAnswer((_) async => errorResponse);
       },
-      act: (vm) => vm.doIntent(
-        LoginIntent(email: testEmail, password: testPassword),
-      ),
+      act: (vm) =>
+          vm.doIntent(LoginIntent(email: testEmail, password: testPassword)),
       expect: () => [
         LoginState(loginState: BaseState<LoginResponseDto>.loading()),
-        LoginState(loginState: BaseState<LoginResponseDto>.error(testErrorMessage)),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.error(testErrorMessage),
+        ),
       ],
     );
 
@@ -117,8 +121,9 @@ void main() {
       build: () => loginViewModel,
       setUp: () {
         provideDummy<Result<LoginResponseDto>>(successResponse);
-        when(mockLoginUseCase.call(email: testEmail, password: testPassword))
-            .thenAnswer((_) async => successResponse);
+        when(
+          mockLoginUseCase.call(email: testEmail, password: testPassword),
+        ).thenAnswer((_) async => successResponse);
       },
       act: (vm) {
         expectLater(
@@ -129,7 +134,9 @@ void main() {
       },
       expect: () => [
         LoginState(loginState: BaseState<LoginResponseDto>.loading()),
-        LoginState(loginState: BaseState<LoginResponseDto>.loaded(loginResponseDto)),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.loaded(loginResponseDto),
+        ),
       ],
     );
 
@@ -138,19 +145,26 @@ void main() {
       build: () => loginViewModel,
       setUp: () {
         provideDummy<Result<LoginResponseDto>>(errorResponse);
-        when(mockLoginUseCase.call(email: testEmail, password: testPassword))
-            .thenAnswer((_) async => errorResponse);
+        when(
+          mockLoginUseCase.call(email: testEmail, password: testPassword),
+        ).thenAnswer((_) async => errorResponse);
       },
       act: (vm) {
         expectLater(
           vm.uiEventsStream,
-          emits(predicate<LoginViewShowToast>((e) => e.isError && e.message == testErrorMessage)),
+          emits(
+            predicate<LoginViewShowToast>(
+              (e) => e.isError && e.message == testErrorMessage,
+            ),
+          ),
         );
         vm.doIntent(LoginIntent(email: testEmail, password: testPassword));
       },
       expect: () => [
         LoginState(loginState: BaseState<LoginResponseDto>.loading()),
-        LoginState(loginState: BaseState<LoginResponseDto>.error(testErrorMessage)),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.error(testErrorMessage),
+        ),
       ],
     );
 

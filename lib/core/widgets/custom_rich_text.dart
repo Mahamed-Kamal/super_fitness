@@ -29,21 +29,25 @@ class CustomRichText extends StatelessWidget {
         children: [
           TextSpan(
             text: firstText,
-            style: firstStyle ?? context.appTheme.regular14.copyWith(
-              color: Colors.white,
-              fontWeight: MyFontWeight.extraBold,
-            ),
+            style:
+                firstStyle ??
+                context.appTheme.regular14.copyWith(
+                  color: Colors.white,
+                  fontWeight: MyFontWeight.extraBold,
+                ),
           ),
           WidgetSpan(child: context.w(2)),
           TextSpan(
             text: secondText,
             recognizer: TapGestureRecognizer()..onTap = onClickSecond,
-            style: secondStyle ?? context.appTheme.regular14.copyWith(
-              fontWeight: MyFontWeight.extraBold,
-              color: context.appTheme.primary,
-              decoration: TextDecoration.underline,
-              decorationColor: context.appTheme.primary,
-            ),
+            style:
+                secondStyle ??
+                context.appTheme.regular14.copyWith(
+                  fontWeight: MyFontWeight.extraBold,
+                  color: context.appTheme.primary,
+                  decoration: TextDecoration.underline,
+                  decorationColor: context.appTheme.primary,
+                ),
           ),
         ],
       ),

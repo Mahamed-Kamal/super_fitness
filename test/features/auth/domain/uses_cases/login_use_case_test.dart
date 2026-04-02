@@ -34,17 +34,20 @@ void main() {
         token: "abc123",
         user: UserDto(id: "1"),
       );
-      successResponse = SuccessResponse<LoginResponseDto>(data: loginResponseDto);
-      errorResponse = FailureResponse<LoginResponseDto>(errorMessage: testErrorMessage);
+      successResponse = SuccessResponse<LoginResponseDto>(
+        data: loginResponseDto,
+      );
+      errorResponse = FailureResponse<LoginResponseDto>(
+        errorMessage: testErrorMessage,
+      );
     });
 
     test("when call Login it should return Success", () async {
       // Arrange
       provideDummy<Result<LoginResponseDto>>(successResponse);
-      when(mockAuthRepo.login(
-        email: testEmail,
-        password: testPassword,
-      )).thenAnswer((_) async => successResponse);
+      when(
+        mockAuthRepo.login(email: testEmail, password: testPassword),
+      ).thenAnswer((_) async => successResponse);
 
       // Act
       final result = await loginUseCase(
@@ -57,20 +60,18 @@ void main() {
         (result as SuccessResponse<LoginResponseDto>).data.token,
         equals(loginResponseDto.token),
       );
-      verify(mockAuthRepo.login(
-        email: testEmail,
-        password: testPassword,
-      )).called(1);
+      verify(
+        mockAuthRepo.login(email: testEmail, password: testPassword),
+      ).called(1);
       verifyNoMoreInteractions(mockAuthRepo);
     });
 
     test("when login fails it should return FailureResponse", () async {
       // Arrange
       provideDummy<Result<LoginResponseDto>>(errorResponse);
-      when(mockAuthRepo.login(
-        email: testEmail,
-        password: testPassword,
-      )).thenAnswer((_) async => errorResponse);
+      when(
+        mockAuthRepo.login(email: testEmail, password: testPassword),
+      ).thenAnswer((_) async => errorResponse);
 
       // Act
       final result = await loginUseCase(
@@ -83,10 +84,9 @@ void main() {
         (result as FailureResponse<LoginResponseDto>).errorMessage,
         equals(testErrorMessage),
       );
-      verify(mockAuthRepo.login(
-        email: testEmail,
-        password: testPassword,
-      )).called(1);
+      verify(
+        mockAuthRepo.login(email: testEmail, password: testPassword),
+      ).called(1);
       verifyNoMoreInteractions(mockAuthRepo);
     });
   });

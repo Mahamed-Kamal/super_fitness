@@ -34,16 +34,19 @@ void main() {
         token: "abc123",
         user: UserDto(id: "1"),
       );
-      successResponse = SuccessResponse<LoginResponseDto>(data: loginResponseDto);
-      errorResponse = FailureResponse<LoginResponseDto>(errorMessage: testErrorMessage);
+      successResponse = SuccessResponse<LoginResponseDto>(
+        data: loginResponseDto,
+      );
+      errorResponse = FailureResponse<LoginResponseDto>(
+        errorMessage: testErrorMessage,
+      );
     });
     test("when call Login it should return Success", () async {
       // Arrange
       provideDummy<Result<LoginResponseDto>>(successResponse);
-      when(mockAuthDataSource.login(
-        email: testEmail,
-        password: testPassword,
-      )).thenAnswer((_) async => successResponse);
+      when(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).thenAnswer((_) async => successResponse);
 
       // Act
       final result = await authRepoImpl.login(
@@ -56,20 +59,18 @@ void main() {
         (result as SuccessResponse<LoginResponseDto>).data.token,
         equals(loginResponseDto.token),
       );
-      verify(mockAuthDataSource.login(
-        email: testEmail,
-        password: testPassword,
-      )).called(1);
+      verify(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).called(1);
       verifyNoMoreInteractions(mockAuthDataSource);
     });
 
     test("when login fails it should return FailureResponse", () async {
       // Arrange
       provideDummy<Result<LoginResponseDto>>(errorResponse);
-      when(mockAuthDataSource.login(
-        email: testEmail,
-        password: testPassword,
-      )).thenAnswer((_) async => errorResponse);
+      when(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).thenAnswer((_) async => errorResponse);
 
       // Act
       final result = await authRepoImpl.login(
@@ -82,10 +83,9 @@ void main() {
         (result as FailureResponse<LoginResponseDto>).errorMessage,
         equals(testErrorMessage),
       );
-      verify(mockAuthDataSource.login(
-        email: testEmail,
-        password: testPassword,
-      )).called(1);
+      verify(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).called(1);
       verifyNoMoreInteractions(mockAuthDataSource);
     });
   });

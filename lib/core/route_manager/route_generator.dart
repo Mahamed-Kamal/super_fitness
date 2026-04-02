@@ -8,10 +8,13 @@ import 'package:super_fitness/features/auth/presentation/login/views/login_view.
 class RouteGenerator {
   static Route<dynamic>? getRoute(RouteSettings setting) {
     switch (setting.name) {
-        case AppRoutes.login:
-        return _buildRoute(BlocProvider(
+      case AppRoutes.login:
+        return _buildRoute(
+          BlocProvider(
             create: (context) => getIt<LoginViewModel>(),
-            child: const LoginView()));
+            child: const LoginView(),
+          ),
+        );
       default:
         return null;
     }
