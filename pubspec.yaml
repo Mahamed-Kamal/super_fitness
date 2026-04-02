@@ -47,6 +47,8 @@ dependencies:
   lottie: ^3.3.2
   google_fonts: ^8.0.2
   pretty_dio_logger: ^1.4.0
+  bloc_test: ^10.0.0
+
 
 dev_dependencies:
   flutter_test:
