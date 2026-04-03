@@ -1,10 +1,22 @@
 import 'package:equatable/equatable.dart';
+import 'package:super_fitness/features/auth/domain/entities/activity_level.dart';
+import 'package:super_fitness/features/auth/domain/entities/user_gender.dart';
+import 'package:super_fitness/features/auth/domain/entities/user_goal.dart';
 
 sealed class RegisterIntent {}
 
 class RegisterButtonClickedIntent extends RegisterIntent with EquatableMixin {
+  final String firstName, lastName, email, password;
+
+  RegisterButtonClickedIntent({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.password,
+  });
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [firstName, lastName, email, password];
 }
 
 class LoginNavigationButtonClickedIntent extends RegisterIntent
@@ -13,126 +25,53 @@ class LoginNavigationButtonClickedIntent extends RegisterIntent
   List<Object?> get props => [];
 }
 
-class SwitchToSelectWeight extends RegisterIntent with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
+class SwitchViewToSelectWeight extends RegisterIntent with EquatableMixin {
+  final UserGender userGender;
 
-class SwitchToSelectHeight extends RegisterIntent with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
-class SwitchToSelectGoal extends RegisterIntent with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
-class SwitchToSelectActivityLevel extends RegisterIntent with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
-class FinishOnboardingIntent extends RegisterIntent with EquatableMixin {
-  @override
-  List<Object?> get props => [];
-}
-
-class UpdateFirstNameIntent extends RegisterIntent with EquatableMixin {
-  final String value;
-
-  UpdateFirstNameIntent(this.value);
+  SwitchViewToSelectWeight({required this.userGender});
 
   @override
-  List<Object?> get props => [value];
+  List<Object?> get props => [userGender];
 }
 
-class UpdateLastNameIntent extends RegisterIntent with EquatableMixin {
-  final String value;
-
-  UpdateLastNameIntent(this.value);
-
-  @override
-  List<Object?> get props => [value];
-}
-
-class UpdateEmailIntent extends RegisterIntent with EquatableMixin {
-  final String value;
-
-  UpdateEmailIntent(this.value);
-
-  @override
-  List<Object?> get props => [value];
-}
-
-class UpdatePasswordIntent extends RegisterIntent with EquatableMixin {
-  final String value;
-
-  UpdatePasswordIntent(this.value);
-
-  @override
-  List<Object?> get props => [value];
-}
-
-class UpdateRePasswordIntent extends RegisterIntent with EquatableMixin {
-  final String value;
-
-  UpdateRePasswordIntent(this.value);
-
-  @override
-  List<Object?> get props => [value];
-}
-
-class UpdateGenderIntent extends RegisterIntent with EquatableMixin {
-  final String gender;
-
-  UpdateGenderIntent(this.gender);
-
-  @override
-  List<Object?> get props => [gender];
-}
-
-class UpdateWeightIntent extends RegisterIntent with EquatableMixin {
+class SwitchViewToSelectHeight extends RegisterIntent with EquatableMixin {
   final int weight;
 
-  UpdateWeightIntent(this.weight);
+  SwitchViewToSelectHeight({required this.weight});
 
   @override
   List<Object?> get props => [weight];
 }
 
-class UpdateHeightIntent extends RegisterIntent with EquatableMixin {
+class SwitchViewToSelectGoal extends RegisterIntent with EquatableMixin {
   final int height;
 
-  UpdateHeightIntent(this.height);
+  SwitchViewToSelectGoal({required this.height});
 
   @override
   List<Object?> get props => [height];
 }
 
-class UpdateAgeIntent extends RegisterIntent with EquatableMixin {
-  final int age;
+class SwitchViewToSelectActivityLevel extends RegisterIntent
+    with EquatableMixin {
+  final UserGoal goal;
 
-  UpdateAgeIntent(this.age);
-
-  @override
-  List<Object?> get props => [age];
-}
-
-class UpdateGoalIntent extends RegisterIntent with EquatableMixin {
-  final String goal;
-
-  UpdateGoalIntent(this.goal);
+  SwitchViewToSelectActivityLevel({required this.goal});
 
   @override
   List<Object?> get props => [goal];
 }
 
-class UpdateActivityLevelIntent extends RegisterIntent with EquatableMixin {
-  final String activityLevel;
+class FinishRegisterIntent extends RegisterIntent with EquatableMixin {
+  final ActivityLevel activityLevel;
 
-  UpdateActivityLevelIntent(this.activityLevel);
+  FinishRegisterIntent({required this.activityLevel});
 
   @override
   List<Object?> get props => [activityLevel];
+}
+
+class RegisterStepNavBackIntent extends RegisterIntent with EquatableMixin {
+  @override
+  List<Object?> get props => [];
 }
