@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/domain/repo/auth_repo.dart';
 
+@injectable
 class RegisterUseCase {
   final AuthRepo _authRepo;
 

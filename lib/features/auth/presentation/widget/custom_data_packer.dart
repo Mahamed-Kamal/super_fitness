@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
@@ -118,7 +119,7 @@ class _CustomDataPickerState extends State<CustomDataPicker> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 55),
                   ),
-                  child: const Text("NEXT"),
+                  child: Text('next'.tr()),
                 ),
               ],
             ),

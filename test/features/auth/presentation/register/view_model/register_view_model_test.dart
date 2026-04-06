@@ -116,7 +116,8 @@ void main() {
     );
 
     blocTest<RegisterViewModel, RegisterState>(
-      'calls register API and emits loading then loaded on success',
+      'calls register API with rookie activity level'
+      'and emits loading then loaded on success',
       build: () {
         when(
           mockRegisterUseCase.call(
@@ -135,7 +136,183 @@ void main() {
         ).thenAnswer((_) async => SuccessResponse(data: 'token_abc'));
         return RegisterViewModel(mockRegisterUseCase)..emit(
           RegisterState.init().copyWith(
-            formData: completedForm,
+            formData: completedForm.copyWith(activityLevel: 'rookie'),
+            hasCompletedForm: true,
+          ),
+        );
+      },
+      act: (vm) => vm.doIntent(
+        RegisterButtonClickedIntent(
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@example.com',
+          password: 'pass123',
+        ),
+      ),
+      expect: () => [
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loading', RequestState.loading)
+            .having((s) => s.hasCompletedForm, 'hasCompletedForm', true),
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loaded', RequestState.loaded)
+            .having((s) => s.data, 'data', 'token_abc'),
+      ],
+    );
+
+    blocTest<RegisterViewModel, RegisterState>(
+      'calls register API with beginner activity level'
+      'and emits loading then loaded on success',
+      build: () {
+        when(
+          mockRegisterUseCase.call(
+            firstName: anyNamed('firstName'),
+            lastName: anyNamed('lastName'),
+            email: anyNamed('email'),
+            password: anyNamed('password'),
+            rePassword: anyNamed('rePassword'),
+            gender: anyNamed('gender'),
+            height: anyNamed('height'),
+            weight: anyNamed('weight'),
+            age: anyNamed('age'),
+            goal: anyNamed('goal'),
+            activityLevel: anyNamed('activityLevel'),
+          ),
+        ).thenAnswer((_) async => SuccessResponse(data: 'token_abc'));
+        return RegisterViewModel(mockRegisterUseCase)..emit(
+          RegisterState.init().copyWith(
+            formData: completedForm.copyWith(activityLevel: 'beginner'),
+            hasCompletedForm: true,
+          ),
+        );
+      },
+      act: (vm) => vm.doIntent(
+        RegisterButtonClickedIntent(
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@example.com',
+          password: 'pass123',
+        ),
+      ),
+      expect: () => [
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loading', RequestState.loading)
+            .having((s) => s.hasCompletedForm, 'hasCompletedForm', true),
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loaded', RequestState.loaded)
+            .having((s) => s.data, 'data', 'token_abc'),
+      ],
+    );
+
+    blocTest<RegisterViewModel, RegisterState>(
+      'calls register API with intermediate activity level'
+      'and emits loading then loaded on success',
+      build: () {
+        when(
+          mockRegisterUseCase.call(
+            firstName: anyNamed('firstName'),
+            lastName: anyNamed('lastName'),
+            email: anyNamed('email'),
+            password: anyNamed('password'),
+            rePassword: anyNamed('rePassword'),
+            gender: anyNamed('gender'),
+            height: anyNamed('height'),
+            weight: anyNamed('weight'),
+            age: anyNamed('age'),
+            goal: anyNamed('goal'),
+            activityLevel: anyNamed('activityLevel'),
+          ),
+        ).thenAnswer((_) async => SuccessResponse(data: 'token_abc'));
+        return RegisterViewModel(mockRegisterUseCase)..emit(
+          RegisterState.init().copyWith(
+            formData: completedForm.copyWith(activityLevel: 'intermediate'),
+            hasCompletedForm: true,
+          ),
+        );
+      },
+      act: (vm) => vm.doIntent(
+        RegisterButtonClickedIntent(
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@example.com',
+          password: 'pass123',
+        ),
+      ),
+      expect: () => [
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loading', RequestState.loading)
+            .having((s) => s.hasCompletedForm, 'hasCompletedForm', true),
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loaded', RequestState.loaded)
+            .having((s) => s.data, 'data', 'token_abc'),
+      ],
+    );
+
+    blocTest<RegisterViewModel, RegisterState>(
+      'calls register API with advanced activity level'
+      'and emits loading then loaded on success',
+      build: () {
+        when(
+          mockRegisterUseCase.call(
+            firstName: anyNamed('firstName'),
+            lastName: anyNamed('lastName'),
+            email: anyNamed('email'),
+            password: anyNamed('password'),
+            rePassword: anyNamed('rePassword'),
+            gender: anyNamed('gender'),
+            height: anyNamed('height'),
+            weight: anyNamed('weight'),
+            age: anyNamed('age'),
+            goal: anyNamed('goal'),
+            activityLevel: anyNamed('activityLevel'),
+          ),
+        ).thenAnswer((_) async => SuccessResponse(data: 'token_abc'));
+        return RegisterViewModel(mockRegisterUseCase)..emit(
+          RegisterState.init().copyWith(
+            formData: completedForm.copyWith(activityLevel: 'advanced'),
+            hasCompletedForm: true,
+          ),
+        );
+      },
+      act: (vm) => vm.doIntent(
+        RegisterButtonClickedIntent(
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@example.com',
+          password: 'pass123',
+        ),
+      ),
+      expect: () => [
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loading', RequestState.loading)
+            .having((s) => s.hasCompletedForm, 'hasCompletedForm', true),
+        isA<RegisterState>()
+            .having((s) => s.requestState, 'loaded', RequestState.loaded)
+            .having((s) => s.data, 'data', 'token_abc'),
+      ],
+    );
+
+    blocTest<RegisterViewModel, RegisterState>(
+      'calls register API with expert activity level'
+      'and emits loading then loaded on success',
+      build: () {
+        when(
+          mockRegisterUseCase.call(
+            firstName: anyNamed('firstName'),
+            lastName: anyNamed('lastName'),
+            email: anyNamed('email'),
+            password: anyNamed('password'),
+            rePassword: anyNamed('rePassword'),
+            gender: anyNamed('gender'),
+            height: anyNamed('height'),
+            weight: anyNamed('weight'),
+            age: anyNamed('age'),
+            goal: anyNamed('goal'),
+            activityLevel: anyNamed('activityLevel'),
+          ),
+        ).thenAnswer((_) async => SuccessResponse(data: 'token_abc'));
+        return RegisterViewModel(mockRegisterUseCase)..emit(
+          RegisterState.init().copyWith(
+            formData: completedForm.copyWith(activityLevel: 'expert'),
             hasCompletedForm: true,
           ),
         );
@@ -180,7 +357,7 @@ void main() {
         );
         return RegisterViewModel(mockRegisterUseCase)..emit(
           RegisterState.init().copyWith(
-            formData: completedForm,
+            formData: completedForm.copyWith(activityLevel: 'beginner'),
             hasCompletedForm: true,
           ),
         );
@@ -218,18 +395,36 @@ void main() {
 
   group('SwitchViewToSelectWeight', () {
     blocTest<RegisterViewModel, RegisterState>(
-      'saves gender and navigates to selectWeight step',
+      'saves gender and navigates to selectAge step',
       build: () => RegisterViewModel(mockRegisterUseCase),
       act: (vm) =>
           vm.doIntent(SwitchViewToSelectWeight(userGender: UserGender.male)),
       expect: () => [
-        isA<RegisterState>().having(
-          (s) => s.formData.gender,
-          'gender',
-          UserGender.male.name,
-        ),
         isA<RegisterState>()
             .having((s) => s.formData.gender, 'gender', UserGender.male.name)
+            .having((s) => s.currentStep, 'currentStep', 0),
+        isA<RegisterState>()
+            .having((s) => s.formData.gender, 'gender', UserGender.male.name)
+            .having(
+              (s) => s.currentStep,
+              'currentStep',
+              RegisterStep.selectAge.index,
+            ),
+      ],
+    );
+  });
+
+  group("SwitchViewToSelectAge", () {
+    blocTest<RegisterViewModel, RegisterState>(
+      'saves age and navigates to selectWeight step',
+      build: () => RegisterViewModel(mockRegisterUseCase),
+      act: (vm) => vm.doIntent(SwitchViewToSelectAge(age: 25)),
+      expect: () => [
+        isA<RegisterState>()
+            .having((s) => s.formData.age, 'age', 25)
+            .having((s) => s.currentStep, 'currentStep', 0),
+        isA<RegisterState>()
+            .having((s) => s.formData.age, 'age', 25)
             .having(
               (s) => s.currentStep,
               'currentStep',

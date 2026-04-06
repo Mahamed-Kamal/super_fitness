@@ -270,4 +270,28 @@ void main() {
       expect(RegisterStepNavBackIntent(), isA<RegisterIntent>());
     });
   });
+
+  group('SwitchViewToSelectAge', () {
+    test('two instances with same age are equal', () {
+      final intent1 = SwitchViewToSelectAge(age: 25);
+      final intent2 = SwitchViewToSelectAge(age: 25);
+      expect(intent1, equals(intent2));
+    });
+
+    test('two instances with different age are not equal', () {
+      final intent1 = SwitchViewToSelectAge(age: 25);
+      final intent2 = SwitchViewToSelectAge(age: 30);
+      expect(intent1, isNot(equals(intent2)));
+    });
+
+    test('props contains age', () {
+      final intent = SwitchViewToSelectAge(age: 25);
+      expect(intent.props, [25]);
+    });
+
+    test('is a RegisterIntent', () {
+      final intent = SwitchViewToSelectAge(age: 25);
+      expect(intent, isA<RegisterIntent>());
+    });
+  });
 }

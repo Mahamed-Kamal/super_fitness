@@ -34,6 +34,15 @@ class SwitchViewToSelectWeight extends RegisterIntent with EquatableMixin {
   List<Object?> get props => [userGender];
 }
 
+class SwitchViewToSelectAge extends RegisterIntent with EquatableMixin {
+  final int age;
+
+  SwitchViewToSelectAge({required this.age});
+
+  @override
+  List<Object?> get props => [age];
+}
+
 class SwitchViewToSelectHeight extends RegisterIntent with EquatableMixin {
   final int weight;
 

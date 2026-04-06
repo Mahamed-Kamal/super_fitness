@@ -8,15 +8,6 @@ class NavigateFromRegisterToLoginEvent extends RegisterEvent
   List<Object?> get props => [];
 }
 
-class UserRegisterSuccessfulEvent extends RegisterEvent with EquatableMixin {
-  final String message;
-
-  UserRegisterSuccessfulEvent({required this.message});
-
-  @override
-  List<Object?> get props => [message];
-}
-
 class UserRegisterFailedEvent extends RegisterEvent with EquatableMixin {
   final String message;
 
@@ -29,13 +20,4 @@ class UserRegisterFailedEvent extends RegisterEvent with EquatableMixin {
 class RegisterCompletedEvent extends RegisterEvent with EquatableMixin {
   @override
   List<Object?> get props => [];
-}
-
-class UpdateUserDataFailedEvent extends RegisterEvent with EquatableMixin {
-  final String message;
-
-  UpdateUserDataFailedEvent({required this.message});
-
-  @override
-  List<Object?> get props => [message];
 }
