@@ -1,70 +1,75 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/glass_container.dart';
+import 'package:super_fitness/features/auth/domain/entities/user_gender.dart';
+import 'package:super_fitness/features/auth/presentation/register/view_model/register_intent.dart';
+import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 
 class GenderPage extends StatefulWidget {
-  const GenderPage({super.key, required this.pageController});
-  final PageController pageController;
+  const GenderPage({super.key});
+
   @override
   State<GenderPage> createState() => _GenderPageState();
 }
 
 class _GenderPageState extends State<GenderPage> {
-  String? selectedGender;
+  UserGender? selectedGender;
+
+  @override
+  void initState() {
+    super.initState();
+    final savedGender = context.read<RegisterViewModel>().state.formData.gender;
+    if (savedGender.isNotEmpty) {
+      selectedGender = UserGender.values.byName(savedGender);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           Text(
-            "TELL US ABOUT YOURSELF!",
+            "tell_us_about_yourself".tr(),
             style: context.appTheme.semiBold24,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
           Text(
-            "TO GIVE YOU A BETTER EXPERIENCE WE NEED\nTO KNOW YOUR GENDER",
+            "gender_subtitle".tr(),
             style: context.appTheme.regular14.copyWith(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
-
           GlassContainer(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _buildGenderItem(
-                  label: "Male",
+                  label: "male".tr(),
                   icon: AssetsManager.icMaleSvg,
-                  isSelected: selectedGender == "male",
-                  onTap: () {
-                    setState(() => selectedGender = "male");
-                  },
+                  isSelected: selectedGender == UserGender.male,
+                  onTap: () => setState(() => selectedGender = UserGender.male),
                 ),
                 const SizedBox(width: 40),
-
                 _buildGenderItem(
-                  label: "Female",
+                  label: "female".tr(),
                   icon: AssetsManager.icFemaleSvg,
-                  isSelected: selectedGender == "female",
-                  onTap: () {
-                    setState(() => selectedGender = "female");
-                  },
+                  isSelected: selectedGender == UserGender.female,
+                  onTap: () =>
+                      setState(() => selectedGender = UserGender.female),
                 ),
                 const SizedBox(width: 50),
                 ElevatedButton(
                   onPressed: selectedGender == null
                       ? null
-                      : () {
-                          widget.pageController.animateToPage(
-                            2,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOut,
-                          );
-                        },
+                      : () => context.read<RegisterViewModel>().doIntent(
+                          SwitchViewToSelectWeight(userGender: selectedGender!),
+                        ),
                   child: Text("next".tr()),
                 ),
               ],

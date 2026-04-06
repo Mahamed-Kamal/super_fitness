@@ -5,21 +5,21 @@ import 'package:super_fitness/features/auth/presentation/register/view_model/reg
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/widget/custom_data_packer.dart';
 
-class WeightPage extends StatefulWidget {
-  const WeightPage({super.key});
+class HeightPage extends StatefulWidget {
+  const HeightPage({super.key});
 
   @override
-  State<WeightPage> createState() => _WeightPageState();
+  State<HeightPage> createState() => _HeightPageState();
 }
 
-class _WeightPageState extends State<WeightPage> {
-  int _weight = 70;
+class _HeightPageState extends State<HeightPage> {
+  int _height = 180;
 
   @override
   void initState() {
     super.initState();
-    final savedWeight = context.read<RegisterViewModel>().state.formData.weight;
-    if (savedWeight != 0) _weight = savedWeight;
+    final savedHeight = context.read<RegisterViewModel>().state.formData.height;
+    if (savedHeight != 0) _height = savedHeight;
   }
 
   @override
@@ -28,15 +28,15 @@ class _WeightPageState extends State<WeightPage> {
       child: Column(
         children: [
           CustomDataPicker(
-            title: "what_is_your_weight".tr(),
+            title: "what_is_your_height".tr(),
             subtitle: "personalized_plan_subtitle".tr(),
-            unit: 'kg'.tr(),
-            minValue: 40,
-            maxValue: 200,
-            initialValue: _weight,
-            onValueChanged: (value) => setState(() => _weight = value),
+            unit: 'cm'.tr(),
+            minValue: 100,
+            maxValue: 250,
+            initialValue: _height,
+            onValueChanged: (value) => setState(() => _height = value),
             onNext: () => context.read<RegisterViewModel>().doIntent(
-              SwitchViewToSelectHeight(weight: _weight),
+              SwitchViewToSelectGoal(height: _height),
             ),
           ),
         ],

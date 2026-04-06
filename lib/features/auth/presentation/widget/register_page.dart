@@ -7,6 +7,7 @@ import 'package:super_fitness/features/auth/presentation/widget/register_from_wi
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key, required this.pageController});
   final PageController pageController;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -31,13 +32,13 @@ class RegisterPage extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           GlassContainer(
-            bottomLeft: Radius.circular(50),
-            bottomRight: Radius.circular(50),
-            topRight: Radius.circular(50),
-            topLeft: Radius.circular(50),
-            child: RegisterFormWidget(pageController: pageController),
+            bottomLeft: const Radius.circular(50),
+            bottomRight: const Radius.circular(50),
+            topRight: const Radius.circular(50),
+            topLeft: const Radius.circular(50),
+            child: RegisterFormWidget(),
           ),
         ],
       ),

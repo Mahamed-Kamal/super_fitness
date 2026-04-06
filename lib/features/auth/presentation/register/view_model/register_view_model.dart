@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/bloc/base_view_model.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
@@ -10,6 +11,7 @@ import 'package:super_fitness/features/auth/presentation/register/view_model/reg
 
 part 'register_state.dart';
 
+@injectable
 class RegisterViewModel
     extends BaseViewModel<RegisterState, RegisterIntent, RegisterEvent> {
   final RegisterUseCase _registerUseCase;
@@ -49,6 +51,9 @@ class RegisterViewModel
 
       case FinishRegisterIntent():
         _saveActivityLevelAndRegister(intent.activityLevel.name);
+
+      case SwitchViewToSelectAge():
+        _saveAgeAndProceed(intent.age);
     }
   }
 
@@ -77,9 +82,14 @@ class RegisterViewModel
     _goToStep(RegisterStep.selectGender.index);
   }
 
+  void _saveAgeAndProceed(int age) {
+    _updateFormData(state.formData.copyWith(age: age));
+    _goToStep(RegisterStep.selectWeight.index);
+  }
+
   void _saveGenderAndProceed(String gender) {
     _updateFormData(state.formData.copyWith(gender: gender));
-    _goToStep(RegisterStep.selectWeight.index);
+    _goToStep(RegisterStep.selectAge.index);
   }
 
   void _saveWeightAndProceed(int weight) {
@@ -109,6 +119,24 @@ class RegisterViewModel
         hasCompletedForm: true,
       ),
     );
+    late String level;
+    switch (state.formData.activityLevel) {
+      case 'rookie':
+        level = 'level1';
+        break;
+      case 'beginner':
+        level = 'level2';
+        break;
+      case 'intermediate':
+        level = 'level3';
+        break;
+      case 'advanced':
+        level = 'level4';
+        break;
+      case 'expert':
+        level = 'level5';
+        break;
+    }
 
     final result = await _registerUseCase.call(
       firstName: state.formData.firstname,
@@ -121,7 +149,7 @@ class RegisterViewModel
       weight: state.formData.weight,
       age: state.formData.age,
       goal: state.formData.goal,
-      activityLevel: state.formData.activityLevel,
+      activityLevel: level,
     );
 
     switch (result) {

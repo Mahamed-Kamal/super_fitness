@@ -19,39 +19,6 @@ void main() {
     });
   });
 
-  group('UserRegisterSuccessfulEvent', () {
-    test('stores message correctly', () {
-      final event = UserRegisterSuccessfulEvent(message: 'Welcome!');
-      expect(event.message, 'Welcome!');
-    });
-
-    test('props contains message', () {
-      final event = UserRegisterSuccessfulEvent(message: 'Welcome!');
-      expect(event.props, ['Welcome!']);
-    });
-
-    test('two instances with same message are equal', () {
-      expect(
-        UserRegisterSuccessfulEvent(message: 'Welcome!'),
-        equals(UserRegisterSuccessfulEvent(message: 'Welcome!')),
-      );
-    });
-
-    test('two instances with different message are not equal', () {
-      expect(
-        UserRegisterSuccessfulEvent(message: 'Welcome!'),
-        isNot(equals(UserRegisterSuccessfulEvent(message: 'Hello!'))),
-      );
-    });
-
-    test('is a RegisterEvent', () {
-      expect(
-        UserRegisterSuccessfulEvent(message: 'Welcome!'),
-        isA<RegisterEvent>(),
-      );
-    });
-  });
-
   group('UserRegisterFailedEvent', () {
     test('stores message correctly', () {
       final event = UserRegisterFailedEvent(message: 'Email already exists');
@@ -96,39 +63,6 @@ void main() {
 
     test('is a RegisterEvent', () {
       expect(RegisterCompletedEvent(), isA<RegisterEvent>());
-    });
-  });
-
-  group('UpdateUserDataFailedEvent', () {
-    test('stores message correctly', () {
-      final event = UpdateUserDataFailedEvent(message: 'Update failed');
-      expect(event.message, 'Update failed');
-    });
-
-    test('props contains message', () {
-      final event = UpdateUserDataFailedEvent(message: 'Update failed');
-      expect(event.props, ['Update failed']);
-    });
-
-    test('two instances with same message are equal', () {
-      expect(
-        UpdateUserDataFailedEvent(message: 'Update failed'),
-        equals(UpdateUserDataFailedEvent(message: 'Update failed')),
-      );
-    });
-
-    test('two instances with different message are not equal', () {
-      expect(
-        UpdateUserDataFailedEvent(message: 'Update failed'),
-        isNot(equals(UpdateUserDataFailedEvent(message: 'Server error'))),
-      );
-    });
-
-    test('is a RegisterEvent', () {
-      expect(
-        UpdateUserDataFailedEvent(message: 'Update failed'),
-        isA<RegisterEvent>(),
-      );
     });
   });
 }
