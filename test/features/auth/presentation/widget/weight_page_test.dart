@@ -73,7 +73,7 @@ void main() {
         final picker = tester.widget<CustomDataPicker>(
           find.byType(CustomDataPicker),
         );
-        picker.onValueChanged(90); // تغيير الوزن لـ 90
+        picker.onValueChanged(90);
         await tester.pumpAndSettle();
 
         picker.onNext();
