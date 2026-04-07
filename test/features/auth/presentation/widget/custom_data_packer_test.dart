@@ -4,7 +4,6 @@ import 'package:super_fitness/features/auth/presentation/widget/custom_data_pack
 import 'package:super_fitness/core/theme/app_theme/dark_theme.dart';
 
 void main() {
-  late int capturedValue;
   bool nextPressed = false;
 
   Widget createWidgetUnderTest({
@@ -26,7 +25,7 @@ void main() {
           minValue: min,
           maxValue: max,
           initialValue: initialValue,
-          onValueChanged: (val) => capturedValue = val,
+          onValueChanged: (val) => {},
           onNext: () => nextPressed = true,
         ),
       ),
