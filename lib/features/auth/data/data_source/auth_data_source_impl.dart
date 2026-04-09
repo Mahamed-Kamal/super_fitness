@@ -18,31 +18,29 @@ class AuthDataSourceImpl implements AuthDataSource {
 
   @override
   Future<Result<ForgotPasswordResponse>> forgotPassword({
-    required ForgotPasswordRequest forgotPassword, })
-  => executeApi(() async {
+    required ForgotPasswordRequest forgotPassword,
+  }) => executeApi(() async {
     var response = await _apiClient.forgotPassword(
-      forgotPassword:forgotPassword,
+      forgotPassword: forgotPassword,
     );
     return response;
   });
 
   @override
   Future<Result<VerifyResetCodeResponse>> verifyOtp({
-    required VerifyResetCodeRequest verifyResetCodeRequest, })
-  => executeApi(() async {
+    required VerifyResetCodeRequest verifyResetCodeRequest,
+  }) => executeApi(() async {
     var response = await _apiClient.verifyOtp(
-      verifyResetCodeRequest:verifyResetCodeRequest,
+      verifyResetCodeRequest: verifyResetCodeRequest,
     );
     return response;
   });
 
   @override
   Future<Result<ResetPasswordResponse>> resetPassword({
-    required ResetPasswordRequest resetPassword, })
-  => executeApi(() async {
-    var response = await _apiClient.resetPassword(
-      resetPassword:resetPassword,
-    );
+    required ResetPasswordRequest resetPassword,
+  }) => executeApi(() async {
+    var response = await _apiClient.resetPassword(resetPassword: resetPassword);
     return response;
   });
 }

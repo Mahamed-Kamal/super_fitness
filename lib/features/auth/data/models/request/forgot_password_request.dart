@@ -4,14 +4,11 @@ import 'package:json_annotation/json_annotation.dart';
 part 'forgot_password_request.g.dart';
 
 @JsonSerializable()
-class ForgotPasswordRequest extends Equatable{
+class ForgotPasswordRequest extends Equatable {
   @JsonKey(name: "email")
   final String? email;
 
-  const ForgotPasswordRequest ({
-    this.email,
-
-  });
+  const ForgotPasswordRequest({this.email});
 
   factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) {
     return _$ForgotPasswordRequestFromJson(json);
@@ -24,5 +21,3 @@ class ForgotPasswordRequest extends Equatable{
   @override
   List<Object?> get props => [email];
 }
-
-

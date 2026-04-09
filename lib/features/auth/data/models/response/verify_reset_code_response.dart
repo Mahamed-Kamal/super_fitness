@@ -3,7 +3,6 @@ import 'package:super_fitness/features/auth/domain/entity/verify_reset_code_enti
 
 part 'verify_reset_code_response.g.dart';
 
-
 @JsonSerializable()
 class VerifyResetCodeResponse {
   @JsonKey(name: 'status')
@@ -16,8 +15,6 @@ class VerifyResetCodeResponse {
 
   Map<String, dynamic> toJson() => _$VerifyResetCodeResponseToJson(this);
   VerifyResetCodeEntity toEntity() {
-    return VerifyResetCodeEntity(
-        message: message
-    );
+    return VerifyResetCodeEntity(message: message);
   }
 }

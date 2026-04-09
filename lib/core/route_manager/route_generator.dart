@@ -11,20 +11,18 @@ class RouteGenerator {
   static final _forgetPasswordViewModel = getIt.get<ForgetPasswordViewModel>();
 
   static Route<dynamic>? getRoute(RouteSettings setting) {
-
-   //  final viewModel = getIt.get<ForgetPasswordViewModel>();
+    //  final viewModel = getIt.get<ForgetPasswordViewModel>();
 
     switch (setting.name) {
       case AppRoutes.onBoarding:
         return _buildRoute(const OnBoardingView());
-        case AppRoutes.forgetPassword:
-
-          return MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-              value: _forgetPasswordViewModel,
-              child: const ForgetPasswordView(),
-            ),
-          );
+      case AppRoutes.forgetPassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: _forgetPasswordViewModel,
+            child: const ForgetPasswordView(),
+          ),
+        );
       case AppRoutes.otp:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
@@ -37,7 +35,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
             value: _forgetPasswordViewModel,
-           // child: const ResetPasswordView(),
+            // child: const ResetPasswordView(),
           ),
         );
       default:

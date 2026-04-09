@@ -9,10 +9,6 @@ class ForgetPasswordUseCase {
   final AuthRepo _authRepo;
 
   ForgetPasswordUseCase(this._authRepo);
-  Future<Result<ForgotPasswordEntity>> call ({required String email})=>
+  Future<Result<ForgotPasswordEntity>> call({required String email}) =>
       _authRepo.forgotPassword(email: email);
 }
-
-
-
-

@@ -92,7 +92,6 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
 
   Future<void> _verifyResetCode(String verificationCode) async {
     emit(state.copyWith(verifyResetCodeState: BaseState.loading()));
-    print("emaillllllllllll ${state.email}");
     var response = await _verifyResetCodeUseCase.call(
       resetCode: verificationCode,
     );
@@ -133,7 +132,6 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
 
   void _resendOtp() {
     if (state.resendRemainingSeconds > 0 || state.email == null) {
-      print("email is null");
       return;
     }
 

@@ -19,11 +19,9 @@ class ResetPasswordResponse with EquatableMixin {
   Map<String, dynamic> toJson() => _$ResetPasswordResponseToJson(this);
 
   ResetPasswordEntity toEntity() {
-    return ResetPasswordEntity(
-      message: message,
-      info: token,
-    );
+    return ResetPasswordEntity(message: message, info: token);
   }
+
   @override
   List<Object?> get props => [message, token];
 }

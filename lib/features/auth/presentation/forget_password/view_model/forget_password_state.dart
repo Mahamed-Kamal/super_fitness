@@ -9,7 +9,7 @@ class ForgetPasswordState extends Equatable {
   const ForgetPasswordState({
     this.forgotPasswordState,
     this.verifyResetCodeState,
-    this.resendRemainingSeconds= 0 ,
+    this.resendRemainingSeconds = 0,
     this.email,
   });
   @override

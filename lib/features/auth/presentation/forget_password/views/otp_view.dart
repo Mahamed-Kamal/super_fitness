@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -137,15 +136,17 @@ class _OtpViewState extends State<OtpView> {
                         context.h(15),
                         Text(
                           "didnt recieve verification code?",
-                          style: context.appTheme.regular16.copyWith(fontSize: 18),
+                          style: context.appTheme.regular16.copyWith(
+                            fontSize: 18,
+                          ),
                         ).tr(),
                         InkWell(
-                            onTap: isResendEnabled
-                                ? () {
-                              context.read<ForgetPasswordViewModel>().doIntent(ResendOtpIntent());
-                              print("resend");
-                            }
-
+                          onTap: isResendEnabled
+                              ? () {
+                                  context
+                                      .read<ForgetPasswordViewModel>()
+                                      .doIntent(ResendOtpIntent());
+                                }
                               : null,
                           child: Text(
                             isResendEnabled
@@ -155,11 +156,12 @@ class _OtpViewState extends State<OtpView> {
                               fontSize: 18,
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.bold,
-                              color: isResendEnabled ? Colors.blue : Colors.grey,
+                              color: isResendEnabled
+                                  ? Colors.blue
+                                  : Colors.grey,
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   );

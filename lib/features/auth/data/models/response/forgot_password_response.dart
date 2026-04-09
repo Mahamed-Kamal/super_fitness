@@ -10,10 +10,7 @@ class ForgotPasswordResponse {
   @JsonKey(name: "info")
   final String? info;
 
-  ForgotPasswordResponse ({
-    this.message,
-    this.info,
-  });
+  ForgotPasswordResponse({this.message, this.info});
 
   factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) {
     return _$ForgotPasswordResponseFromJson(json);
@@ -22,12 +19,8 @@ class ForgotPasswordResponse {
   Map<String, dynamic> toJson() {
     return _$ForgotPasswordResponseToJson(this);
   }
+
   ForgotPasswordEntity toEntity() {
-    return ForgotPasswordEntity(
-      message: message,
-      info: info,
-    );
+    return ForgotPasswordEntity(message: message, info: info);
   }
 }
-
-

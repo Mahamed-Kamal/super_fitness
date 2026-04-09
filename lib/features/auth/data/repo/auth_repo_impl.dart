@@ -19,48 +19,78 @@ class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl(this._authDataSource);
 
   @override
-  Future<Result<ForgotPasswordEntity>> forgotPassword({required String email}) async {
+  Future<Result<ForgotPasswordEntity>> forgotPassword({
+    required String email,
+  }) async {
     var forgotPassword = ForgotPasswordRequest(email: email);
-    var response = await _authDataSource.forgotPassword(forgotPassword: forgotPassword);
+    var response = await _authDataSource.forgotPassword(
+      forgotPassword: forgotPassword,
+    );
     switch (response) {
       case SuccessResponse<ForgotPasswordResponse>():
         {
-          return SuccessResponse<ForgotPasswordEntity>(data: response.data.toEntity());
-
+          return SuccessResponse<ForgotPasswordEntity>(
+            data: response.data.toEntity(),
+          );
         }
       case FailureResponse<ForgotPasswordResponse>():
         {
-          return FailureResponse<ForgotPasswordEntity>(errorMessage: response.errorMessage);}}}
-
-  @override
-  Future<Result<VerifyResetCodeEntity>> verifyOtp({required String resetCode}) async {
-    var verifyResetCodeRequest = VerifyResetCodeRequest(resetCode: resetCode);
-    var response = await _authDataSource.verifyOtp(verifyResetCodeRequest: verifyResetCodeRequest);
-    switch (response) {
-      case SuccessResponse<VerifyResetCodeResponse>():
-        {
-          return SuccessResponse<VerifyResetCodeEntity>(data: response.data.toEntity());
-
-        }
-      case FailureResponse<VerifyResetCodeResponse>():
-        {
-          return FailureResponse<VerifyResetCodeEntity>(errorMessage: response.errorMessage);
+          return FailureResponse<ForgotPasswordEntity>(
+            errorMessage: response.errorMessage,
+          );
         }
     }
   }
 
   @override
-  Future<Result<ResetPasswordEntity>> resetPassword({required String email, required String newPassword}) async {
-    var resetPassword =ResetPasswordRequest(email: email, newPassword: newPassword);
-    var response = await _authDataSource.resetPassword(resetPassword: resetPassword);
+  Future<Result<VerifyResetCodeEntity>> verifyOtp({
+    required String resetCode,
+  }) async {
+    var verifyResetCodeRequest = VerifyResetCodeRequest(resetCode: resetCode);
+    var response = await _authDataSource.verifyOtp(
+      verifyResetCodeRequest: verifyResetCodeRequest,
+    );
+    switch (response) {
+      case SuccessResponse<VerifyResetCodeResponse>():
+        {
+          return SuccessResponse<VerifyResetCodeEntity>(
+            data: response.data.toEntity(),
+          );
+        }
+      case FailureResponse<VerifyResetCodeResponse>():
+        {
+          return FailureResponse<VerifyResetCodeEntity>(
+            errorMessage: response.errorMessage,
+          );
+        }
+    }
+  }
+
+  @override
+  Future<Result<ResetPasswordEntity>> resetPassword({
+    required String email,
+    required String newPassword,
+  }) async {
+    var resetPassword = ResetPasswordRequest(
+      email: email,
+      newPassword: newPassword,
+    );
+    var response = await _authDataSource.resetPassword(
+      resetPassword: resetPassword,
+    );
     switch (response) {
       case SuccessResponse<ResetPasswordResponse>():
         {
-          return SuccessResponse<ResetPasswordEntity>(data: response.data.toEntity());
-
+          return SuccessResponse<ResetPasswordEntity>(
+            data: response.data.toEntity(),
+          );
         }
       case FailureResponse<ResetPasswordResponse>():
         {
-          return FailureResponse<ResetPasswordEntity>(errorMessage: response.errorMessage);}}}
-
+          return FailureResponse<ResetPasswordEntity>(
+            errorMessage: response.errorMessage,
+          );
+        }
+    }
+  }
 }

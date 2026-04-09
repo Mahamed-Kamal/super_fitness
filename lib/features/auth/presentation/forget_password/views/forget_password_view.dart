@@ -29,7 +29,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   // final viewModel = getIt.get<ForgetPasswordViewModel>();
   @override
   void dispose() {
-   // _emailController.dispose();
+    // _emailController.dispose();
     _uiEventSubscription.cancel();
     super.dispose();
   }
@@ -37,27 +37,30 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   @override
   void initState() {
     super.initState();
-    _uiEventSubscription = context.read<ForgetPasswordViewModel>().forgetPasswordUiEvent.listen((event) {
-      switch (event) {
-        case ShowToast():
-          {
-            if (!mounted) return;
-            Toast.showToast(context, event.message, isError: event.isError);
-          }
-        case NavigateToOtpViewIntent():
-          {
-            if (!mounted) return;
+    _uiEventSubscription = context
+        .read<ForgetPasswordViewModel>()
+        .forgetPasswordUiEvent
+        .listen((event) {
+          switch (event) {
+            case ShowToast():
+              {
+                if (!mounted) return;
+                Toast.showToast(context, event.message, isError: event.isError);
+              }
+            case NavigateToOtpViewIntent():
+              {
+                if (!mounted) return;
 
-            Navigator.pushNamed(context, AppRoutes.otp);
-          }
-        case NavigateToResetPasswordViewIntent():
-          {
-            if (!mounted) return;
+                Navigator.pushNamed(context, AppRoutes.otp);
+              }
+            case NavigateToResetPasswordViewIntent():
+              {
+                if (!mounted) return;
 
-            ///Navigator.pushNamed(context, AppRoutes.appSection);
+                ///Navigator.pushNamed(context, AppRoutes.appSection);
+              }
           }
-      }
-    });
+        });
   }
 
   @override
@@ -96,11 +99,14 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 context.h(25),
                 BlocConsumer<ForgetPasswordViewModel, ForgetPasswordState>(
                   listenWhen: (previous, current) =>
-                  previous.verifyResetCodeState != current.verifyResetCodeState,
+                      previous.verifyResetCodeState !=
+                      current.verifyResetCodeState,
                   listener: (context, state) {
                     ///
                     if (state.forgotPasswordState?.isLoaded ?? false) {
-                      context.read<ForgetPasswordViewModel>().doUiIntent(NavigateToOtpViewIntent());
+                      context.read<ForgetPasswordViewModel>().doUiIntent(
+                        NavigateToOtpViewIntent(),
+                      );
                     } else if (state.forgotPasswordState?.isError ?? false) {
                       context.read<ForgetPasswordViewModel>().doUiIntent(
                         ShowToast(
@@ -153,7 +159,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                                     },
 
                               child: isLoading
-                                  ?  CircularProgressIndicator(
+                                  ? CircularProgressIndicator(
                                       color: context.appTheme.primary,
                                     )
                                   : Text("Sent OTP").tr(),
