@@ -14,13 +14,14 @@ class SuperFitnessApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Super Fitness',
       // Localization
-      locale: context.locale,
+     // locale: context.locale,
+      locale: Locale('en'),
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
       // Themes
       theme: DarkTheme().themeData,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.themePreview,
+      initialRoute: AppRoutes.forgetPassword,
       onGenerateRoute: RouteGenerator.getRoute,
     );
   }
