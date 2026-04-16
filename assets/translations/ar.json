@@ -33,9 +33,9 @@
     "outOfStock": "المنتج غير متوفر في المخزون"
   },
   "navigation": {
-    "home": "الرئيسية",
-    "categories": "التصنيفات",
-    "cart": "السلة",
+    "explore": "استكشف",
+    "chatAi": "دردشة ذكية",
+    "workouts": "التمارين",
     "profile": "الملف الشخصي"
   },
   "validation": {

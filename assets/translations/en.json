@@ -32,6 +32,12 @@
     "unAuthorized": "Please login to continue",
     "outOfStock": "product isOut of stock"
   },
+  "navigation": {
+    "explore": "Explore",
+    "chatAi": "Chat AI",
+    "workouts": "Workouts",
+    "profile": "Profile"
+  },
   "validation": {
     "enterUsername": "Please enter a username",
     "least3CharUsername": "Username must be at least 3 characters",
