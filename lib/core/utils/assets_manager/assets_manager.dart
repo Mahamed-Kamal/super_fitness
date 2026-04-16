@@ -16,6 +16,15 @@ abstract final class AssetsManager {
   static const String profileBackground =
       'assets/images/profile_background.jpg';
 
+  // =================== Onboarding ===================
+  static const String onBoardingBackground = "assets/images/onboarding_bg.png";
+  static const String onBoardingScreenOne =
+      "assets/images/onboarding_screen_one.png";
+  static const String onBoardingScreenTwo =
+      "assets/images/onboarding_screen_two.png";
+  static const String onBoardingScreenThree =
+      "assets/images/onboarding_screen_three.png";
+
   // =============== Icons ===============
   static const String icGymSvg = 'assets/images/ic_gym.svg';
   static const String icHomeSvg = 'assets/images/ic_home.svg';
