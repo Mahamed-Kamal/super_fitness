@@ -29,7 +29,12 @@ class RegisterViewModel
 
       case RegisterButtonClickedIntent():
         state.hasCompletedForm
-            ? _callRegisterApi()
+            ? _callRegisterApi(
+                email: intent.email,
+                password: intent.password,
+                firstName: intent.firstName,
+                lastName: intent.lastName,
+              )
             : _saveRegisterFormAndProceed(
                 intent.email,
                 intent.password,
@@ -112,7 +117,12 @@ class RegisterViewModel
     _callRegisterApi();
   }
 
-  Future<void> _callRegisterApi() async {
+  Future<void> _callRegisterApi({
+    String? email,
+    String? password,
+    String? firstName,
+    String? lastName,
+  }) async {
     emit(
       state.copyWith(
         requestState: RequestState.loading,
@@ -139,10 +149,10 @@ class RegisterViewModel
     }
 
     final result = await _registerUseCase.call(
-      firstName: state.formData.firstname,
-      lastName: state.formData.lastname,
-      email: state.formData.email,
-      password: state.formData.password,
+      email: email ?? state.formData.email,
+      password: password ?? state.formData.password,
+      firstName: firstName ?? state.formData.firstname,
+      lastName: lastName ?? state.formData.lastname,
       rePassword: state.formData.rePassword,
       gender: state.formData.gender,
       height: state.formData.height,
