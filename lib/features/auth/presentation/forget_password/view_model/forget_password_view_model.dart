@@ -6,8 +6,10 @@ import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/domain/entity/forget_password_entity.dart';
+import 'package:super_fitness/features/auth/domain/entity/reset_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/verify_reset_code_entity.dart';
 import 'package:super_fitness/features/auth/domain/use_cases/forgot_password_use_case.dart';
+import 'package:super_fitness/features/auth/domain/use_cases/reset_password_use_case.dart';
 import 'package:super_fitness/features/auth/domain/use_cases/verify_reset_code_use_case.dart';
 import 'package:super_fitness/features/auth/presentation/forget_password/view_model/forget_password_intent.dart';
 part 'forget_password_state.dart';
@@ -16,9 +18,11 @@ part 'forget_password_state.dart';
 class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
   final ForgetPasswordUseCase _forgetPasswordUseCase;
   final VerifyResetCodeUseCase _verifyResetCodeUseCase;
+  final ResetPasswordUseCase _resetPasswordUseCase;
   ForgetPasswordViewModel(
     this._forgetPasswordUseCase,
     this._verifyResetCodeUseCase,
+    this._resetPasswordUseCase,
   ) : super(ForgetPasswordState());
   final StreamController<ForgetPasswordUiIntent> _intentStreamController =
       StreamController.broadcast();
@@ -42,6 +46,10 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         {
           _resendOtp();
         }
+      case ResetPasswordIntent():
+        {
+          _resetPassword(intent.email, intent.newPassword);
+        }
     }
   }
 
@@ -61,6 +69,10 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         {
           _intentStreamController.add(NavigateToResetPasswordViewIntent());
         }
+      case NavigateToLoginViewIntent():
+        {
+          _intentStreamController.add(NavigateToLoginViewIntent());
+        }
     }
   }
 
@@ -77,7 +89,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
               forgotPasswordState: BaseState.loaded(response.data),
             ),
           );
-          _resentOtpTimer();
+          _resendOtpTimer();
         }
       case FailureResponse<ForgotPasswordEntity>():
         {
@@ -115,7 +127,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
   }
 
-  void _resentOtpTimer() {
+  void _resendOtpTimer() {
     _timer?.cancel();
     _remainingSeconds = 30;
     emit(state.copyWith(resendRemainingSeconds: _remainingSeconds));
@@ -136,6 +148,30 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
     }
 
     _sendResetPasswordCode(state.email!);
+  }
+
+  void _resetPassword(String email, String newPassword) async {
+    emit(state.copyWith(resetPasswordState: BaseState.loading()));
+    var response = await _resetPasswordUseCase.call(
+      email: email,
+      newPassword: newPassword,
+    );
+    switch (response) {
+      case SuccessResponse<ResetPasswordEntity>():
+        {
+          emit(
+            state.copyWith(resetPasswordState: BaseState.loaded(response.data)),
+          );
+        }
+      case FailureResponse<ResetPasswordEntity>():
+        {
+          emit(
+            state.copyWith(
+              resetPasswordState: BaseState.error(response.errorMessage),
+            ),
+          );
+        }
+    }
   }
 
   @override

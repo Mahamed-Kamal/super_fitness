@@ -25,7 +25,7 @@ abstract class ApiClient {
   Future<VerifyResetCodeResponse> verifyOtp({
     @Body() required VerifyResetCodeRequest verifyResetCodeRequest,
   });
-  @POST(EndPoints.resetPassword)
+  @PUT(EndPoints.resetPassword)
   Future<ResetPasswordResponse> resetPassword({
     @Body() required ResetPasswordRequest resetPassword,
   });

@@ -54,10 +54,23 @@ class _OtpViewState extends State<OtpView> {
 
               context.h(25),
               BlocConsumer<ForgetPasswordViewModel, ForgetPasswordState>(
+                listenWhen: (previous, current) {
+                  final prev = previous.verifyResetCodeState;
+                  final curr = current.verifyResetCodeState;
+
+                  return prev?.requestState != curr?.requestState ||
+                      prev?.errorMessage != curr?.errorMessage;
+                },
                 listener: (context, state) {
                   if (state.verifyResetCodeState?.isLoaded ?? false) {
                     context.read<ForgetPasswordViewModel>().doUiIntent(
                       NavigateToResetPasswordViewIntent(),
+                    );
+                    context.read<ForgetPasswordViewModel>().doUiIntent(
+                      ShowToast(
+                        message: "OTP verified successfully",
+                        isError: false,
+                      ),
                     );
                   } else if (state.verifyResetCodeState?.isError ?? false) {
                     context.read<ForgetPasswordViewModel>().doUiIntent(
@@ -82,7 +95,7 @@ class _OtpViewState extends State<OtpView> {
                       children: [
                         PinCodeTextField(
                           appContext: context,
-                          length: 7,
+                          length: 6,
                           keyboardType: TextInputType.number,
                           animationType: AnimationType.fade,
                           enableActiveFill: true,
@@ -121,9 +134,11 @@ class _OtpViewState extends State<OtpView> {
                             onPressed: isLoading
                                 ? null
                                 : () {
-                                    context
-                                        .read<ForgetPasswordViewModel>()
-                                        .doIntent(VerifyResetCodeIntent(otp));
+                                    if (otp.length == 6) {
+                                      context
+                                          .read<ForgetPasswordViewModel>()
+                                          .doIntent(VerifyResetCodeIntent(otp));
+                                    }
                                   },
 
                             child: isLoading
