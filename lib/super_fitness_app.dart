@@ -14,8 +14,7 @@ class SuperFitnessApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Super Fitness',
       // Localization
-      // locale: context.locale,
-      locale: Locale('en'),
+      locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
       // Themes
