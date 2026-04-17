@@ -60,7 +60,6 @@
     "enterRecipientName": "Please enter recipient name",
     "enterAddress": "Please enter address"
   },
-  "retry": "Retry",
   "onboarding": {
     "title1": "The price of excellence is discipline",
     "desc1": "Greatness isn't born; it's built in the gym. Commit to the process and watch your discipline turn into your greatest strength",
@@ -72,7 +71,19 @@
     "back": "Back",
     "skip": "Skip",
     "doIt": "Do IT"
-  }
+  },
 
 
+  "retry"  : "Retry",
+"forget password":{
+  "Enter Your Email": "Enter Your Email",
+  "Forget password": "Forget password",
+  "Email": "Email",
+  "Sent OTP": "Sent OTP",
+  "OTP CODE": "OTP CODE",
+  "Enter Your OTP Check your email": "Enter Your OTP Check your email",
+  "Confirm": "Confirm",
+  "didnt recieve verification code?": "didnt recieve verification code?",
+  "Resend Code?": "Resend Code?"
+}
 }

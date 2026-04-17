@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/route_manager/route_generator.dart';
+
 import 'package:super_fitness/core/theme/app_theme/dark_theme.dart';
 
 class SuperFitnessApp extends StatelessWidget {
@@ -19,7 +20,7 @@ class SuperFitnessApp extends StatelessWidget {
       // Themes
       theme: DarkTheme().themeData,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.onBoarding,
+      initialRoute: AppRoutes.forgetPassword,
       onGenerateRoute: RouteGenerator.getRoute,
     );
   }

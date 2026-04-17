@@ -5,67 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/extensions/context_spacing_extension.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
-import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/utils/validation/form_validator.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
 import 'package:super_fitness/core/widgets/glass_container.dart';
 import 'package:super_fitness/core/widgets/screen_backdrop.dart';
-import 'package:super_fitness/core/widgets/show_toast.dart';
 import 'package:super_fitness/features/auth/presentation/forget_password/view_model/forget_password_intent.dart';
 import 'package:super_fitness/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
 
-class ForgetPasswordView extends StatefulWidget {
-  const ForgetPasswordView({super.key});
+class ResetPasswordView extends StatefulWidget {
+  const ResetPasswordView({super.key});
 
   @override
-  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
+  State<ResetPasswordView> createState() => _ResetPasswordViewState();
 }
 
-class _ForgetPasswordViewState extends State<ForgetPasswordView> {
-  final TextEditingController _emailController = TextEditingController();
+class _ResetPasswordViewState extends State<ResetPasswordView> {
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late StreamSubscription<ForgetPasswordUiIntent> _uiEventSubscription;
 
   @override
   void dispose() {
-    // _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
     _uiEventSubscription.cancel();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _uiEventSubscription = context
-        .read<ForgetPasswordViewModel>()
-        .forgetPasswordUiEvent
-        .listen((event) {
-          switch (event) {
-            case ShowToast():
-              {
-                if (!mounted) return;
-                Toast.showToast(context, event.message, isError: event.isError);
-              }
-            case NavigateToOtpViewIntent():
-              {
-                if (!mounted) return;
-
-                Navigator.pushNamed(context, AppRoutes.otp);
-              }
-            case NavigateToResetPasswordViewIntent():
-              {
-                if (!mounted) return;
-
-                Navigator.pushNamed(context, AppRoutes.resetPassword);
-              }
-            case NavigateToLoginViewIntent():
-              {
-                if (!mounted) return;
-                Navigator.pushNamed(context, AppRoutes.resetPassword);
-              }
-          }
-        });
   }
 
   @override
@@ -93,12 +60,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                       ),
                     ),
                     Text(
-                      "Enter Your Email",
+                      "make sure its 8 characters or more",
                       style: context.appTheme.regular16.copyWith(fontSize: 18),
                     ).tr(),
                     context.h(15),
                     Text(
-                      "Forget password",
+                      "create new password",
                       style: context.appTheme.regular16.copyWith(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -107,25 +74,24 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     context.h(25),
                     BlocConsumer<ForgetPasswordViewModel, ForgetPasswordState>(
                       listenWhen: (previous, current) =>
-                          previous.forgotPasswordState !=
-                          current.forgotPasswordState,
+                          previous.resetPasswordState !=
+                          current.resetPasswordState,
                       listener: (context, state) {
                         ///
-                        if (state.forgotPasswordState?.isLoaded ?? false) {
+                        if (state.resetPasswordState?.isLoaded ?? false) {
                           context.read<ForgetPasswordViewModel>().doUiIntent(
-                            NavigateToOtpViewIntent(),
+                            NavigateToLoginViewIntent(),
                           );
                           context.read<ForgetPasswordViewModel>().doUiIntent(
                             ShowToast(
-                              message: "OTP sent successfully",
+                              message: "Password reset successfully",
                               isError: false,
                             ),
                           );
-                        } else if (state.forgotPasswordState?.isError ??
-                            false) {
+                        } else if (state.resetPasswordState?.isError ?? false) {
                           context.read<ForgetPasswordViewModel>().doUiIntent(
                             ShowToast(
-                              message: state.forgotPasswordState!.errorMessage!,
+                              message: state.resetPasswordState!.errorMessage!,
                               isError: true,
                             ),
                           );
@@ -133,7 +99,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                       },
                       builder: (context, state) {
                         final isLoading =
-                            state.forgotPasswordState?.isLoading ?? false;
+                            state.resetPasswordState?.isLoading ?? false;
 
                         return GlassContainer(
                           bottomLeft: Radius.circular(30),
@@ -143,11 +109,26 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                           child: Column(
                             children: [
                               TextFormField(
-                                controller: _emailController,
-                                validator: FormValidators.email,
+                                controller: _passwordController,
+                                validator: FormValidators.password,
                                 decoration: InputDecoration(
-                                  prefix: Icon(Icons.email_outlined),
-                                  hintText: "Email".tr(),
+                                  prefix: Icon(Icons.lock),
+                                  hintText: "Password".tr(),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                ),
+                              ),
+                              context.h(15),
+                              TextFormField(
+                                controller: _confirmPasswordController,
+                                validator: (value) =>
+                                    FormValidators.confirmPassword(
+                                      value,
+                                      _passwordController.text,
+                                    ),
+                                decoration: InputDecoration(
+                                  prefix: Icon(Icons.lock),
+                                  hintText: "Password".tr(),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                 ),
@@ -165,12 +146,17 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                                       ? null
                                       : () {
                                           if (_formKey.currentState!
-                                              .validate()) {
+                                                  .validate() &&
+                                              _passwordController.text ==
+                                                  _confirmPasswordController
+                                                      .text) {
                                             context
                                                 .read<ForgetPasswordViewModel>()
                                                 .doIntent(
-                                                  SendResetPasswordCodeIntent(
-                                                    _emailController.text,
+                                                  ResetPasswordIntent(
+                                                    state.email ?? "",
+                                                    _confirmPasswordController
+                                                        .text,
                                                   ),
                                                 );
                                           }
@@ -180,7 +166,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                                       ? CircularProgressIndicator(
                                           color: context.appTheme.primary,
                                         )
-                                      : Text("Sent OTP").tr(),
+                                      : Text("Done").tr(),
                                 ),
                               ),
                             ],
