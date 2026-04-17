@@ -2,8 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
-import 'package:super_fitness/core/error_handling/result.dart';
-import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/verify_reset_code_request.dart';
@@ -18,8 +16,8 @@ import 'package:super_fitness/features/auth/domain/repo/auth_repo.dart';
 @Injectable(as: AuthRepo)
 class AuthRepoImpl implements AuthRepo {
   final AuthDataSource _authDataSource;
-  const AuthRepoImpl(this._authDataSource);
 
+  AuthRepoImpl(this._authDataSource);
   @override
   Future<Result<LoginResponseDto>> login({
     required String email,
@@ -36,11 +34,6 @@ class AuthRepoImpl implements AuthRepo {
         return FailureResponse(errorMessage: response.errorMessage);
     }
   }
-}
-class AuthRepoImpl implements AuthRepo {
-  final AuthDataSource _authDataSource;
-
-  AuthRepoImpl(this._authDataSource);
 
   @override
   Future<Result<ForgotPasswordEntity>> forgotPassword({

@@ -14,8 +14,8 @@ import 'package:super_fitness/features/auth/data/models/response/verify_reset_co
 @Injectable(as: AuthDataSource)
 class AuthDataSourceImpl implements AuthDataSource {
   final ApiClient _apiClient;
-  const AuthDataSourceImpl(this._apiClient);
 
+  AuthDataSourceImpl(this._apiClient);
   @override
   Future<Result<LoginResponseDto>> login({
     required String email,
@@ -23,11 +23,6 @@ class AuthDataSourceImpl implements AuthDataSource {
   }) {
     return executeApi(() => _apiClient.login(email: email, password: password));
   }
-}
-class AuthDataSourceImpl implements AuthDataSource {
-  final ApiClient _apiClient;
-
-  AuthDataSourceImpl(this._apiClient);
 
   @override
   Future<Result<ForgotPasswordResponse>> forgotPassword({

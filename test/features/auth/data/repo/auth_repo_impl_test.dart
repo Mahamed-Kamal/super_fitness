@@ -12,10 +12,10 @@ import 'package:super_fitness/features/auth/data/models/response/reset_password_
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/repo/auth_repo_impl.dart';
-
 import 'package:super_fitness/features/auth/domain/entity/forget_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/reset_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/verify_reset_code_entity.dart';
+
 import 'auth_repo_impl_test.mocks.dart';
 
 @GenerateMocks([AuthDataSource])
@@ -27,8 +27,6 @@ void main() {
   const testPassword = 'Mohamed@123';
   const testErrorMessage = 'errors.connectionError';
 
-  late AuthDataSource authDataSource;
-  late AuthRepoImpl authRepo;
   late ForgotPasswordRequest forgotPasswordRequest;
   late ForgotPasswordResponse forgotPasswordResponse;
   late VerifyResetCodeResponse verifyResetCodeResponse;
@@ -39,11 +37,23 @@ void main() {
   late VerifyResetCodeEntity verifyResetCodeEntity;
   late ForgotPasswordEntity forgotPasswordEntity;
   late String errorMessage;
+
+  setUpAll(() {
+    provideDummy<Result<ForgotPasswordResponse>>(
+      FailureResponse<ForgotPasswordResponse>(errorMessage: ""),
+    );
+    provideDummy<Result<VerifyResetCodeResponse>>(
+      FailureResponse<VerifyResetCodeResponse>(errorMessage: ""),
+    );
+    provideDummy<Result<ResetPasswordResponse>>(
+      FailureResponse<ResetPasswordResponse>(errorMessage: ""),
+    );
+  });
+
   setUp(() {
     mockAuthDataSource = MockAuthDataSource();
     authRepoImpl = AuthRepoImpl(mockAuthDataSource);
-    authDataSource = MockAuthDataSource();
-    authRepo = AuthRepoImpl(authDataSource);
+
     forgotPasswordRequest = ForgotPasswordRequest(email: "email");
     forgotPasswordResponse = ForgotPasswordResponse();
     verifyResetCodeResponse = VerifyResetCodeResponse(message: 'message');
@@ -58,84 +68,141 @@ void main() {
     resetPasswordEntity = ResetPasswordEntity();
     errorMessage = "error";
   });
-  setUpAll(() {
-    provideDummy<Result<ForgotPasswordResponse>>(
-      FailureResponse<ForgotPasswordResponse>(errorMessage: ""),
-    );
-    provideDummy<Result<VerifyResetCodeResponse>>(
-      FailureResponse<VerifyResetCodeResponse>(errorMessage: ""),
-    );
-    provideDummy<Result<ResetPasswordResponse>>(
-      FailureResponse<ResetPasswordResponse>(errorMessage: ""),
-    );
-  });
-  group("test forgotPassword ", () {
-    test(
-      'when call forgotPassword it should return success with the correct data',
-      () async {
-        when(
-          authDataSource.forgotPassword(forgotPassword: forgotPasswordRequest),
-        ).thenAnswer(
-          (_) async => SuccessResponse<ForgotPasswordResponse>(
-            data: forgotPasswordResponse,
-          ),
-        );
-        final result = await authRepo.forgotPassword(
-          email: forgotPasswordRequest.email ?? "",
-        );
 
+  // ══════════════════════════════════════════════════════════
+  //  Login
+  // ══════════════════════════════════════════════════════════
   group("Login Function Test Cases", () {
     late LoginResponseDto loginResponseDto;
     late SuccessResponse<LoginResponseDto> successResponse;
     late FailureResponse<LoginResponseDto> errorResponse;
-        expect(
-          result,
-          SuccessResponse<ForgotPasswordEntity>(data: forgotPasswordEntity),
-        );
 
     setUp(() {
       loginResponseDto = LoginResponseDto(
         message: "mohamed",
         token: "abc123",
         user: UserDto(id: "1"),
+      );
+      successResponse = SuccessResponse<LoginResponseDto>(
+        data: loginResponseDto,
+      );
+      errorResponse = FailureResponse<LoginResponseDto>(
+        errorMessage: testErrorMessage,
+      );
+    });
+
+    test("when call Login it should return Success", () async {
+      provideDummy<Result<LoginResponseDto>>(successResponse);
+      when(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).thenAnswer((_) async => successResponse);
+
+      final result = await authRepoImpl.login(
+        email: testEmail,
+        password: testPassword,
+      );
+
+      expect(
+        (result as SuccessResponse<LoginResponseDto>).data.token,
+        equals(loginResponseDto.token),
+      );
+      verify(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).called(1);
+      verifyNoMoreInteractions(mockAuthDataSource);
+    });
+
+    test("when login fails it should return FailureResponse", () async {
+      provideDummy<Result<LoginResponseDto>>(errorResponse);
+      when(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).thenAnswer((_) async => errorResponse);
+
+      final result = await authRepoImpl.login(
+        email: testEmail,
+        password: testPassword,
+      );
+
+      expect(
+        (result as FailureResponse<LoginResponseDto>).errorMessage,
+        equals(testErrorMessage),
+      );
+      verify(
+        mockAuthDataSource.login(email: testEmail, password: testPassword),
+      ).called(1);
+      verifyNoMoreInteractions(mockAuthDataSource);
+    });
+  });
+
+  // ══════════════════════════════════════════════════════════
+  //  Forgot Password
+  // ══════════════════════════════════════════════════════════
+  group("test forgotPassword", () {
+    test(
+      'when call forgotPassword it should return success with the correct data',
+      () async {
+        when(
+          mockAuthDataSource.forgotPassword(
+            forgotPassword: forgotPasswordRequest,
+          ),
+        ).thenAnswer(
+          (_) async => SuccessResponse<ForgotPasswordResponse>(
+            data: forgotPasswordResponse,
+          ),
+        );
+
+        final result = await authRepoImpl.forgotPassword(
+          email: forgotPasswordRequest.email ?? "",
+        );
+
+        expect(
+          result,
+          SuccessResponse<ForgotPasswordEntity>(data: forgotPasswordEntity),
+        );
         verify(
-          authDataSource.forgotPassword(forgotPassword: forgotPasswordRequest),
+          mockAuthDataSource.forgotPassword(
+            forgotPassword: forgotPasswordRequest,
+          ),
         ).called(1);
-        verifyNoMoreInteractions(authDataSource);
+        verifyNoMoreInteractions(mockAuthDataSource);
       },
     );
+
     test('when call forgotPassword it should return failure', () async {
       when(
-        authDataSource.forgotPassword(forgotPassword: forgotPasswordRequest),
+        mockAuthDataSource.forgotPassword(
+          forgotPassword: forgotPasswordRequest,
+        ),
       ).thenAnswer(
         (_) async =>
             FailureResponse<ForgotPasswordResponse>(errorMessage: errorMessage),
       );
-      successResponse = SuccessResponse<LoginResponseDto>(
-        data: loginResponseDto,
-      final result = await authRepo.forgotPassword(
+
+      final result = await authRepoImpl.forgotPassword(
         email: forgotPasswordRequest.email ?? "",
       );
-      errorResponse = FailureResponse<LoginResponseDto>(
-        errorMessage: testErrorMessage,
+
       expect(
         result as FailureResponse<ForgotPasswordEntity>,
         isA<FailureResponse<ForgotPasswordEntity>>(),
       );
       expect(result.errorMessage, contains(errorMessage));
       verify(
-        authDataSource.forgotPassword(forgotPassword: forgotPasswordRequest),
+        mockAuthDataSource.forgotPassword(
+          forgotPassword: forgotPasswordRequest,
+        ),
       ).called(1);
-      verifyNoMoreInteractions(authDataSource);
+      verifyNoMoreInteractions(mockAuthDataSource);
     });
-    test("when call Login it should return Success", () async {
-      // Arrange
-      provideDummy<Result<LoginResponseDto>>(successResponse);
   });
-  group("test verifyOtp ", () {
+
+  // ══════════════════════════════════════════════════════════
+  //  Verify OTP
+  // ══════════════════════════════════════════════════════════
+  group("test verifyOtp", () {
     test("when call verifyOtp it should return success", () async {
       when(
-        authDataSource.verifyOtp(
+        mockAuthDataSource.verifyOtp(
           verifyResetCodeRequest: verifyResetCodeRequest,
         ),
       ).thenAnswer(
@@ -143,23 +210,26 @@ void main() {
           data: verifyResetCodeResponse,
         ),
       );
-      final result = await authRepo.verifyOtp(
+
+      final result = await authRepoImpl.verifyOtp(
         resetCode: verifyResetCodeRequest.resetCode,
       );
+
       expect(
         result,
         SuccessResponse<VerifyResetCodeEntity>(data: verifyResetCodeEntity),
       );
       verify(
-        authDataSource.verifyOtp(
+        mockAuthDataSource.verifyOtp(
           verifyResetCodeRequest: verifyResetCodeRequest,
         ),
       ).called(1);
-      verifyNoMoreInteractions(authDataSource);
+      verifyNoMoreInteractions(mockAuthDataSource);
     });
+
     test("when call verifyOtp it should return failure", () async {
       when(
-        authDataSource.verifyOtp(
+        mockAuthDataSource.verifyOtp(
           verifyResetCodeRequest: verifyResetCodeRequest,
         ),
       ).thenAnswer(
@@ -167,92 +237,73 @@ void main() {
           errorMessage: errorMessage,
         ),
       );
-      final result = await authRepo.verifyOtp(
+
+      final result = await authRepoImpl.verifyOtp(
         resetCode: verifyResetCodeRequest.resetCode,
       );
+
       expect(
         result as FailureResponse<VerifyResetCodeEntity>,
         isA<FailureResponse<VerifyResetCodeEntity>>(),
       );
       expect(result.errorMessage, contains(errorMessage));
       verify(
-        authDataSource.verifyOtp(
+        mockAuthDataSource.verifyOtp(
           verifyResetCodeRequest: verifyResetCodeRequest,
         ),
       ).called(1);
-      verifyNoMoreInteractions(authDataSource);
+      verifyNoMoreInteractions(mockAuthDataSource);
     });
   });
-  group("test resetPassword ", () {
+
+  // ══════════════════════════════════════════════════════════
+  //  Reset Password
+  // ══════════════════════════════════════════════════════════
+  group("test resetPassword", () {
     test("when call resetPassword it should return success", () async {
       when(
-        mockAuthDataSource.login(email: testEmail, password: testPassword),
-      ).thenAnswer((_) async => successResponse);
-
-      // Act
-      final result = await authRepoImpl.login(
-        email: testEmail,
-        password: testPassword,
-        authDataSource.resetPassword(resetPassword: resetPasswordRequest),
+        mockAuthDataSource.resetPassword(resetPassword: resetPasswordRequest),
       ).thenAnswer(
         (_) async =>
             SuccessResponse<ResetPasswordResponse>(data: resetPasswordResponse),
       );
-      final result = await authRepo.resetPassword(
+
+      final result = await authRepoImpl.resetPassword(
         email: resetPasswordRequest.email ?? "",
         newPassword: resetPasswordRequest.newPassword ?? "",
       );
 
-      // Assert & Verify
       expect(
         result,
         SuccessResponse<ResetPasswordEntity>(data: resetPasswordEntity),
-        (result as SuccessResponse<LoginResponseDto>).data.token,
-        equals(loginResponseDto.token),
       );
       verify(
-        mockAuthDataSource.login(email: testEmail, password: testPassword),
-        authDataSource.resetPassword(resetPassword: resetPasswordRequest),
+        mockAuthDataSource.resetPassword(resetPassword: resetPasswordRequest),
       ).called(1);
       verifyNoMoreInteractions(mockAuthDataSource);
-      verifyNoMoreInteractions(authDataSource);
     });
 
     test("when call resetPassword it should return failure", () async {
-    test("when login fails it should return FailureResponse", () async {
-      // Arrange
-      provideDummy<Result<LoginResponseDto>>(errorResponse);
       when(
-        authDataSource.resetPassword(resetPassword: resetPasswordRequest),
+        mockAuthDataSource.resetPassword(resetPassword: resetPasswordRequest),
       ).thenAnswer(
         (_) async =>
             FailureResponse<ResetPasswordResponse>(errorMessage: errorMessage),
       );
-      final result = await authRepo.resetPassword(
+
+      final result = await authRepoImpl.resetPassword(
         email: resetPasswordRequest.email ?? "",
         newPassword: resetPasswordRequest.newPassword ?? "",
-        mockAuthDataSource.login(email: testEmail, password: testPassword),
-      ).thenAnswer((_) async => errorResponse);
-
-      // Act
-      final result = await authRepoImpl.login(
-        email: testEmail,
-        password: testPassword,
       );
 
-      // Assert & Verify
       expect(
         result as FailureResponse<ResetPasswordEntity>,
         isA<FailureResponse<ResetPasswordEntity>>(),
-        (result as FailureResponse<LoginResponseDto>).errorMessage,
-        equals(testErrorMessage),
       );
       expect(result.errorMessage, contains(errorMessage));
       verify(
-        authDataSource.resetPassword(resetPassword: resetPasswordRequest),
-        mockAuthDataSource.login(email: testEmail, password: testPassword),
+        mockAuthDataSource.resetPassword(resetPassword: resetPasswordRequest),
       ).called(1);
-      verifyNoMoreInteractions(authDataSource);
       verifyNoMoreInteractions(mockAuthDataSource);
     });
   });

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/di/di.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:super_fitness/core/di/di.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/features/auth/presentation/login/view_model/login_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/login/views/login_view.dart';
