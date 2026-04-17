@@ -32,6 +32,12 @@
     "unAuthorized": "Please login to continue",
     "outOfStock": "product isOut of stock"
   },
+  "navigation": {
+    "explore": "Explore",
+    "chatAi": "Chat AI",
+    "workouts": "Workouts",
+    "profile": "Profile"
+  },
   "validation": {
     "enterUsername": "Please enter a username",
     "least3CharUsername": "Username must be at least 3 characters",
@@ -54,6 +60,18 @@
     "enterRecipientName": "Please enter recipient name",
     "enterAddress": "Please enter address"
   },
+  "onboarding": {
+    "title1": "The price of excellence is discipline",
+    "desc1": "Greatness isn't born; it's built in the gym. Commit to the process and watch your discipline turn into your greatest strength",
+    "title2": "Fitness has never been so much fun",
+    "desc2": "Who says hard work can’t be a blast? Discover routines designed to keep you moving, smiling, and coming back for more",
+    "title3": "NO MORE EXCUSES Do It Now",
+    "desc3": "The 'perfect time' doesn't exist. There is only now. Stop dreaming, start doing, and leave your excuses at the door.",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "doIt": "Do IT"
+  },
   "retry"  : "Retry",
   "auth": {
     "don_t_have_an_account_yet": "Don't have an account yet?",
@@ -66,4 +84,15 @@
     "hey_there": "Hey There\n"
   }
 
+  "forget password":{
+  "Enter Your Email": "Enter Your Email",
+  "Forget password": "Forget password",
+  "Email": "Email",
+  "Sent OTP": "Sent OTP",
+  "OTP CODE": "OTP CODE",
+  "Enter Your OTP Check your email": "Enter Your OTP Check your email",
+  "Confirm": "Confirm",
+  "didnt recieve verification code?": "didnt recieve verification code?",
+  "Resend Code?": "Resend Code?"
+}
 }

@@ -48,11 +48,12 @@ class DarkTheme extends AppTheme {
       disabledForegroundColor: color.onBackground,
       textStyle: AppFont.semiBold16.copyWith(
         fontWeight: MyFontWeight.extraBold,
+        fontSize: 14,
       ),
       elevation: 0,
       shadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
-      minimumSize: const Size(0, 52),
+      minimumSize: const Size(double.infinity, 40),
       shape: const StadiumBorder(),
     ),
   );
