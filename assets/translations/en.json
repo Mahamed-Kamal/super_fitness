@@ -54,6 +54,16 @@
     "enterRecipientName": "Please enter recipient name",
     "enterAddress": "Please enter address"
   },
-  "retry"  : "Retry"
+  "retry"  : "Retry",
+  "auth": {
+    "don_t_have_an_account_yet": "Don't have an account yet?",
+    "register": "Register",
+    "login": "Login",
+    "forget_password?": "Forget Password ?",
+    "password": "Password",
+    "email": "Email",
+    "welcome_back": "Welcome Back",
+    "hey_there": "Hey There\n"
+  }
 
 }

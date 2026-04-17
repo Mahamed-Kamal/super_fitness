@@ -17,7 +17,6 @@ import 'login_view_model_test.mocks.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  // Mock Method Channel للـ Secure Storage (مهم جداً)
   const MethodChannel secureStorageChannel = MethodChannel(
     'plugins.it_nomads.com/flutter_secure_storage',
   );
@@ -33,28 +32,15 @@ void main() {
     mockLoginUseCase = MockLoginUseCase();
     loginViewModel = LoginViewModel(mockLoginUseCase);
 
-    // Mock كل مكالمات الـ Secure Storage عشان ما يرميش MissingPluginException
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(secureStorageChannel, (
           MethodCall methodCall,
         ) async {
-          switch (methodCall.method) {
-            case 'write': // setSecuredString
-              return null; // أو true
-            case 'read':
-              return null;
-            case 'delete':
-              return null;
-            case 'deleteAll':
-              return null;
-            default:
-              return null;
-          }
+          return null;
         });
   });
 
   tearDown(() async {
-    // إزالة الـ mock بعد كل test
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(secureStorageChannel, null);
     await loginViewModel.close();
@@ -70,6 +56,7 @@ void main() {
     final successResponse = SuccessResponse<LoginResponseDto>(
       data: loginResponseDto,
     );
+
     final errorResponse = FailureResponse<LoginResponseDto>(
       errorMessage: testErrorMessage,
     );
@@ -88,9 +75,13 @@ void main() {
       act: (vm) =>
           vm.doIntent(LoginIntent(email: testEmail, password: testPassword)),
       expect: () => [
-        LoginState(loginState: BaseState<LoginResponseDto>.loading()),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.loading(),
+          isButtonEnabled: false,
+        ),
         LoginState(
           loginState: BaseState<LoginResponseDto>.loaded(loginResponseDto),
+          isButtonEnabled: false,
         ),
       ],
     );
@@ -107,11 +98,34 @@ void main() {
       act: (vm) =>
           vm.doIntent(LoginIntent(email: testEmail, password: testPassword)),
       expect: () => [
-        LoginState(loginState: BaseState<LoginResponseDto>.loading()),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.loading(),
+          isButtonEnabled: false,
+        ),
         LoginState(
           loginState: BaseState<LoginResponseDto>.error(testErrorMessage),
+          isButtonEnabled: false,
         ),
       ],
+    );
+
+    // ─── Form Intent Test ───────────────────────────────────────────
+
+    blocTest<LoginViewModel, LoginState>(
+      "should enable button when email & password are not empty",
+      build: () => loginViewModel,
+      act: (vm) => vm.doIntent(FormChangedIntent(email: "a", password: "b")),
+      expect: () => [
+        LoginState(loginState: BaseState.init(), isButtonEnabled: true),
+      ],
+    );
+
+    blocTest<LoginViewModel, LoginState>(
+      "should disable button when any field is empty",
+      build: () => loginViewModel,
+      act: (vm) => vm.doIntent(FormChangedIntent(email: "", password: "b")),
+      expect: () => [],
+      // مفيش emit لأن already false
     );
 
     // ─── UI Events Tests ────────────────────────────────────────────
@@ -133,9 +147,13 @@ void main() {
         vm.doIntent(LoginIntent(email: testEmail, password: testPassword));
       },
       expect: () => [
-        LoginState(loginState: BaseState<LoginResponseDto>.loading()),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.loading(),
+          isButtonEnabled: false,
+        ),
         LoginState(
           loginState: BaseState<LoginResponseDto>.loaded(loginResponseDto),
+          isButtonEnabled: false,
         ),
       ],
     );
@@ -161,14 +179,19 @@ void main() {
         vm.doIntent(LoginIntent(email: testEmail, password: testPassword));
       },
       expect: () => [
-        LoginState(loginState: BaseState<LoginResponseDto>.loading()),
+        LoginState(
+          loginState: BaseState<LoginResponseDto>.loading(),
+          isButtonEnabled: false,
+        ),
         LoginState(
           loginState: BaseState<LoginResponseDto>.error(testErrorMessage),
+          isButtonEnabled: false,
         ),
       ],
     );
 
-    // Navigation tests
+    // ─── Navigation Tests ───────────────────────────────────────────
+
     blocTest<LoginViewModel, LoginState>(
       "should emit NavigateToRegister when RegisterIntent is called",
       build: () => loginViewModel,

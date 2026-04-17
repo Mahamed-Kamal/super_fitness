@@ -6,6 +6,13 @@ final class LoginIntent extends Intent {
   LoginIntent({required this.email, required this.password});
 }
 
+final class FormChangedIntent extends Intent {
+  final String email;
+  final String password;
+
+  FormChangedIntent({required this.email, required this.password});
+}
+
 final class RegisterIntent extends Intent {}
 
 final class ForgetPasswordIntent extends Intent {}

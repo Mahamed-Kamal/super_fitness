@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/extensions/context_spacing_extension.dart';
@@ -29,14 +30,13 @@ class _LoginViewState extends State<LoginView> {
   StreamSubscription<LoginUIEvents>? _uiEventsSubscription;
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordObscured = true;
-  bool _isLoginButtonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _listenToUIEvents();
-    _emailController.addListener(_validateForm);
-    _passwordController.addListener(_validateForm);
+    _emailController.addListener(_onChanged);
+    _passwordController.addListener(_onChanged);
   }
 
   void _listenToUIEvents() {
@@ -58,22 +58,20 @@ class _LoginViewState extends State<LoginView> {
         });
   }
 
-  void _validateForm() {
-    final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
-
-    final isEnabled = email.isNotEmpty && password.isNotEmpty;
-
-    if (isEnabled != _isLoginButtonEnabled) {
-      setState(() => _isLoginButtonEnabled = isEnabled);
-    }
+  void _onChanged() {
+    context.read<LoginViewModel>().doIntent(
+      FormChangedIntent(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      ),
+    );
   }
 
   @override
   void dispose() {
     _uiEventsSubscription?.cancel();
-    _emailController.removeListener(_validateForm);
-    _passwordController.removeListener(_validateForm);
+    _emailController.removeListener(_onChanged);
+    _passwordController.removeListener(_onChanged);
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -97,9 +95,9 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: CustomRichText(
                     textAlign: TextAlign.start,
-                    firstText: "Hey There\n",
+                    firstText: "auth.hey_there".tr(),
                     firstStyle: context.appTheme.semiBold18,
-                    secondText: "Welcome Back",
+                    secondText: "auth.welcome_back".tr(),
                     secondStyle: context.appTheme.medium20.copyWith(
                       fontWeight: MyFontWeight.extraBold,
                     ),
@@ -113,7 +111,7 @@ class _LoginViewState extends State<LoginView> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          "Login",
+                          "auth.login".tr(),
                           style: context.appTheme.semiBold24.copyWith(
                             color: Colors.white,
                             fontWeight: MyFontWeight.extraBold,
@@ -125,9 +123,9 @@ class _LoginViewState extends State<LoginView> {
                           validator: FormValidators.email,
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             prefixIcon: Icon(Icons.email_outlined),
-                            hintText: "Email",
+                            hintText: "auth.email".tr(),
                           ),
                         ),
 
@@ -149,7 +147,7 @@ class _LoginViewState extends State<LoginView> {
                                     : Icons.visibility_outlined,
                               ),
                             ),
-                            hintText: "Password",
+                            hintText: "auth.password".tr(),
                           ),
                         ),
 
@@ -159,7 +157,7 @@ class _LoginViewState extends State<LoginView> {
                             ForgetPasswordIntent(),
                           ),
                           child: Text(
-                            "Forget Password ?",
+                            "auth_forget_password?".tr(),
                             textAlign: TextAlign.end,
                             style: context.appTheme.regular14.copyWith(
                               color: context.appTheme.primary,
@@ -173,22 +171,22 @@ class _LoginViewState extends State<LoginView> {
                           builder: (context, state) {
                             final isLoading = state.loginState.isLoading;
                             return ElevatedButton(
-                              onPressed: _isLoginButtonEnabled && !isLoading
+                              onPressed: state.isButtonEnabled && !isLoading
                                   ? _login
                                   : null,
                               child: isLoading
                                   ? const CircularProgressIndicator(
                                       color: Colors.white,
                                     )
-                                  : const Text("Login"),
+                                  : Text("auth.login".tr()),
                             );
                           },
                         ),
 
                         context.h(8),
                         CustomRichText(
-                          firstText: "Don't have an account yet ?",
-                          secondText: "Register",
+                          firstText: "auth.don_t_have_an_account_yet".tr(),
+                          secondText: "auth.register".tr(),
                           onClickSecond: () => context
                               .read<LoginViewModel>()
                               .doIntent(RegisterIntent()),

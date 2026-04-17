@@ -25,10 +25,21 @@ class LoginViewModel extends Cubit<LoginState> {
     switch (intent) {
       case LoginIntent():
         _login(email: intent.email, password: intent.password);
+      case FormChangedIntent():
+        _onFormChanged(email: intent.email, password: intent.password);
+
       case RegisterIntent():
         _navigateToRegister();
       case ForgetPasswordIntent():
         _navigateToForgetPassword();
+    }
+  }
+
+  void _onFormChanged({required String email, required String password}) {
+    final isEnabled = email.isNotEmpty && password.isNotEmpty;
+
+    if (isEnabled != state.isButtonEnabled) {
+      emit(state.copyWith(isButtonEnabled: isEnabled));
     }
   }
 
