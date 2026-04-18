@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/extensions/context_spacing_extension.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/theme/fonts/my_font_weight.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/utils/validation/form_validator.dart';
@@ -49,10 +50,13 @@ class _LoginViewState extends State<LoginView> {
             case LoginViewShowToast():
               Toast.showToast(context, event.message, isError: event.isError);
             case NavigateToRegister():
-              // TODO: Navigate to Register.
+              Navigator.pushNamed(
+                context,
+                AppRoutes.registerAndCompleteRegistration,
+              );
               break;
             case NavigateToForgetPassword():
-              // TODO: Navigate to Forget Password.
+              Navigator.pushNamed(context, AppRoutes.forgetPassword);
               break;
           }
         });
