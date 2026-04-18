@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
 
 void main() {
   group('UpdateUserDataResponseDto Tests', () {
     // Mock user for testing nested objects
-    const mockUser = UserDto(
+    const mockUser = UsersDto(
       id: "123",
       email: "test@test.com",
       firstName: "Mohamed",

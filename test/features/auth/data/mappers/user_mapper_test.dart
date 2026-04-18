@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 import 'package:super_fitness/features/auth/data/mappers/user_mapper.dart';
 import 'package:super_fitness/features/auth/domain/entities/user_gender.dart';
 import 'package:super_fitness/features/auth/domain/entities/activity_level.dart';
@@ -11,7 +11,7 @@ void main() {
       "should map UserDto to UserEntity correctly when all fields are valid",
       () {
         // Arrange
-        final dto = UserDto(
+        final dto = UsersDto(
           firstName: "Mohamed",
           lastName: "Ehab",
           email: "test@test.com",
@@ -43,7 +43,7 @@ void main() {
 
     test("should map gender to female when value is not male", () {
       // Arrange
-      final dto = UserDto(gender: "female");
+      final dto = UsersDto(gender: "female");
 
       // Act
       final result = dto.toUserEntity();
@@ -54,7 +54,7 @@ void main() {
 
     test("should return default values when dto fields are null", () {
       // Arrange
-      final dto = UserDto();
+      final dto = UsersDto();
 
       // Act
       final result = dto.toUserEntity();
@@ -74,7 +74,7 @@ void main() {
 
     test("should map activity level and goal using mappers", () {
       // Arrange
-      final dto = UserDto(activityLevel: "level5", goal: "learnTheBasics");
+      final dto = UsersDto(activityLevel: "level5", goal: "learnTheBasics");
 
       // Act
       final result = dto.toUserEntity();

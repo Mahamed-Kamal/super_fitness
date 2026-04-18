@@ -249,9 +249,9 @@ class AuthRepoImpl implements AuthRepo {
       updateUserDataRequest: updateUserDataRequest,
     );
     switch (result) {
-      case SuccessResponse<UserDto>():
+      case SuccessResponse<UsersDto>():
         return SuccessResponse(data: result.data.toUserEntity());
-      case FailureResponse<UserDto>():
+      case FailureResponse<UsersDto>():
         return FailureResponse(errorMessage: result.errorMessage);
     }
   }

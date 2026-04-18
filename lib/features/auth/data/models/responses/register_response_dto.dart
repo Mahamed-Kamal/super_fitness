@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 
 part 'register_response_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RegisterResponseDto extends Equatable {
   final String? message;
-  final UserDto? user;
+  final UsersDto? user;
   final String? token;
 
   const RegisterResponseDto({this.message, this.user, this.token});

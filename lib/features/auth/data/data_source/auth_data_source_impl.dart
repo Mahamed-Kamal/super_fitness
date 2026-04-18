@@ -74,7 +74,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       });
 
   @override
-  Future<Result<UserDto>> updateUserData({
+  Future<Result<UsersDto>> updateUserData({
     String token = "",
     required UpdateUserDataRequest updateUserDataRequest,
   }) => executeApi(() async {
@@ -83,6 +83,6 @@ class AuthDataSourceImpl implements AuthDataSource {
       token: bearerToken,
       updateUserDataRequest: updateUserDataRequest,
     );
-    return result.user ?? UserDto();
+    return result.user ?? UsersDto();
   });
 }

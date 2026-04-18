@@ -19,24 +19,18 @@ import '../../features/auth/data/data_source/auth_data_source_impl.dart'
     as _i985;
 import '../../features/auth/data/repo/auth_repo_impl.dart' as _i984;
 import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
-import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
-import '../../features/auth/presentation/register/view_model/register_view_model.dart'
-    as _i721;
-
 import '../../features/auth/domain/use_cases/forgot_password_use_case.dart'
     as _i897;
+import '../../features/auth/domain/use_cases/login_use_case.dart' as _i1038;
+import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
 import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
     as _i169;
 import '../../features/auth/domain/use_cases/verify_reset_code_use_case.dart'
     as _i449;
 import '../../features/auth/presentation/forget_password/view_model/forget_password_view_model.dart'
     as _i346;
-import '../../features/auth/data/data_source/auth_data_source.dart' as _i364;
-import '../../features/auth/data/data_source/auth_data_source_impl.dart'
-    as _i985;
-import '../../features/auth/data/repo/auth_repo_impl.dart' as _i984;
-import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
-import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
+import '../../features/auth/presentation/login/view_model/login_view_model.dart'
+    as _i671;
 import '../../features/auth/presentation/register/view_model/register_view_model.dart'
     as _i721;
 import '../api/api_client.dart' as _i277;
@@ -71,29 +65,30 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i897.ForgetPasswordUseCase>(
       () => _i897.ForgetPasswordUseCase(gh<_i170.AuthRepo>()),
     );
+    gh.factory<_i1038.LoginUseCase>(
+      () => _i1038.LoginUseCase(gh<_i170.AuthRepo>()),
+    );
+    gh.factory<_i1010.RegisterUseCase>(
+      () => _i1010.RegisterUseCase(gh<_i170.AuthRepo>()),
+    );
     gh.factory<_i169.ResetPasswordUseCase>(
       () => _i169.ResetPasswordUseCase(gh<_i170.AuthRepo>()),
     );
     gh.factory<_i449.VerifyResetCodeUseCase>(
       () => _i449.VerifyResetCodeUseCase(gh<_i170.AuthRepo>()),
     );
+    gh.factory<_i721.RegisterViewModel>(
+      () => _i721.RegisterViewModel(gh<_i1010.RegisterUseCase>()),
+    );
     gh.lazySingleton<_i346.ForgetPasswordViewModel>(
       () => _i346.ForgetPasswordViewModel(
         gh<_i897.ForgetPasswordUseCase>(),
         gh<_i449.VerifyResetCodeUseCase>(),
+        gh<_i169.ResetPasswordUseCase>(),
       ),
     );
-    gh.factory<_i364.AuthDataSource>(
-      () => _i985.AuthDataSourceImpl(gh<_i277.ApiClient>()),
-    );
-    gh.factory<_i170.AuthRepo>(
-      () => _i984.AuthRepoImpl(gh<_i364.AuthDataSource>()),
-    );
-    gh.factory<_i1010.RegisterUseCase>(
-      () => _i1010.RegisterUseCase(gh<_i170.AuthRepo>()),
-    );
-    gh.factory<_i721.RegisterViewModel>(
-      () => _i721.RegisterViewModel(gh<_i1010.RegisterUseCase>()),
+    gh.factory<_i671.LoginViewModel>(
+      () => _i671.LoginViewModel(gh<_i1038.LoginUseCase>()),
     );
     return this;
   }

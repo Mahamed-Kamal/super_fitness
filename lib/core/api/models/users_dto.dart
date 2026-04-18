@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_dto.g.dart';
+part 'users_dto.g.dart';
 
 @JsonSerializable()
-class UserDto extends Equatable {
+class UsersDto extends Equatable {
   @JsonKey(name: "_id")
   final String? id;
   final String? createdAt;
@@ -20,7 +20,7 @@ class UserDto extends Equatable {
   @JsonKey(name: "photo")
   final String? profilePicture;
 
-  const UserDto({
+  const UsersDto({
     this.id,
     this.createdAt,
     this.firstName,
@@ -35,10 +35,10 @@ class UserDto extends Equatable {
     this.profilePicture,
   });
 
-  factory UserDto.fromJson(Map<String, dynamic> json) =>
-      _$UserDtoFromJson(json);
+  factory UsersDto.fromJson(Map<String, dynamic> json) =>
+      _$UsersDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserDtoToJson(this);
+  Map<String, dynamic> toJson() => _$UsersDtoToJson(this);
 
   @override
   List<Object?> get props => [

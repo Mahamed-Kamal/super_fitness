@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 
 part 'update_user_data_response_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UpdateUserDataResponseDto extends Equatable {
   final String? message;
-  final UserDto? user;
+  final UsersDto? user;
 
   const UpdateUserDataResponseDto({this.message, this.user});
 

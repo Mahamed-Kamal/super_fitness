@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 
 void main() {
   group('RegisterResponseDto Tests', () {
     const message = "Success";
     const token = "token_123";
 
-    final user = UserDto(
+    final user = UsersDto(
       id: "1",
       firstName: "Mohamed",
       lastName: "Ehab",

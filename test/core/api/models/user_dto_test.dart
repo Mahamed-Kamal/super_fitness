@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 
 void main() {
   group('UserDto Tests', () {
@@ -16,7 +16,7 @@ void main() {
     const goal = "fitness";
     const profilePicture = "image.png";
 
-    final user = UserDto(
+    final user = UsersDto(
       id: id,
       createdAt: createdAt,
       firstName: firstName,
@@ -47,7 +47,7 @@ void main() {
     });
 
     test('should support Equatable correctly', () {
-      final user2 = UserDto(
+      final user2 = UsersDto(
         id: id,
         createdAt: createdAt,
         firstName: firstName,
@@ -80,7 +80,7 @@ void main() {
     });
 
     test('should not be equal when values differ', () {
-      final differentUser = UserDto(id: "2");
+      final differentUser = UsersDto(id: "2");
 
       expect(user == differentUser, false);
     });
@@ -101,7 +101,7 @@ void main() {
         "photo": profilePicture,
       };
 
-      final result = UserDto.fromJson(json);
+      final result = UsersDto.fromJson(json);
 
       expect(result.id, id);
       expect(result.createdAt, createdAt);
@@ -150,7 +150,7 @@ void main() {
         "photo": null,
       };
 
-      final result = UserDto.fromJson(json);
+      final result = UsersDto.fromJson(json);
 
       expect(result.id, null);
       expect(result.createdAt, null);
@@ -168,7 +168,7 @@ void main() {
 
     test('should serialize and deserialize consistently', () {
       final json = user.toJson();
-      final recreated = UserDto.fromJson(json);
+      final recreated = UsersDto.fromJson(json);
 
       expect(recreated, equals(user));
     });
