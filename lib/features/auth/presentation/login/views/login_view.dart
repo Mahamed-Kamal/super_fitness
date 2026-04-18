@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
             case NavigateToHome():
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                AppRoutes.home,
+                AppRoutes.appSectionView,
                 (route) => false,
               );
           }

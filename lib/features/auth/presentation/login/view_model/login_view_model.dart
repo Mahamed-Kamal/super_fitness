@@ -67,6 +67,8 @@ class LoginViewModel extends Cubit<LoginState> {
         _uiEventsController.add(
           LoginViewShowToast(message: response.data.message ?? ""),
         );
+
+        _navigateToHome();
       case FailureResponse<LoginResponseDto>():
         emit(
           state.copyWith(
@@ -87,6 +89,7 @@ class LoginViewModel extends Cubit<LoginState> {
   @override
   Future<void> close() {
     _uiEventsController.close();
+
     return super.close();
   }
 }
