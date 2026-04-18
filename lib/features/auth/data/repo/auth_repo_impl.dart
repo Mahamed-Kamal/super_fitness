@@ -4,8 +4,7 @@ import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
 import 'package:super_fitness/features/auth/data/mappers/user_mapper.dart';
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
-import 'package:super_fitness/core/error_handling/result.dart';
-import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
+
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
@@ -117,6 +116,7 @@ class AuthRepoImpl implements AuthRepo {
         }
     }
   }
+
   @override
   Future<Result<String>> register({
     required String firstName,

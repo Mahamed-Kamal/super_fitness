@@ -37,7 +37,6 @@ class RouteGenerator {
           ),
         );
 
-        return _buildRoute(const RegisterView());
       case AppRoutes.appSectionView:
         return _buildRoute(
           BlocProvider(

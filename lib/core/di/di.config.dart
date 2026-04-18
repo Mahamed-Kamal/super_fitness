@@ -22,11 +22,7 @@ import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
 import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
 import '../../features/auth/presentation/register/view_model/register_view_model.dart'
     as _i721;
-import '../../features/auth/data/data_source/auth_data_source.dart' as _i364;
-import '../../features/auth/data/data_source/auth_data_source_impl.dart'
-    as _i985;
-import '../../features/auth/data/repo/auth_repo_impl.dart' as _i984;
-import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
+
 import '../../features/auth/domain/use_cases/forgot_password_use_case.dart'
     as _i897;
 import '../../features/auth/domain/use_cases/reset_password_use_case.dart'

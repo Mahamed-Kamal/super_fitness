@@ -5,7 +5,6 @@ import 'package:super_fitness/core/api/constants/end_points.dart';
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
-import 'package:super_fitness/core/api/constants/end_points.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
