@@ -17,6 +17,8 @@ final class RegisterIntent extends Intent {}
 
 final class ForgetPasswordIntent extends Intent {}
 
+final class LoginNavigationButtonClickedIntent extends Intent {}
+
 sealed class LoginUIEvents {}
 
 final class LoginViewShowToast extends LoginUIEvents {
@@ -32,3 +34,5 @@ final class LoginViewShowToast extends LoginUIEvents {
 final class NavigateToRegister extends LoginUIEvents {}
 
 final class NavigateToForgetPassword extends LoginUIEvents {}
+
+final class NavigateToHome extends LoginUIEvents {}

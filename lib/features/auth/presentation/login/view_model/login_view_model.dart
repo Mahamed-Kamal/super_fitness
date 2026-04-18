@@ -32,6 +32,8 @@ class LoginViewModel extends Cubit<LoginState> {
         _navigateToRegister();
       case ForgetPasswordIntent():
         _navigateToForgetPassword();
+      case LoginNavigationButtonClickedIntent():
+        _navigateToHome();
     }
   }
 
@@ -80,6 +82,7 @@ class LoginViewModel extends Cubit<LoginState> {
   void _navigateToRegister() => _uiEventsController.add(NavigateToRegister());
   void _navigateToForgetPassword() =>
       _uiEventsController.add(NavigateToForgetPassword());
+  void _navigateToHome() => _uiEventsController.add(NavigateToHome());
 
   @override
   Future<void> close() {

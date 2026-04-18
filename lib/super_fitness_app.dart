@@ -20,7 +20,7 @@ class SuperFitnessApp extends StatelessWidget {
       // Themes
       theme: DarkTheme().themeData,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.registerAndCompleteRegistration,
+      initialRoute: AppRoutes.onBoarding,
       onGenerateRoute: RouteGenerator.getRoute,
     );
   }

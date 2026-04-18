@@ -26,7 +26,7 @@
     "error500": "Internal server error. Please try again later.",
     "error502": "Bad gateway. Server is temporarily unavailable.",
     "error503": "Service unavailable. Please try again later.",
-    "error504": "Gateway timeout. Please try again.",
+    "error504": "Gateway timeout. Please try again."
   },
   "navigation": {
     "explore": "Explore",
@@ -68,7 +68,6 @@
     "skip": "Skip",
     "doIt": "Do IT"
   },
-  "retry"  : "Retry",
   "auth": {
     "don_t_have_an_account_yet": "Don't have an account yet?",
     "register": "Register",
@@ -78,19 +77,18 @@
     "email": "Email",
     "welcome_back": "Welcome Back",
     "hey_there": "Hey There\n"
-  }
-
-  "forget password":{
-  "Enter Your Email": "Enter Your Email",
-  "Forget password": "Forget password",
-  "Email": "Email",
-  "Sent OTP": "Sent OTP",
-  "OTP CODE": "OTP CODE",
-  "Enter Your OTP Check your email": "Enter Your OTP Check your email",
-  "Confirm": "Confirm",
-  "didnt recieve verification code?": "didnt recieve verification code?",
-  "Resend Code?": "Resend Code?"
-}
+  },
+  "forget password": {
+    "Enter Your Email": "Enter Your Email",
+    "Forget password": "Forget password",
+    "Email": "Email",
+    "Sent OTP": "Sent OTP",
+    "OTP CODE": "OTP CODE",
+    "Enter Your OTP Check your email": "Enter Your OTP Check your email",
+    "Confirm": "Confirm",
+    "didnt recieve verification code?": "didnt recieve verification code?",
+    "Resend Code?": "Resend Code?"
+  },
   "retry": "Retry",
   "register": "Register",
   "first_name": "First Name",
