@@ -34,25 +34,13 @@ void main() {
     when(mockViewModel.close()).thenAnswer((_) async => {});
   });
 
-  Widget buildTestableWidget() => EasyLocalization(
-    saveLocale: false,
-    supportedLocales: const [Locale('en'), Locale('ar')],
-    path: 'assets/translations',
-    fallbackLocale: const Locale("en"),
-    child: Builder(
-      builder: (context) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          locale: context.locale,
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationDelegates,
-          theme: DarkTheme().themeData,
-          home: BlocProvider<RegisterViewModel>.value(
-            value: mockViewModel,
-            child: const RegisterView(),
-          ),
-        );
-      },
+  Widget buildTestableWidget() => MaterialApp(
+    debugShowCheckedModeBanner: false,
+
+    theme: DarkTheme().themeData,
+    home: BlocProvider<RegisterViewModel>.value(
+      value: mockViewModel,
+      child: const RegisterView(),
     ),
   );
 

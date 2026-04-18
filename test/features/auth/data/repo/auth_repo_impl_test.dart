@@ -1,6 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
@@ -11,10 +14,9 @@ import 'package:super_fitness/features/auth/data/models/response/forgot_password
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 
-import 'package:super_fitness/features/auth/data/repo/auth_repo_impl.dart';
+import 'auth_repo_impl_test.mocks.dart';
 
-import 'auth_data_source_impl_test.mocks.dart';
-
+@GenerateMocks([AuthDataSource])
 void main() {
   late MockAuthDataSource mockAuthDataSource;
   const String testEmail = 'test@example.com';
@@ -30,6 +32,9 @@ void main() {
       final request = RegisterRequestModel(
         firstName: 'Abdelrahman',
         lastName: 'Ayman',
+      );
+      provideDummy<Result<String>>(
+          SuccessResponse<String>(data: 'success_token')
       );
 
       when(
@@ -49,7 +54,9 @@ void main() {
       'should return LoginResponseDto when credentials are correct',
       () async {
         final responseDto = LoginResponseDto(token: 'abc_123');
-
+        provideDummy<Result<LoginResponseDto>>(
+            SuccessResponse<LoginResponseDto>(data: responseDto)
+        );
         when(
           mockAuthDataSource.login(
             email: anyNamed('email'),
@@ -78,6 +85,9 @@ void main() {
     test('should return ForgotPasswordResponse successfully', () async {
       final request = ForgotPasswordRequest(email: testEmail);
       final response = ForgotPasswordResponse();
+      provideDummy<Result<ForgotPasswordResponse>>(
+          SuccessResponse<ForgotPasswordResponse>(data: response)
+      );
 
       when(
         mockAuthDataSource.forgotPassword(
@@ -100,7 +110,9 @@ void main() {
     test('should return VerifyResetCodeResponse when code is valid', () async {
       final request = VerifyResetCodeRequest(resetCode: '123456');
       final response = VerifyResetCodeResponse(message: 'verified');
-
+      provideDummy<Result<VerifyResetCodeResponse>>(
+          SuccessResponse<VerifyResetCodeResponse>(data: response)
+      );
       when(
         mockAuthDataSource.verifyOtp(
           verifyResetCodeRequest: anyNamed('verifyResetCodeRequest'),
@@ -125,7 +137,9 @@ void main() {
         newPassword: 'NewPassword123',
       );
       final response = ResetPasswordResponse();
-
+      provideDummy<Result<ResetPasswordResponse>>(
+          SuccessResponse<ResetPasswordResponse>(data: response)
+      );
       when(
         mockAuthDataSource.resetPassword(
           resetPassword: anyNamed('resetPassword'),
@@ -146,14 +160,21 @@ void main() {
   group('Update User Data Tests', () {
     test('should return dynamic data when update is successful', () async {
       final request = UpdateUserDataRequest(firstName: 'Updated Name');
-
+      provideDummy<Result<UsersDto>>(
+        SuccessResponse<UsersDto>(data: UsersDto(
+          firstName: 'Updated Name',
+        )),
+      );
       when(
         mockAuthDataSource.updateUserData(
           token: anyNamed('token'),
           updateUserDataRequest: anyNamed('updateUserDataRequest'),
         ),
       ).thenAnswer(
-        (_) async => SuccessResponse<dynamic>(data: {'status': 'updated'}),
+            (_) async =>
+            SuccessResponse<UsersDto>(data: UsersDto(
+              firstName: 'Updated Name',
+            )),
       );
 
       final result = await mockAuthDataSource.updateUserData(
@@ -161,7 +182,7 @@ void main() {
         updateUserDataRequest: request,
       );
 
-      expect(result is SuccessResponse<dynamic>, true);
+      expect(result, isA<SuccessResponse<UsersDto>>());
     });
   });
 }
