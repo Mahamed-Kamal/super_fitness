@@ -1,4 +1,4 @@
-import 'package:super_fitness/core/api/models/user_dto.dart';
+import 'package:super_fitness/core/api/models/users_dto.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
@@ -26,12 +26,6 @@ abstract interface class AuthDataSource {
     required ResetPasswordRequest resetPassword,
   });
   Future<Result<UsersDto>> updateUserData({
-    String token = "",
-    required UpdateUserDataRequest updateUserDataRequest,
-  });
-  Future<Result<String>> register(RegisterRequestModel registerRequestModel);
-
-  Future<Result<UserDto>> updateUserData({
     String token = "",
     required UpdateUserDataRequest updateUserDataRequest,
   });
