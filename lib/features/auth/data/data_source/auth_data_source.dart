@@ -28,4 +28,10 @@ abstract interface class AuthDataSource {
     String token = "",
     required UpdateUserDataRequest updateUserDataRequest,
   });
+  Future<Result<String>> register(RegisterRequestModel registerRequestModel);
+
+  Future<Result<UserDto>> updateUserData({
+    String token = "",
+    required UpdateUserDataRequest updateUserDataRequest,
+  });
 }

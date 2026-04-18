@@ -2,6 +2,7 @@ class AppRoutes {
   AppRoutes._();
 
   static const String login = "/login";
+
   static const String onBoarding = "/onBoarding";
   static const String registerAndCompleteRegistration =
       "/registerAndCompleteRegistration";

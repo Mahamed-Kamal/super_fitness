@@ -31,6 +31,14 @@ import '../../features/auth/domain/use_cases/verify_reset_code_use_case.dart'
     as _i449;
 import '../../features/auth/presentation/forget_password/view_model/forget_password_view_model.dart'
     as _i346;
+import '../../features/auth/data/data_source/auth_data_source.dart' as _i364;
+import '../../features/auth/data/data_source/auth_data_source_impl.dart'
+    as _i985;
+import '../../features/auth/data/repo/auth_repo_impl.dart' as _i984;
+import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
+import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
+import '../../features/auth/presentation/register/view_model/register_view_model.dart'
+    as _i721;
 import '../api/api_client.dart' as _i277;
 import 'modules/remote_module.dart' as _i616;
 

@@ -27,8 +27,6 @@
     "error502": "Bad gateway. Server is temporarily unavailable.",
     "error503": "Service unavailable. Please try again later.",
     "error504": "Gateway timeout. Please try again.",
-    "unexpected": "Unexpected error, please try again",
-    "defaultError": "Server error. Please try again."
   },
   "navigation": {
     "explore": "Explore",
