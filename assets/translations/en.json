@@ -10,7 +10,6 @@
     "resourceExhausted": "Resource limit exceeded. Please try again later.",
     "aborted": "The operation was aborted. Please retry.",
     "internal": "An internal error occurred. Please try again.",
-
     "connectionTimeout": "Connection Timeout",
     "sendTimeout": "Send Timeout",
     "receiveTimeout": "Receive Timeout",
@@ -28,9 +27,6 @@
     "error502": "Bad gateway. Server is temporarily unavailable.",
     "error503": "Service unavailable. Please try again later.",
     "error504": "Gateway timeout. Please try again.",
-    "defaultError": "Server error. Please try again.",
-    "unAuthorized": "Please login to continue",
-    "outOfStock": "product isOut of stock"
   },
   "navigation": {
     "explore": "Explore",
@@ -60,7 +56,6 @@
     "enterRecipientName": "Please enter recipient name",
     "enterAddress": "Please enter address"
   },
-  "retry": "Retry",
   "onboarding": {
     "title1": "The price of excellence is discipline",
     "desc1": "Greatness isn't born; it's built in the gym. Commit to the process and watch your discipline turn into your greatest strength",
@@ -72,7 +67,67 @@
     "back": "Back",
     "skip": "Skip",
     "doIt": "Do IT"
+  },
+  "retry"  : "Retry",
+  "auth": {
+    "don_t_have_an_account_yet": "Don't have an account yet?",
+    "register": "Register",
+    "login": "Login",
+    "forget_password?": "Forget Password ?",
+    "password": "Password",
+    "email": "Email",
+    "welcome_back": "Welcome Back",
+    "hey_there": "Hey There\n"
   }
 
-
+  "forget password":{
+  "Enter Your Email": "Enter Your Email",
+  "Forget password": "Forget password",
+  "Email": "Email",
+  "Sent OTP": "Sent OTP",
+  "OTP CODE": "OTP CODE",
+  "Enter Your OTP Check your email": "Enter Your OTP Check your email",
+  "Confirm": "Confirm",
+  "didnt recieve verification code?": "didnt recieve verification code?",
+  "Resend Code?": "Resend Code?"
+}
+  "retry": "Retry",
+  "register": "Register",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "password": "Password",
+  "enter_first_name": "Enter your first name",
+  "enter_last_name": "Enter your last name",
+  "enter_email": "Enter your email",
+  "enter_password": "Enter your password",
+  "already_have_an_account": "Already have an account? ",
+  "login": "Login",
+  "hey_there": "Hey There,",
+  "create_an_account": "Create an Account",
+  "tell_us_about_yourself": "TELL US ABOUT YOURSELF!",
+  "gender_subtitle": "TO GIVE YOU A BETTER EXPERIENCE WE NEED\nTO KNOW YOUR GENDER",
+  "male": "Male",
+  "female": "Female",
+  "next": "Next",
+  "how_old_are_you": "How Old Are You?",
+  "personalized_plan_subtitle": "This helps us create your personalized plan",
+  "year": "Year",
+  "what_is_your_weight": "What Is Your Weight?",
+  "kg": "KG",
+  "what_is_your_height": "What Is Your Height?",
+  "cm": "CM",
+  "what_is_your_goal": "What Is Your Goal?",
+  "gain_weight": "Gain Weight",
+  "lose_weight": "Lose Weight",
+  "get_fitter": "Get Fitter",
+  "gain_more_flexible": "Gain More Flexible",
+  "learn_the_basics": "Learn The Basics",
+  "your_regular_physical": "Your Regular Physical Activity Level?",
+  "rookie": "Rookie",
+  "beginner": "Beginner",
+  "intermediate": "Intermediate",
+  "advanced": "Advanced",
+  "expert": "expert",
+  "registration_successful": "Register successful, please login"
 }
