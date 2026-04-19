@@ -11,8 +11,14 @@ class Toast {
       behavior: SnackBarBehavior.floating,
       backgroundColor: isError
           ? context.appTheme.error
-          : context.appTheme.glassBackground,
-      content: Center(child: Text(message)),
+          : context.appTheme.primary,
+      content: Center(
+        child: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+          textAlign: TextAlign.center,
+        ),
+      ),
       duration: const Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -37,7 +43,7 @@ class Toast {
             decoration: BoxDecoration(
               color: isError
                   ? context.appTheme.error
-                  : context.appTheme.glassBackground,
+                  : context.appTheme.primary,
               borderRadius: BorderRadius.circular(12),
               boxShadow: const [
                 BoxShadow(color: Colors.black26, blurRadius: 6),

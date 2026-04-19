@@ -15,10 +15,17 @@ class SuperFitnessApp extends StatefulWidget {
 
 class _SuperFitnessAppState extends State<SuperFitnessApp> {
   Future<String?> checkInitRoute() async {
-    if (await AppLocalStorage.getBool(LocalKeys.onBoarding)) {
-      return AppRoutes.login;
-    }
-    return AppRoutes.onBoarding;
+    // OnBoarding
+    final seenOnBoarding = await AppLocalStorage.getBool(LocalKeys.onBoarding);
+    if (!seenOnBoarding) return AppRoutes.onBoarding;
+
+    // Auto Login
+    final token = await AppLocalStorage.getSecuredString(
+      key: LocalKeys.authToken,
+    );
+    if (token.isNotEmpty) return AppRoutes.appSectionView;
+
+    return AppRoutes.login;
   }
 
   @override
