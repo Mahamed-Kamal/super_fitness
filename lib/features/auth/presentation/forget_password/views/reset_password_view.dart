@@ -27,7 +27,8 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late StreamSubscription<ForgetPasswordUiIntent> _uiEventSubscription;
-
+  bool _isObscure2 = true;
+  bool _isObscure = true;
   @override
   void dispose() {
     _passwordController.dispose();
@@ -129,23 +130,49 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                               TextFormField(
                                 controller: _passwordController,
                                 validator: FormValidators.password,
+                                obscureText: _isObscure,
                                 decoration: InputDecoration(
-                                  prefix: Icon(Icons.lock),
+                                  prefixIcon: Icon(Icons.lock),
                                   hintText: "Password".tr(),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isObscure
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isObscure = !_isObscure;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
                               context.h(15),
                               TextFormField(
                                 controller: _confirmPasswordController,
+                                obscureText: _isObscure2,
+
                                 validator: (value) =>
                                     FormValidators.confirmPassword(
                                       value,
                                       _passwordController.text,
                                     ),
                                 decoration: InputDecoration(
-                                  prefix: Icon(Icons.lock),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isObscure2
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isObscure2 = !_isObscure2;
+                                      });
+                                    },
+                                  ),
                                   hintText: "Password".tr(),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,

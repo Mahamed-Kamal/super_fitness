@@ -145,9 +145,10 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                               TextFormField(
                                 controller: _emailController,
                                 validator: FormValidators.email,
+
                                 decoration: InputDecoration(
-                                  prefix: Icon(Icons.email_outlined),
-                                  hintText: "Email".tr(),
+                                  prefixIcon: Icon(Icons.email_outlined),
+                                  hint: Text("Email").tr(),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                 ),
