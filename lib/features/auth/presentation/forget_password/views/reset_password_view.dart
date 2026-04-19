@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/extensions/context_spacing_extension.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/utils/validation/form_validator.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
@@ -33,6 +34,23 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
     _confirmPasswordController.dispose();
     _uiEventSubscription.cancel();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _uiEventSubscription = context
+        .read<ForgetPasswordViewModel>()
+        .forgetPasswordUiEvent
+        .listen((intent) {
+          if (intent is NavigateToLoginViewIntent) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRoutes.login,
+              (route) => false,
+            );
+          }
+        });
   }
 
   @override

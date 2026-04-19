@@ -58,6 +58,12 @@ class _LoginViewState extends State<LoginView> {
             case NavigateToForgetPassword():
               Navigator.pushNamed(context, AppRoutes.forgetPassword);
               break;
+            case NavigateToHome():
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.appSectionView,
+                (route) => false,
+              );
           }
         });
   }
