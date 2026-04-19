@@ -5,6 +5,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
+import 'package:super_fitness/core/utils/local/app_local_storage.dart';
+import 'package:super_fitness/core/utils/local/local_keys.dart';
 import 'package:super_fitness/core/widgets/glass_container.dart';
 import 'package:super_fitness/core/widgets/screen_image_background.dart';
 import 'package:super_fitness/features/on_boarding/controller/page_view_controller.dart';
@@ -89,7 +91,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ),
           onPressed: _currentPage.value == _onBoardingModel.length - 1
               ? () {
-                  Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+                  Navigator.of(
+                    context,
+                  ).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
+                  AppLocalStorage.set(LocalKeys.onBoarding, true);
                 }
               : _pageController.navigateToNextPage,
           child: ValueListenableBuilder(

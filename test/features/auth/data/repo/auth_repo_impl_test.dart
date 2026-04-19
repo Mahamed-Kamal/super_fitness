@@ -34,7 +34,7 @@ void main() {
         lastName: 'Ayman',
       );
       provideDummy<Result<String>>(
-          SuccessResponse<String>(data: 'success_token')
+        SuccessResponse<String>(data: 'success_token'),
       );
 
       when(
@@ -55,7 +55,7 @@ void main() {
       () async {
         final responseDto = LoginResponseDto(token: 'abc_123');
         provideDummy<Result<LoginResponseDto>>(
-            SuccessResponse<LoginResponseDto>(data: responseDto)
+          SuccessResponse<LoginResponseDto>(data: responseDto),
         );
         when(
           mockAuthDataSource.login(
@@ -86,7 +86,7 @@ void main() {
       final request = ForgotPasswordRequest(email: testEmail);
       final response = ForgotPasswordResponse();
       provideDummy<Result<ForgotPasswordResponse>>(
-          SuccessResponse<ForgotPasswordResponse>(data: response)
+        SuccessResponse<ForgotPasswordResponse>(data: response),
       );
 
       when(
@@ -111,7 +111,7 @@ void main() {
       final request = VerifyResetCodeRequest(resetCode: '123456');
       final response = VerifyResetCodeResponse(message: 'verified');
       provideDummy<Result<VerifyResetCodeResponse>>(
-          SuccessResponse<VerifyResetCodeResponse>(data: response)
+        SuccessResponse<VerifyResetCodeResponse>(data: response),
       );
       when(
         mockAuthDataSource.verifyOtp(
@@ -138,7 +138,7 @@ void main() {
       );
       final response = ResetPasswordResponse();
       provideDummy<Result<ResetPasswordResponse>>(
-          SuccessResponse<ResetPasswordResponse>(data: response)
+        SuccessResponse<ResetPasswordResponse>(data: response),
       );
       when(
         mockAuthDataSource.resetPassword(
@@ -161,9 +161,7 @@ void main() {
     test('should return dynamic data when update is successful', () async {
       final request = UpdateUserDataRequest(firstName: 'Updated Name');
       provideDummy<Result<UsersDto>>(
-        SuccessResponse<UsersDto>(data: UsersDto(
-          firstName: 'Updated Name',
-        )),
+        SuccessResponse<UsersDto>(data: UsersDto(firstName: 'Updated Name')),
       );
       when(
         mockAuthDataSource.updateUserData(
@@ -171,10 +169,9 @@ void main() {
           updateUserDataRequest: anyNamed('updateUserDataRequest'),
         ),
       ).thenAnswer(
-            (_) async =>
-            SuccessResponse<UsersDto>(data: UsersDto(
-              firstName: 'Updated Name',
-            )),
+        (_) async => SuccessResponse<UsersDto>(
+          data: UsersDto(firstName: 'Updated Name'),
+        ),
       );
 
       final result = await mockAuthDataSource.updateUserData(
