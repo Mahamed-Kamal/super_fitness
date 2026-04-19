@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:super_fitness/core/api/api_client.dart';
 import 'package:super_fitness/core/api/constants/api_constants.dart';
+import 'package:super_fitness/core/di/modules/auth_interceptor.dart';
 
 @module
 abstract class ApiModule {
@@ -16,11 +17,9 @@ abstract class ApiModule {
   Future<Dio> provideDio(BaseOptions option, PrettyDioLogger logger) async {
     var dio = Dio(option);
     dio.interceptors.add(logger);
+    dio.interceptors.add(AuthInterceptor());
 
-    dio.options.headers = {
-      'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer $userToken',
-    };
+    dio.options.headers = {'Content-Type': 'application/json'};
 
     return dio;
   }
