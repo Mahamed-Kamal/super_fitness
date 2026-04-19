@@ -2,26 +2,44 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/route_manager/route_generator.dart';
-
 import 'package:super_fitness/core/theme/app_theme/dark_theme.dart';
+import 'package:super_fitness/core/utils/local/app_local_storage.dart';
+import 'package:super_fitness/core/utils/local/local_keys.dart';
 
-class SuperFitnessApp extends StatelessWidget {
+class SuperFitnessApp extends StatefulWidget {
   const SuperFitnessApp({super.key});
 
   @override
+  State<SuperFitnessApp> createState() => _SuperFitnessAppState();
+}
+
+class _SuperFitnessAppState extends State<SuperFitnessApp> {
+  Future<String?> checkInitRoute() async {
+    if (await AppLocalStorage.getBool(LocalKeys.onBoarding)) {
+      return AppRoutes.login;
+    }
+    return AppRoutes.onBoarding;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Super Fitness',
-      // Localization
-      locale: context.locale,
-      supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
-      // Themes
-      theme: DarkTheme().themeData,
-      themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.onBoarding,
-      onGenerateRoute: RouteGenerator.getRoute,
+    return FutureBuilder(
+      initialData: AppRoutes.onBoarding,
+      future: checkInitRoute(),
+      builder: (context, asyncSnapshot) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Super Fitness',
+          // Localization
+          locale: context.locale,
+          supportedLocales: context.supportedLocales,
+          localizationsDelegates: context.localizationDelegates,
+          theme: DarkTheme().themeData,
+          themeMode: ThemeMode.dark,
+          initialRoute: asyncSnapshot.data,
+          onGenerateRoute: RouteGenerator.getRoute,
+        );
+      },
     );
   }
 }
