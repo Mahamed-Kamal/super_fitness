@@ -26,7 +26,7 @@ class RouteGenerator {
             child: const LoginView(),
           ),
         );
-      case AppRoutes.onBoarding:
+      case AppRoutes.onboardingView:
         return _buildRoute(const OnBoardingView());
 
       case AppRoutes.registerAndCompleteRegistration:

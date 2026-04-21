@@ -1,0 +1,12 @@
+import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/explore/domain/entities/categories_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
+
+abstract interface class ExploreRepo {
+  Future<Result<MusclesResponseEntity>> getMusclesRandom();
+  Future<Result<MusclesGroupResponseEntity>> getMusclesGroup();
+  Future<Result<MusclesGroupResponseEntity>> getSpecificMusclesGroup({
+    required String id,
+  });
+  Future<Result<CategoriesResponseEntity>> getCategories();
+}
