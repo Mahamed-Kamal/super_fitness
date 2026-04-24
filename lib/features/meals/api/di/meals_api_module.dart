@@ -1,11 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:super_fitness/core/api/constants/api_constants.dart';
 import 'package:super_fitness/features/meals/api/client/meals_api_client.dart';
 
 @module
 abstract class MealsApiModule {
   @lazySingleton
-  MealsApiClient provideMealsApiClient(Dio dio) =>
-      MealsApiClient(dio, baseUrl: ApiConstants.mealsBaseUrl);
+  MealsApiClient provideMealsApiClient(@Named('mealsDio') Dio dio) =>
+      MealsApiClient(dio);
+
+  @lazySingleton
+  @Named('mealsDio')
+  Dio provideMealsDio(PrettyDioLogger logger) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstants.mealsBaseUrl,
+        sendTimeout: const Duration(seconds: 60),
+        receiveTimeout: const Duration(seconds: 60),
+      ),
+    );
+
+    dio.interceptors.add(logger);
+
+    return dio;
+  }
 }
