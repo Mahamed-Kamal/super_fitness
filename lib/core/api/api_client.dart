@@ -13,6 +13,8 @@ import 'package:super_fitness/features/auth/data/models/response/reset_password_
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
+import 'package:super_fitness/features/exercises/data/models/difficulty_levels_response.dart';
+import 'package:super_fitness/features/exercises/data/models/exercises_response.dart';
 
 part 'api_client.g.dart';
 
@@ -49,5 +51,17 @@ abstract class ApiClient {
   @PUT(EndPoints.resetPassword)
   Future<ResetPasswordResponse> resetPassword({
     @Body() required ResetPasswordRequest resetPassword,
+  });
+
+  @GET(EndPoints.getExercises)
+  Future<ExercisesResponse> getExercises({
+    @Query("primeMoverMuscleId") required String primeMoverMuscleId,
+    @Query("difficultyLevelId") required String difficultyLevelId,
+    @Query("page") required int page,
+  });
+
+  @GET(EndPoints.getDifficultyLevels)
+  Future<DifficultyLevelsResponse> getDifficultyLevels({
+    @Query("primeMoverMuscleId") required String primeMoverMuscleId,
   });
 }
