@@ -12,6 +12,8 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 
 class RouteGenerator {
@@ -66,6 +68,16 @@ class RouteGenerator {
             child: const ResetPasswordView(),
           ),
         );
+
+      case AppRoutes.mealDetails:
+        var vm = getIt.get<MealDetailsViewModel>();
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<MealDetailsViewModel>(
+            create: (_) => vm,
+            child: MealDetailsView(id: "53144"),
+          ),
+        );
+
       default:
         return null;
     }
