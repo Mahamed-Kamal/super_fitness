@@ -127,5 +127,10 @@
   "intermediate": "Intermediate",
   "advanced": "Advanced",
   "expert": "expert",
-  "registration_successful": "Register successful, please login"
+  "registration_successful": "Register successful, please login",
+  "workouts":{
+    "Workouts": "Workouts",
+    "untitled": "untitled",
+    "There is no Muscles yet": "There is no Muscles yet"
+  }
 }
