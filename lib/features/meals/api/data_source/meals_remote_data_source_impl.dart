@@ -12,14 +12,14 @@ class MealsRemoteDataSourceImpl implements MealsRemoteDataSource {
   MealsRemoteDataSourceImpl(this._mealsApiClient);
 
   @override
-  Future<Result<List<MealDto>>> getMealDetails({required String id}) async {
-    return executeApi(() async {
-      var response = await _mealsApiClient.getMealDetails(id: id);
-      if (response.meals != null) {
-        return response.meals!;
-      } else {
-        return [];
-      }
-    });
+  Future<Result<MealDto>> getMealDetails({required String id}) async {
+    if (id.isNotEmpty) {
+      return executeApi(() async {
+        var response = await _mealsApiClient.getMealDetails(id: id);
+        return response.meals!.first;
+      });
+    } else {
+      return FailureResponse(errorMessage: "empty_id");
+    }
   }
 }

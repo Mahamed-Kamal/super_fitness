@@ -40,7 +40,7 @@ class _MealDetailsViewState extends State<MealDetailsView> {
               message: state.errorMessage ?? 'Something went wrong',
               id: widget.id,
             ),
-            RequestState.loaded => MealDetailBody(meal: state.data!.first),
+            RequestState.loaded => MealDetailBody(meal: state.data!),
           };
         },
       ),

@@ -9,6 +9,6 @@ class GetMealDetailsUseCase {
 
   GetMealDetailsUseCase(this._mealsRepo);
 
-  Future<Result<List<MealEntity>>> getMealDetails({required String id}) =>
+  Future<Result<MealEntity>> call({required String id}) =>
       _mealsRepo.getMealDetails(id: id);
 }

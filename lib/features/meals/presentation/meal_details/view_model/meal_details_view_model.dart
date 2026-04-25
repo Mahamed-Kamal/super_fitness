@@ -26,11 +26,11 @@ class MealDetailsViewModel
 
   Future<void> getMealDetails({required String id}) async {
     emit(MealDetailsState.loading());
-    var result = await _getMealDetailsUseCase.getMealDetails(id: id);
+    var result = await _getMealDetailsUseCase.call(id: id);
     switch (result) {
-      case SuccessResponse<List<MealEntity>>():
+      case SuccessResponse<MealEntity>():
         emit(MealDetailsState.loaded(result.data));
-      case FailureResponse<List<MealEntity>>():
+      case FailureResponse<MealEntity>():
         emit(MealDetailsState.error(result.errorMessage));
     }
   }

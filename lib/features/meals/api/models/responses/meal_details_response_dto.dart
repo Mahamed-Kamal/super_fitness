@@ -11,11 +11,8 @@ class MealDetailsResponseDto {
 
   MealDetailsResponseDto({this.meals});
 
-  factory MealDetailsResponseDto.fromJson(Map<String, dynamic> json) {
-    return _$MealDetailsResponseDtoFromJson(json);
-  }
+  factory MealDetailsResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$MealDetailsResponseDtoFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return _$MealDetailsResponseDtoToJson(this);
-  }
+  Map<String, dynamic> toJson() => _$MealDetailsResponseDtoToJson(this);
 }

@@ -13,13 +13,12 @@ class MealsRepoImpl implements MealsRepo {
   MealsRepoImpl(this._mealsRemoteDataSource);
 
   @override
-  Future<Result<List<MealEntity>>> getMealDetails({required String id}) async {
+  Future<Result<MealEntity>> getMealDetails({required String id}) async {
     var result = await _mealsRemoteDataSource.getMealDetails(id: id);
     switch (result) {
-      case SuccessResponse<List<MealDto>>():
-        var meals = result.data.map((e) => e.toMealEntity()).toList();
-        return SuccessResponse(data: meals);
-      case FailureResponse<List<MealDto>>():
+      case SuccessResponse<MealDto>():
+        return SuccessResponse(data: result.data.toMealEntity());
+      case FailureResponse<MealDto>():
         return FailureResponse(errorMessage: result.errorMessage);
     }
   }

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/features/meals/domain/entities/meal_entity.dart';
 
-class MealDetailsState extends BaseState<List<MealEntity>> with EquatableMixin {
+class MealDetailsState extends BaseState<MealEntity> with EquatableMixin {
   const MealDetailsState({
     required super.requestState,
     super.errorMessage,
@@ -15,7 +15,7 @@ class MealDetailsState extends BaseState<List<MealEntity>> with EquatableMixin {
   factory MealDetailsState.loading() =>
       MealDetailsState(requestState: RequestState.loading);
 
-  factory MealDetailsState.loaded(List<MealEntity> data) =>
+  factory MealDetailsState.loaded(MealEntity data) =>
       MealDetailsState(requestState: RequestState.loaded, data: data);
 
   factory MealDetailsState.error(String message) =>
@@ -24,7 +24,7 @@ class MealDetailsState extends BaseState<List<MealEntity>> with EquatableMixin {
   MealDetailsState copyWith({
     RequestState? requestState,
     String? errorMessage,
-    List<MealEntity>? data,
+    MealEntity? data,
   }) => MealDetailsState(
     requestState: requestState ?? this.requestState,
     errorMessage: errorMessage ?? this.errorMessage,
