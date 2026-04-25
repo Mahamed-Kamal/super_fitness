@@ -6,6 +6,7 @@ import 'package:super_fitness/features/explore/data/data_source/explore_data_sou
 import 'package:super_fitness/features/explore/data/models/categories_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
 
 @LazySingleton(as: ExploreDataSource)
 class ExploreDataSourceImpl implements ExploreDataSource {
@@ -20,9 +21,9 @@ class ExploreDataSourceImpl implements ExploreDataSource {
       executeApi(() => _apiClient.getMusclesGroup());
 
   @override
-  Future<Result<MusclesResponseDto>> getSpecificMusclesGroup({
+  Future<Result<SpecialMusclesResponse>> getSpecificMusclesGroup({
     required String id,
-  }) => executeApi(() => _apiClient.getSpecificMusclesGroup(id: id));
+  }) => executeApi(() => _apiClient.getSpecificMusclesGroup(id));
 
   @override
   Future<Result<CategoriesResponse>> getCategories() =>

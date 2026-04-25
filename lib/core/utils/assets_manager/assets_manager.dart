@@ -51,4 +51,5 @@ abstract final class AssetsManager {
   static const String gym = "$_imagesPath/gym.png";
   static const String aerobics = "$_imagesPath/aerobics.png";
   static const String fitness = "$_imagesPath/fitness.png";
+  static const String gymComingSoon = "$_imagesPath/gym_coming_soon.jpg";
 }

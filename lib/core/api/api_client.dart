@@ -16,6 +16,7 @@ import 'package:super_fitness/features/auth/data/models/responses/update_user_da
 import 'package:super_fitness/features/explore/data/models/categories_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
 
 part 'api_client.g.dart';
 
@@ -60,5 +61,5 @@ abstract class ApiClient {
   @GET(EndPoints.getCategories)
   Future<CategoriesResponse> getCategories();
   @GET(EndPoints.getSpecificMusclesGroup)
-  Future<MusclesResponseDto> getSpecificMusclesGroup({required String id});
+  Future<SpecialMusclesResponse> getSpecificMusclesGroup(@Path() String id);
 }

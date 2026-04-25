@@ -5,8 +5,10 @@ import 'package:super_fitness/features/explore/data/mapper/explore_mapper.dart';
 import 'package:super_fitness/features/explore/data/models/categories_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
 import 'package:super_fitness/features/explore/domain/entities/categories_entity.dart';
 import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/special_muscles_response_entity.dart';
 import 'package:super_fitness/features/explore/domain/repo/explore_repo.dart';
 
 @LazySingleton(as: ExploreRepo)
@@ -37,14 +39,14 @@ class ExploreRepoImpl implements ExploreRepo {
   }
 
   @override
-  Future<Result<MusclesGroupResponseEntity>> getSpecificMusclesGroup({
+  Future<Result<SpecialMusclesResponseEntity>> getSpecificMusclesGroup({
     required String id,
   }) async {
     final result = await _exploreDataSource.getSpecificMusclesGroup(id: id);
     switch (result) {
-      case SuccessResponse<MusclesResponseDto>():
+      case SuccessResponse<SpecialMusclesResponse>():
         return SuccessResponse(data: result.data.toEntity());
-      case FailureResponse<MusclesResponseDto>():
+      case FailureResponse<SpecialMusclesResponse>():
         return FailureResponse(errorMessage: result.errorMessage);
     }
   }

@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 class MusclesResponseEntity extends Equatable {
   final List<MusclesEntity>? muscles;
-
   const MusclesResponseEntity({this.muscles});
 
   @override

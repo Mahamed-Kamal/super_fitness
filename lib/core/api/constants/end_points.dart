@@ -11,5 +11,5 @@ abstract final class EndPoints {
   static const String getMusclesGroup = 'muscles';
   static const String getCategories =
       'https://www.themealdb.com/api/json/v1/1/categories.php';
-  static const String getSpecificMusclesGroup = 'muscles/{id}';
+  static const String getSpecificMusclesGroup = 'musclesGroup/{id}';
 }

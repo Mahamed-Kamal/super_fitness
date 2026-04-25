@@ -1,14 +1,43 @@
+import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:super_fitness/core/extensions/sliver_extension.dart';
-import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/screen_image_background.dart';
-import 'package:super_fitness/features/explore/presentation/widgets/fitness_categories.dart';
-import 'package:super_fitness/features/explore/presentation/widgets/recommendation_today.dart';
-import 'package:super_fitness/features/explore/presentation/widgets/upcoming_workouts.dart';
+import 'package:super_fitness/features/explore/domain/entities/explore_section.dart';
+import 'package:super_fitness/features/explore/presentation/factory/categories_explore_section.dart';
+import 'package:super_fitness/features/explore/presentation/factory/muscles_explore_section.dart';
+import 'package:super_fitness/features/explore/presentation/factory/muscles_group_explore_section.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
+import 'package:super_fitness/features/explore/presentation/widgets/section_widget.dart';
+import '../widgets/fitness_categories.dart';
 
-class ExploreView extends StatelessWidget {
+class ExploreView extends StatefulWidget {
   const ExploreView({super.key});
+
+  @override
+  State<ExploreView> createState() => _ExploreViewState();
+}
+
+class _ExploreViewState extends State<ExploreView> {
+  late final StreamSubscription _exploreEvents;
+  @override
+  void initState() {
+    _exploreEvents = context.read<ExploreViewModel>().eventStream.listen((
+      event,
+    ) {
+      if (event is NavigateToFoodRecommendation) {}
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _exploreEvents.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,78 +45,98 @@ class ExploreView extends StatelessWidget {
       imagePath: AssetsManager.exploreBg,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: CustomScrollView(
-          slivers: [
-            const SliverAppBar(
-              title: ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text("hi Omar"),
-                subtitle: Text("Let’s start your day"),
-                trailing: CircleAvatar(),
-              ),
+        child: Column(
+          children: [
+            const SizedBox(height: 32),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text("explore.hi".tr()),
+              subtitle: Text("explore.start_your_day".tr()),
+              trailing: const CircleAvatar(),
             ),
-            const SizedBox(height: 24).toSliver,
-            const _SessionWidget(title: "Category", widget: Categories()),
-            const SizedBox(height: 24).toSliver,
-            const _SessionWidget(
-              title: "Recommendation to day",
-              widget: RecommendationToDay(),
+            const SizedBox(height: 24),
+            SectionWidget(
+              title: "explore.category".tr(),
+              widget: const FitnessCategories(),
             ),
-            const SizedBox(height: 24).toSliver,
-            _SessionWidget(
-              title: "Upcoming Workouts",
+            Expanded(
+              child: BlocBuilder<ExploreViewModel, ExploreState>(
+                builder: (context, state) {
+                  return ListView.separated(
+                    itemBuilder: (BuildContext context, int index) {
+                      return switch (state.exploreData[index].data) {
+                        null => const CircularProgressIndicator(),
+                        MusclesRandomSection() =>
+                          MusclesExploreSection().buildUI(
+                            switch (state.exploreData[index].requestState) {
+                                  RequestState.init =>
+                                    BaseState<MusclesRandomSection>.init(),
+                                  RequestState.loading =>
+                                    BaseState<MusclesRandomSection>.loading(),
+                                  RequestState.loaded =>
+                                    BaseState<MusclesRandomSection>.loaded(
+                                      state.exploreData[index].data
+                                          as MusclesRandomSection,
+                                    ),
+                                  RequestState.error =>
+                                    BaseState<MusclesExploreSection>.error(
+                                      state.exploreData[index].errorMessage!,
+                                    ),
+                                }
+                                as BaseState<MusclesRandomSection>,
+                          ),
+                        MusclesGroupSection() =>
+                          MusclesGroupExploreSection().buildUI(
+                            switch (state.exploreData[index].requestState) {
+                              RequestState.init =>
+                                BaseState<MusclesGroupSection>.init(),
 
-              widget: UpcomingWorkout(),
-            ),
-            const SizedBox(height: 8).toSliver,
-            const RecommendationToDay().toSliver,
-            const SizedBox(height: 24).toSliver,
-            _SessionWidget(
-              title: "Recommendation For You",
-              widget: RecommendationToDay(),
-              onTap: () {},
+                              RequestState.loading =>
+                                BaseState<MusclesGroupSection>.loading(),
+
+                              RequestState.loaded =>
+                                BaseState<MusclesGroupSection>.loaded(
+                                  state.exploreData[index].data
+                                      as MusclesGroupSection,
+                                ),
+                              RequestState.error =>
+                                BaseState<MusclesGroupSection>.error(
+                                  state.exploreData[index].errorMessage!,
+                                ),
+                            },
+                          ),
+                        CategoriesSection() =>
+                          CategoriesExploreSection().buildUI(
+                            switch (state.exploreData[index].requestState) {
+                              RequestState.init =>
+                                BaseState<CategoriesSection>.init(),
+
+                              RequestState.loading =>
+                                BaseState<CategoriesSection>.loading(),
+
+                              RequestState.loaded =>
+                                BaseState<CategoriesSection>.loaded(
+                                  state.exploreData[index].data
+                                      as CategoriesSection,
+                                ),
+                              RequestState.error =>
+                                BaseState<CategoriesSection>.error(
+                                  state.exploreData[index].errorMessage!,
+                                ),
+                            },
+                          ),
+                      };
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(height: 24),
+                    itemCount: state.exploreData.length,
+                  );
+                },
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-}
-
-class _SessionWidget extends StatelessWidget {
-  final String title;
-  final Widget widget;
-  final void Function()? onTap;
-
-  const _SessionWidget({required this.title, required this.widget, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.appTheme;
-    return Column(
-      spacing: 8,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: theme.semiBold16),
-            if (onTap != null)
-              GestureDetector(
-                onTap: onTap,
-                child: Text(
-                  "See All",
-                  style: theme.regular14.copyWith(
-                    decoration: TextDecoration.underline,
-                    color: theme.primary,
-                    decorationColor: theme.primary,
-                  ),
-                ),
-              ),
-          ],
-        ),
-        widget,
-      ],
-    ).toSliver;
   }
 }

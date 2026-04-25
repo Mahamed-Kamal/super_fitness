@@ -4,8 +4,10 @@ import 'package:super_fitness/features/explore/data/models/muscles_dto.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_dto.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
 import 'package:super_fitness/features/explore/domain/entities/categories_entity.dart';
 import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/special_muscles_response_entity.dart';
 
 extension MusclesRasponseMapper on MusclesRandomDto {
   MusclesResponseEntity toEntity() => MusclesResponseEntity(
@@ -39,5 +41,13 @@ extension CategoriesEntityMapper on Categories {
     strCategory: strCategory,
     strCategoryThumb: strCategoryThumb,
     strCategoryDescription: strCategoryDescription,
+  );
+}
+
+extension SpecialMusclesResponseEntityMapper on SpecialMusclesResponse {
+  SpecialMusclesResponseEntity toEntity() => SpecialMusclesResponseEntity(
+    muscles: muscles?.map((e) => e.toEntity()).toList() ?? [],
+    musclesGroup:
+        muscleGroup?.toEntity() ?? MusclesGroupEntity(id: '', name: ''),
   );
 }
