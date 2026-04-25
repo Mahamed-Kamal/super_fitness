@@ -31,7 +31,7 @@ class _SuperFitnessAppState extends State<SuperFitnessApp> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      initialData: AppRoutes.onBoarding,
+      initialData: AppRoutes.exercise,
       future: checkInitRoute(),
       builder: (context, asyncSnapshot) {
         return MaterialApp(
