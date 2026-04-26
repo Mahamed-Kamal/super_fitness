@@ -1,0 +1,125 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/meals/api/models/responses/categories_response_dto.dart';
+import 'package:super_fitness/features/meals/api/models/responses/meal_category_dto.dart';
+import 'package:super_fitness/features/meals/api/models/responses/meal_list_item_dto.dart';
+import 'package:super_fitness/features/meals/api/models/responses/meals_filter_response_dto.dart';
+import 'package:super_fitness/features/meals/data/data_source/meals_remote_data_source.dart';
+import 'package:super_fitness/features/meals/data/repo/meals_repo_impl.dart';
+import 'package:super_fitness/features/meals/domain/entities/meal_category_entity.dart';
+import 'package:super_fitness/features/meals/domain/entities/meal_entity.dart';
+
+import 'meals_repo_impl_test.mocks.dart';
+
+@GenerateMocks([MealsRemoteDataSource])
+void main() {
+  late MockMealsRemoteDataSource mockDataSource;
+  late MealsRepoImpl repo;
+
+  setUp(() {
+    mockDataSource = MockMealsRemoteDataSource();
+    repo = MealsRepoImpl(mockDataSource);
+  });
+
+  group('MealsRepoImpl.getMealCategories', () {
+    test('maps SuccessResponse DTO to entity list', () async {
+      final dto = CategoriesResponseDto(
+        categories: [
+          const MealCategoryDto(
+            idCategory: '1',
+            strCategory: 'Beef',
+            strCategoryThumb: 'http://thumb',
+            strCategoryDescription: 'desc',
+          ),
+        ],
+      );
+      final remote = SuccessResponse<CategoriesResponseDto>(data: dto);
+      provideDummy<Result<CategoriesResponseDto>>(remote);
+      when(
+        mockDataSource.fetchMealCategories(),
+      ).thenAnswer((_) async => remote);
+
+      final result = await repo.getMealCategories();
+
+      expect(result, isA<SuccessResponse<List<MealCategoryEntity>>>());
+      final data = (result as SuccessResponse<List<MealCategoryEntity>>).data;
+      expect(data.length, 1);
+      expect(
+        data.first,
+        const MealCategoryEntity(
+          id: '1',
+          name: 'Beef',
+          thumbUrl: 'http://thumb',
+          description: 'desc',
+        ),
+      );
+      verify(mockDataSource.fetchMealCategories()).called(1);
+    });
+
+    test('propagates FailureResponse', () async {
+      final remote = FailureResponse<CategoriesResponseDto>(
+        errorMessage: 'errors.connectionError',
+      );
+      provideDummy<Result<CategoriesResponseDto>>(remote);
+      when(
+        mockDataSource.fetchMealCategories(),
+      ).thenAnswer((_) async => remote);
+
+      final result = await repo.getMealCategories();
+
+      expect(
+        (result as FailureResponse<List<MealCategoryEntity>>).errorMessage,
+        'errors.connectionError',
+      );
+      verify(mockDataSource.fetchMealCategories()).called(1);
+    });
+  });
+
+  group('MealsRepoImpl.getMealsByCategory', () {
+    test('maps SuccessResponse DTO to entity list', () async {
+      final dto = MealsFilterResponseDto(
+        meals: [
+          const MealListItemDto(
+            idMeal: '10',
+            strMeal: ' Pie ',
+            strMealThumb: 'http://m',
+          ),
+        ],
+      );
+      final remote = SuccessResponse<MealsFilterResponseDto>(data: dto);
+      provideDummy<Result<MealsFilterResponseDto>>(remote);
+      when(
+        mockDataSource.fetchMealsByCategory(category: 'Beef'),
+      ).thenAnswer((_) async => remote);
+
+      final result = await repo.getMealsByCategory(category: 'Beef');
+
+      expect(result, isA<SuccessResponse<List<MealEntity>>>());
+      final data = (result as SuccessResponse<List<MealEntity>>).data;
+      expect(
+        data.single,
+        const MealEntity(id: '10', name: 'Pie', imageUrl: 'http://m'),
+      );
+      verify(mockDataSource.fetchMealsByCategory(category: 'Beef')).called(1);
+    });
+
+    test('propagates FailureResponse', () async {
+      final remote = FailureResponse<MealsFilterResponseDto>(
+        errorMessage: 'errors.connectionError',
+      );
+      provideDummy<Result<MealsFilterResponseDto>>(remote);
+      when(
+        mockDataSource.fetchMealsByCategory(category: 'Beef'),
+      ).thenAnswer((_) async => remote);
+
+      final result = await repo.getMealsByCategory(category: 'Beef');
+
+      expect(
+        (result as FailureResponse<List<MealEntity>>).errorMessage,
+        'errors.connectionError',
+      );
+    });
+  });
+}
