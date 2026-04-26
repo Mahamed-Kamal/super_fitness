@@ -2,9 +2,11 @@ import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/bloc/base_cubit.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/explore/domain/entities/exercises_response_entity.dart';
 import 'package:super_fitness/features/explore/domain/entities/explore_section.dart';
 import 'package:super_fitness/features/explore/domain/entities/special_muscles_response_entity.dart';
 import 'package:super_fitness/features/explore/domain/usecase/explore_use_case.dart';
+import 'package:super_fitness/features/explore/domain/usecase/get_popular_training_use_case.dart';
 import 'package:super_fitness/features/explore/domain/usecase/get_spesical_muscles_use_case.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
 
@@ -13,18 +15,27 @@ class ExploreViewModel
     extends BaseCubit<ExploreState, ExploreIntent, ExploreEvents> {
   final ExploreUseCase _exploreUseCase;
   final GetSpecificMusclesGroup _getSpecificMusclesGroup;
-  ExploreViewModel(this._exploreUseCase, this._getSpecificMusclesGroup)
-    : super(
+  final GetPopularTrainingUseCase _getPopularTrainingUseCase;
+  ExploreViewModel(
+    this._exploreUseCase,
+    this._getSpecificMusclesGroup,
+    this._getPopularTrainingUseCase,
+  ) : super(
         ExploreState(
           exploreData: [
             BaseState<MusclesRandomSection>.init(),
             BaseState<MusclesGroupSection>.init(),
             BaseState<CategoriesSection>.init(),
+            BaseState<PopularSection>.init(),
           ],
           specialMuscles: BaseState<SpecialMusclesResponseEntity>.init(),
           index: 0,
         ),
       );
+
+  void loadPopular() {
+    _getPopularTrainingUseCase.call();
+  }
 
   @override
   void doIntent(intent) {
@@ -82,6 +93,12 @@ class ExploreViewModel
           BaseState<CategoriesSection>.loadingWithData(
             data: CategoriesSection([], 2),
           ),
+          BaseState<PopularSection>.loadingWithData(
+            data: PopularSection(
+              ExercisesResponseEntity(exercise: [], tasks: 0),
+              3,
+            ),
+          ),
         ],
       ),
     );
@@ -107,6 +124,10 @@ class ExploreViewModel
               case CategoriesSection():
                 exploreSection.add(
                   BaseState.loaded(section.data as CategoriesSection),
+                );
+              case PopularSection():
+                exploreSection.add(
+                  BaseState.loaded(section.data as PopularSection),
                 );
             }
           }

@@ -12,4 +12,7 @@ abstract final class EndPoints {
   static const String getCategories =
       'https://www.themealdb.com/api/json/v1/1/categories.php';
   static const String getSpecificMusclesGroup = 'musclesGroup/{id}';
+  static const String getTrainerLevels = 'levels';
+  static const String getExercisesByMuscleDifficulty =
+      'exercises/by-muscle-difficulty';
 }
