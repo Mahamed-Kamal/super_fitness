@@ -34,7 +34,7 @@ class ExercisesViewModel
           difficultyLevelId: intent.difficultyLevelId,
           page: intent.page,
         );
-        throw UnimplementedError();
+
       case GetDifficultyLevelsIntent():
         _getDifficultyLevels(intent.muscleId);
       case GetNextPageIntent():
@@ -43,6 +43,11 @@ class ExercisesViewModel
       case LoadMoreIntent():
         // TODO: Handle this case.
         throw UnimplementedError();
+      case ChangeDifficultyLevelIntent():
+        _changeDifficulty(
+          difficultyId: intent.difficultyId,
+          muscleId: intent.muscleId,
+        );
     }
   }
 
@@ -57,6 +62,9 @@ class ExercisesViewModel
           emit(
             state.copyWith(
               difficultyLevelsState: BaseState.loaded(response.data),
+              selectedDifficultyId: response.data.isNotEmpty
+                  ? response.data[0].id
+                  : null,
             ),
           );
         }
@@ -96,5 +104,16 @@ class ExercisesViewModel
           );
         }
     }
+  }
+
+  void _changeDifficulty({
+    required String difficultyId,
+    required String muscleId,
+  }) {
+    if (state.selectedDifficultyId == difficultyId) return;
+
+    emit(state.copyWith(selectedDifficultyId: difficultyId, currentPage: 1));
+
+    doIntent(GetExercisesIntent(muscleId, difficultyId, 1));
   }
 }

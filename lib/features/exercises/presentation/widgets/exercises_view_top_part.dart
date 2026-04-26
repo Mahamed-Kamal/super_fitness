@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
+import 'package:super_fitness/core/widgets/lottie_error.dart';
 import 'package:super_fitness/core/widgets/super_fitness_app_bar.dart';
-import 'package:super_fitness/features/exercises/presentation/widgets/difficuly_levels_list.dart';
+import 'package:super_fitness/features/exercises/presentation/view_model/exercises_events.dart';
+import 'package:super_fitness/features/exercises/presentation/view_model/exercises_state.dart';
+import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
+import 'package:super_fitness/features/exercises/presentation/widgets/difficulty_levels_list.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/min_and_cal_container.dart';
 
 class ExercisesViewTopPart extends StatelessWidget {
@@ -112,7 +116,35 @@ class ExercisesViewTopPart extends StatelessWidget {
                 bottomRight: Radius.circular(20),
               ),
             ),
-            child: DifficultyLevelsList(),
+            child: BlocBuilder<ExercisesViewModel, ExercisesState>(
+              bloc: context.read<ExercisesViewModel>()
+                ..doIntent(
+                  GetDifficultyLevelsIntent("69d982ef85f6bfa972bf2248"),
+                ),
+              builder: (context, state) {
+                if (state.difficultyLevelsState!.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state.difficultyLevelsState!.isError) {
+                  return LottieError(
+                    message: state.difficultyLevelsState?.errorMessage ?? "",
+                    onRetry: () => context.read<ExercisesViewModel>().doIntent(
+                      GetDifficultyLevelsIntent('69d982ef85f6bfa972bf2248'),
+                    ),
+                  );
+                } else if (state.difficultyLevelsState!.isLoaded) {
+                  final difficultyLevels =
+                      state.difficultyLevelsState?.data ?? [];
+
+                  return DifficultyLevelsList(
+                    levels: difficultyLevels,
+                    muscleId: "69d982ef85f6bfa972bf2248",
+                    selectedId: state.selectedDifficultyId,
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
           ),
         ),
       ],
