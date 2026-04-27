@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
+import 'package:super_fitness/features/exercises/domain/entity/exercises_entity.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ExercisesListContent extends StatelessWidget {
@@ -10,11 +12,15 @@ class ExercisesListContent extends StatelessWidget {
     required this.exercise,
     required this.prime_equipment,
     required this.thumbnail,
+    required this.videoUrl,
+    required this.exercises,
   });
   final int index;
   final String exercise;
   final String prime_equipment;
   final String thumbnail;
+  final String videoUrl;
+  final List<ExerciseEntity> exercises;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,6 +32,11 @@ class ExercisesListContent extends StatelessWidget {
             ? BorderRadius.only(
                 topLeft: Radius.circular(24),
                 topRight: Radius.circular(24),
+              )
+            : exercises.length - 1 == index
+            ? BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
               )
             : BorderRadius.circular(0),
         border: Border(
@@ -44,6 +55,7 @@ class ExercisesListContent extends StatelessWidget {
               width: 75,
               height: 75,
               fit: BoxFit.cover,
+              placeHolder: AssetsManager.placeholder,
             ),
           ),
 
@@ -88,7 +100,7 @@ class ExercisesListContent extends StatelessWidget {
               color: Colors.deepOrange,
             ),
             child: IconButton(
-              onPressed: () => _showVideoDialog(context, null),
+              onPressed: () => _showVideoDialog(context, videoUrl),
               icon: Icon(
                 Icons.play_arrow_rounded,
                 color: context.appTheme.neutral,

@@ -15,6 +15,7 @@ abstract final class AssetsManager {
   static const String homeBackground = 'assets/images/home_background.jpg';
   static const String profileBackground =
       'assets/images/profile_background.jpg';
+  static const String placeholder = 'assets/images/placeholder.png';
 
   // =================== Onboarding ===================
   static const String onBoardingBackground = "assets/images/onboarding_bg.png";

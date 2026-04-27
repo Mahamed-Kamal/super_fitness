@@ -24,6 +24,7 @@ class ExercisesViewTopPart extends StatelessWidget {
           width: double.infinity,
           height: 350,
           fit: BoxFit.cover,
+          placeHolder: AssetsManager.placeholder,
           radius: const BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
@@ -94,7 +95,7 @@ class ExercisesViewTopPart extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Chest Exercise",
+                "Calf exercises",
                 style: Theme.of(
                   context,
                 ).textTheme.headlineMedium?.copyWith(color: Colors.white),
@@ -125,10 +126,26 @@ class ExercisesViewTopPart extends StatelessWidget {
                 if (state.difficultyLevelsState!.isLoading) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state.difficultyLevelsState!.isError) {
-                  return LottieError(
-                    message: state.difficultyLevelsState?.errorMessage ?? "",
-                    onRetry: () => context.read<ExercisesViewModel>().doIntent(
-                      GetDifficultyLevelsIntent('69d982ef85f6bfa972bf2248'),
+                  return InkWell(
+                    onTap: () => context.read<ExercisesViewModel>().doIntent(
+                      GetDifficultyLevelsIntent("69d982ef85f6bfa972bf2248"),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.refresh,
+                            color: context.appTheme.primary,
+                            size: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Retry",
+                            style: TextStyle(color: context.appTheme.primary),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 } else if (state.difficultyLevelsState!.isLoaded) {

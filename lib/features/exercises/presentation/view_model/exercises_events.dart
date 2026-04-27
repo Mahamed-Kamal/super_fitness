@@ -7,11 +7,11 @@ class GetExercisesIntent extends ExercisesIntent with EquatableMixin {
   final String difficultyLevelId;
   final int page;
 
-  GetExercisesIntent(
-    this.primeMoverMuscleId,
-    this.difficultyLevelId,
-    this.page,
-  );
+  GetExercisesIntent({
+    required this.primeMoverMuscleId,
+    required this.difficultyLevelId,
+    required this.page,
+  });
 
   @override
   List<Object?> get props => [difficultyLevelId, primeMoverMuscleId, page];
@@ -36,7 +36,13 @@ class GetDifficultyLevelsIntent extends ExercisesIntent with EquatableMixin {
 
 class GetNextPageIntent extends ExercisesIntent {}
 
-class LoadMoreIntent extends ExercisesIntent {}
+class LoadMoreIntent extends ExercisesIntent with EquatableMixin {
+  final String muscleId;
+  LoadMoreIntent(this.muscleId);
+
+  @override
+  List<Object?> get props => [muscleId];
+}
 
 sealed class ExercisesEvent {}
 

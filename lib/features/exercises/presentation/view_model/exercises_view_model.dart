@@ -38,11 +38,9 @@ class ExercisesViewModel
       case GetDifficultyLevelsIntent():
         _getDifficultyLevels(intent.muscleId);
       case GetNextPageIntent():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _nextPage();
       case LoadMoreIntent():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        _loadMore('69d982ef85f6bfa972bf2248');
       case ChangeDifficultyLevelIntent():
         _changeDifficulty(
           difficultyId: intent.difficultyId,
@@ -58,15 +56,23 @@ class ExercisesViewModel
     );
     switch (response) {
       case SuccessResponse<List<DifficultyLevelsEntity>>():
+        final firstLevelId = response.data.isNotEmpty
+            ? response.data[0].id
+            : '';
         {
           emit(
             state.copyWith(
               difficultyLevelsState: BaseState.loaded(response.data),
-              selectedDifficultyId: response.data.isNotEmpty
-                  ? response.data[0].id
-                  : null,
+              selectedDifficultyId: firstLevelId,
             ),
           );
+          if (firstLevelId!.isNotEmpty) {
+            _getExercises(
+              primeMoverMuscleId: primeMoverMuscleId,
+              difficultyLevelId: firstLevelId,
+              page: 1,
+            );
+          }
         }
       case FailureResponse<List<DifficultyLevelsEntity>>():
         {
@@ -84,16 +90,40 @@ class ExercisesViewModel
     required String difficultyLevelId,
     required int page,
   }) async {
-    emit(state.copyWith(exercisesState: BaseState.loading()));
+    if (page == 1) {
+      emit(
+        state.copyWith(
+          exercisesState: BaseState.loading(),
+          hasReachedMax: false,
+        ),
+      );
+    }
+
     var response = await _getExercisesUseCase.invoke(
       primeMoverMuscleId: primeMoverMuscleId,
       difficultyLevelId: difficultyLevelId,
       page: page,
     );
+
     switch (response) {
       case SuccessResponse<List<ExerciseEntity>>():
         {
-          emit(state.copyWith(exercisesState: BaseState.loaded(response.data)));
+          List<ExerciseEntity> currentList = [];
+
+          if (page > 1 && state.exercisesState?.data != null) {
+            currentList = List.from(state.exercisesState!.data!);
+            currentList.addAll(response.data);
+          } else {
+            currentList = response.data;
+          }
+
+          emit(
+            state.copyWith(
+              exercisesState: BaseState.loaded(currentList),
+              currentPage: page,
+              hasReachedMax: response.data.length < 10,
+            ),
+          );
         }
       case FailureResponse<List<ExerciseEntity>>():
         {
@@ -112,8 +142,33 @@ class ExercisesViewModel
   }) {
     if (state.selectedDifficultyId == difficultyId) return;
 
-    emit(state.copyWith(selectedDifficultyId: difficultyId, currentPage: 1));
+    emit(
+      state.copyWith(
+        selectedDifficultyId: difficultyId,
+        currentPage: state.currentPage,
+      ),
+    );
 
-    doIntent(GetExercisesIntent(muscleId, difficultyId, 1));
+    doIntent(
+      GetExercisesIntent(
+        difficultyLevelId: difficultyId,
+        primeMoverMuscleId: muscleId,
+        page: state.currentPage,
+      ),
+    );
+  }
+
+  void _nextPage() => emit(state.copyWith(currentPage: state.currentPage + 1));
+
+  void _loadMore(String muscleId) {
+    if (state.exercisesState!.isLoading || state.hasReachedMax) return;
+
+    final nextPage = state.currentPage + 1;
+
+    _getExercises(
+      primeMoverMuscleId: muscleId,
+      difficultyLevelId: state.selectedDifficultyId ?? '',
+      page: nextPage,
+    );
   }
 }

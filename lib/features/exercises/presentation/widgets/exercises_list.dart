@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
+import 'package:super_fitness/features/exercises/domain/entity/exercises_entity.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/exercises_list_content.dart';
 
 class ExercisesList extends StatelessWidget {
-  const ExercisesList({super.key});
+  const ExercisesList({super.key, required this.exercises});
+  final List<ExerciseEntity> exercises;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        padding: const EdgeInsets.only(top: 1, bottom: 100),
+        padding: const EdgeInsets.only(top: 1, bottom: 20),
         physics: const BouncingScrollPhysics(),
-        itemCount: 10,
+        itemCount: exercises.length,
         itemBuilder: (context, index) {
           return ExercisesListContent(
+            exercises: exercises,
             index: index,
-            exercise: '',
-            prime_equipment: '',
-            thumbnail: '',
+            exercise: exercises[index].exercise ?? '',
+            prime_equipment: exercises[index].equipment ?? '',
+            thumbnail:
+                exercises[index].thumbnailUrl ?? AssetsManager.placeholder,
+            videoUrl: exercises[index].videoUrl ?? '',
           );
         },
       ),
