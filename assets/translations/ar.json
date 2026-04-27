@@ -124,5 +124,14 @@
   "intermediate": "متوسط",
   "advanced": "متقدم",
   "expert": "خبير",
-  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول"
+  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
+  "meals": {
+    "food_recommendation": "توصيات الطعام",
+    "loading_categories": "جاري تحميل التصنيفات...",
+    "loading_meals": "جاري تحميل الوجبات...",
+    "categories_error": "تعذر تحميل التصنيفات",
+    "meals_error": "تعذر تحميل الوجبات",
+    "no_meals": "لا توجد وجبات في هذا التصنيف",
+    "no_categories": "لا توجد تصنيفات متاحة"
+  }
 }
