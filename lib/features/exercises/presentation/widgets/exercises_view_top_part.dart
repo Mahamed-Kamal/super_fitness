@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
-import 'package:super_fitness/core/widgets/lottie_error.dart';
 import 'package:super_fitness/core/widgets/super_fitness_app_bar.dart';
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_events.dart';
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_state.dart';
