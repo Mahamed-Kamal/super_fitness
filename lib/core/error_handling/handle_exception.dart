@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class ExceptionHandler {
   static String getMessageError(Exception exception) {
@@ -34,12 +35,10 @@ class ExceptionHandler {
       return 'errors.invalidFormat'.tr();
     } else if (exception is PlatformException) {
       return exception.message ?? 'errors.platform'.tr();
-    }
-    // else if (exception is FirebaseException) {
-    //   return exception.message ?? 'errors.firebase'.tr();
-    // }
-    else {
-      return 'errors.unexpected'.tr();
+    } else if (exception is GenerativeAIException) {
+      return exception.message;
+    } else {
+      return 'errors.unknown'.tr();
     }
   }
 

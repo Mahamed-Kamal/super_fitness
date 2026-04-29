@@ -12,7 +12,10 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
+
+import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
 
 class RouteGenerator {
   static final _forgetPasswordViewModel = getIt.get<ForgetPasswordViewModel>();
@@ -39,9 +42,20 @@ class RouteGenerator {
 
       case AppRoutes.appSectionView:
         return _buildRoute(
-          BlocProvider(
-            create: (context) => AppSectionViewModel(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<AppSectionViewModel>()),
+              BlocProvider(create: (context) => getIt<ChatViewModel>()),
+            ],
             child: const AppSectionView(),
+          ),
+        );
+
+      case AppRoutes.smartChatAi:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: getIt<ChatViewModel>(),
+            child: const SmartCoachChatView(),
           ),
         );
       case AppRoutes.forgetPassword:

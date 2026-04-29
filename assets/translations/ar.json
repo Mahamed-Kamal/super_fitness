@@ -124,5 +124,19 @@
   "intermediate": "متوسط",
   "advanced": "متقدم",
   "expert": "خبير",
-  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول"
+  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
+  "chat": {
+    "hiAhmed": "مرحباً أحمد",
+    "smartCoachSubtitle": "أنا مدربك الذكي",
+    "previousConversations": "المحادثات السابقة",
+    "newConversation": "محادثة جديدة",
+    "failedLoadConversations": "فشل تحميل المحادثات",
+    "noPreviousConversations": "لا توجد محادثات سابقة",
+    "delete": "حذف",
+    "typeAMessage": "اكتب رسالة",
+    "typing": "جارٍ الكتابة...",
+    "error": "خطأ",
+    "introTitle": "أنا مدربك الذكي اليوم؟",
+    "getStarted": "ابدأ الآن"
+  }
 }

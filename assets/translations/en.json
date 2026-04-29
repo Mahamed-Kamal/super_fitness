@@ -127,5 +127,19 @@
   "intermediate": "Intermediate",
   "advanced": "Advanced",
   "expert": "expert",
-  "registration_successful": "Register successful, please login"
+  "registration_successful": "Register successful, please login",
+  "chat": {
+    "hiAhmed": "Hi Ahmed",
+    "smartCoachSubtitle": "I Am your Smart Coach",
+    "previousConversations": "Previous conversations",
+    "newConversation": "New Conversation",
+    "failedLoadConversations": "Failed to load conversations",
+    "noPreviousConversations": "No previous conversations",
+    "delete": "Delete",
+    "typeAMessage": "Type a message",
+    "typing": "Typing...",
+    "error": "Error",
+    "introTitle": "I am your smart coach today?",
+    "getStarted": "Get Started"
+  }
 }

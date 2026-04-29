@@ -43,4 +43,11 @@ abstract final class AssetsManager {
   static const String selectedChatSvg = '$_mainPath/select_chat_ai.svg';
   static const String selectedGymSvg = '$_mainPath/select_gym.svg';
   static const String selectedProfileSvg = '$_mainPath/select_profile.svg';
+  static const String arrowBackSvg = '$_mainPath/arrow_back.svg';
+  static const String drawerSvg = "$_mainPath/drawer.svg";
+
+  // ======================= Smart Chat =======================
+
+  static const String smartChatBg = 'assets/images/smart_chat_bg.png';
+  static const String robot = "assets/images/robot.png";
 }
