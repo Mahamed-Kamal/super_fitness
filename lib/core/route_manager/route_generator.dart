@@ -13,8 +13,9 @@ import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
+import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
+import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
-
 import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
 
 class RouteGenerator {
@@ -78,6 +79,13 @@ class RouteGenerator {
           builder: (context) => BlocProvider.value(
             value: _forgetPasswordViewModel,
             child: const ResetPasswordView(),
+          ),
+        );
+      case AppRoutes.meals:
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => getIt<MealsViewModel>(),
+            child: const MealsView(),
           ),
         );
       default:

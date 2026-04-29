@@ -7,4 +7,7 @@ class ApiConstants {
   static final String baseUrl = _ApiConstants.baseUrl;
   @EnviedField(varName: 'GEMINI_API_KEY', obfuscate: true)
   static final String geminiApiKey = _ApiConstants.geminiApiKey;
+
+  @EnviedField(varName: 'MEALS_BASE_URL', obfuscate: true)
+  static final String mealsBaseUrl = _ApiConstants.mealsBaseUrl;
 }
