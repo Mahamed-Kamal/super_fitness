@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
