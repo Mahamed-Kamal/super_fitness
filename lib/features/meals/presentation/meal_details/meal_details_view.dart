@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
@@ -37,7 +38,7 @@ class _MealDetailsViewState extends State<MealDetailsView> {
               child: CircularProgressIndicator(color: context.appTheme.primary),
             ),
             RequestState.error => _ErrorBody(
-              message: state.errorMessage ?? 'Something went wrong',
+              message: state.errorMessage ?? 'something_went_wrong'.tr(),
               id: widget.id,
             ),
             RequestState.loaded => MealDetailBody(meal: state.data!),
@@ -74,7 +75,7 @@ class _ErrorBody extends StatelessWidget {
               onPressed: () => context.read<MealDetailsViewModel>().doIntent(
                 GetMealDetails(id: id),
               ),
-              child: Text('Retry'),
+              child: Text('retry'.tr()),
             ),
           ],
         ),

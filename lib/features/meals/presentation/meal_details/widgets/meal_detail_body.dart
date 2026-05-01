@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
@@ -78,7 +79,7 @@ class _MealDetailBodyState extends State<MealDetailBody>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ingredients',
+                      'ingredients'.tr(),
                       style: context.appTheme.semiBold18.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -92,7 +93,7 @@ class _MealDetailBodyState extends State<MealDetailBody>
                     ),
                     const SizedBox(height: 32),
                     Text(
-                      'Instructions',
+                      'instructions'.tr(),
                       style: context.appTheme.semiBold18.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -118,6 +119,7 @@ class _MealDetailBodyState extends State<MealDetailBody>
           left: 0,
           right: 0,
           child: FadeTransition(
+            key: const Key('appbar_fade'),
             opacity: _fadeAnimation,
             child: CollapsedAppBar(title: widget.meal.title),
           ),

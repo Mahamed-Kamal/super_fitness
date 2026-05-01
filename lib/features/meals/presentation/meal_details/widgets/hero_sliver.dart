@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/features/meals/domain/entities/meal_entity.dart';
@@ -32,7 +33,6 @@ class HeroSliver extends StatelessWidget {
             else
               const PlaceholderHero(),
 
-            /// Gradient overlay
             DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -40,7 +40,7 @@ class HeroSliver extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   stops: const [0.0, 0.45, 1.0],
                   colors: [
-                    Colors.black.withOpacity(0.25),
+                    Colors.black.withValues(alpha: 0.25),
                     Colors.transparent,
                     Colors.black,
                   ],
@@ -53,7 +53,7 @@ class HeroSliver extends StatelessWidget {
               right: 20,
               bottom: 24,
               child: Text(
-                meal.title.isEmpty ? 'Untitled Meal' : meal.title,
+                meal.title.isEmpty ? 'untitled_meal'.tr() : meal.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: context.appTheme.semiBold24.copyWith(

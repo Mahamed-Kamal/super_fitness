@@ -127,5 +127,12 @@
   "intermediate": "Intermediate",
   "advanced": "Advanced",
   "expert": "expert",
-  "registration_successful": "Register successful, please login"
+  "registration_successful": "Register successful, please login",
+  "something_went_wrong": "Something went wrong",
+  "untitled_meal": "Untitled meal",
+  "no_ingredients_available": "No ingredients available.",
+  "show_less": "Show less",
+  "show_more": "Show more",
+  "ingredients": "Ingredients",
+  "instructions": "Instructions"
 }

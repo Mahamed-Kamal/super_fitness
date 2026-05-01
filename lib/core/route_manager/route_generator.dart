@@ -71,10 +71,11 @@ class RouteGenerator {
 
       case AppRoutes.mealDetails:
         var vm = getIt.get<MealDetailsViewModel>();
+        final String mealId = setting.arguments as String;
         return MaterialPageRoute(
           builder: (context) => BlocProvider<MealDetailsViewModel>(
             create: (_) => vm,
-            child: MealDetailsView(id: "53144"),
+            child: MealDetailsView(id: mealId),
           ),
         );
 

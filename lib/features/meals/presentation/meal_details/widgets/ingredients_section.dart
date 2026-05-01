@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/widgets/ingredient_row.dart';
@@ -14,9 +15,9 @@ class IngredientsSection extends StatelessWidget {
         .toList();
 
     if (ingredients.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 12),
-        child: Text('No ingredients available.'),
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Text('no_ingredients_available'.tr()),
       );
     } else {
       return ListView.separated(

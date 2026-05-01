@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 
@@ -30,7 +31,7 @@ class _InstructionsSectionState extends State<InstructionsSection> {
           GestureDetector(
             onTap: () => setState(() => _expanded = !_expanded),
             child: Text(
-              _expanded ? 'Show less' : 'Show more',
+              _expanded ? 'show_less'.tr() : 'show_more'.tr(),
               style: TextStyle(
                 color: context.appTheme.primary,
                 fontSize: 13,
