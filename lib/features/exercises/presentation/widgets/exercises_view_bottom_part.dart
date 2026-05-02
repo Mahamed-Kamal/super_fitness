@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/widgets/lottie_error.dart';
@@ -55,6 +56,8 @@ class _ExercisesViewBottomPartState extends State<ExercisesViewBottomPart> {
             },
             child: ExercisesList(exercises: exercises),
           );
+        } else if (state.exercisesState!.data!.isEmpty) {
+          return Center(child: Text('no_exercises'.tr()));
         } else {
           return Container();
         }

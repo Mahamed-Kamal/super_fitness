@@ -168,8 +168,15 @@ class _ExercisesViewTopPartState extends State<ExercisesViewTopPart> {
                     muscleId: widget.muscle?.id ?? '',
                     selectedId: state.selectedDifficultyId,
                   );
+                } else if (state.difficultyLevelsState!.data!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      "no_difficulty_levels".tr(),
+                      style: TextStyle(color: context.appTheme.primary),
+                    ),
+                  );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return SizedBox.shrink();
                 }
               },
             ),

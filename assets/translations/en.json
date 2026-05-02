@@ -132,7 +132,8 @@
   "ok": "OK",
   "30_min": "30 MIN",
   "130_cal": "130 CAL",
-  "registration_successful": "Register successful, please login",
+  "no_exercises": "No Exercises Available For This Muscle Group",
+  "no_difficulty_levels": "No Difficulty Levels Available For This Exercise",
   "workouts": {
     "Workouts": "Workouts",
     "untitled": "untitled",
