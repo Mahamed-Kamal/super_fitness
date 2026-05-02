@@ -63,6 +63,11 @@ class RouteGenerator {
         return _buildRoute(
           MultiBlocProvider(
             providers: [
+              BlocProvider(create: (_) => AppSectionViewModel()),
+              BlocProvider(
+                create: (_) =>
+                    getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
+              ),
               BlocProvider(
                 create: (context) => getIt.get<AppSectionViewModel>(),
               ),
