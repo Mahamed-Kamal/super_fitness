@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
@@ -9,17 +11,33 @@ import 'package:super_fitness/features/exercises/presentation/view_model/exercis
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_state.dart';
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/difficulty_levels_list.dart';
+import 'package:super_fitness/features/exercises/presentation/widgets/levels_loading.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/min_and_cal_container.dart';
+import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
 
-class ExercisesViewTopPart extends StatelessWidget {
-  const ExercisesViewTopPart({super.key});
+class ExercisesViewTopPart extends StatefulWidget {
+  const ExercisesViewTopPart({super.key, required this.muscle});
+  final MusclesEntity? muscle;
+
+  @override
+  State<ExercisesViewTopPart> createState() => _ExercisesViewTopPartState();
+}
+
+class _ExercisesViewTopPartState extends State<ExercisesViewTopPart> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ExercisesViewModel>().doIntent(
+      GetDifficultyLevelsIntent(widget.muscle!.id!),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CustomImageView(
-          imagePath: 'https://iili.io/33p7LoF.png',
+          imagePath: widget.muscle!.image,
           width: double.infinity,
           height: 350,
           fit: BoxFit.cover,
@@ -52,12 +70,12 @@ class ExercisesViewTopPart extends StatelessWidget {
           child: Row(
             children: [
               MinAndCalContainer(
-                text: "30 Min",
+                text: "30_min".tr(),
                 color: context.appTheme.textMuted,
               ),
               Spacer(),
               MinAndCalContainer(
-                text: "130 Cal",
+                text: "130_cal".tr(),
                 color: context.appTheme.primary,
               ),
             ],
@@ -94,7 +112,7 @@ class ExercisesViewTopPart extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Calf exercises",
+                "${widget.muscle?.name}",
                 style: Theme.of(
                   context,
                 ).textTheme.headlineMedium?.copyWith(color: Colors.white),
@@ -117,17 +135,13 @@ class ExercisesViewTopPart extends StatelessWidget {
               ),
             ),
             child: BlocBuilder<ExercisesViewModel, ExercisesState>(
-              bloc: context.read<ExercisesViewModel>()
-                ..doIntent(
-                  GetDifficultyLevelsIntent("69d982ef85f6bfa972bf2248"),
-                ),
               builder: (context, state) {
                 if (state.difficultyLevelsState!.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return LevelsLoading();
                 } else if (state.difficultyLevelsState!.isError) {
                   return InkWell(
                     onTap: () => context.read<ExercisesViewModel>().doIntent(
-                      GetDifficultyLevelsIntent("69d982ef85f6bfa972bf2248"),
+                      GetDifficultyLevelsIntent(widget.muscle?.id ?? ''),
                     ),
                     child: Center(
                       child: Row(
@@ -140,7 +154,7 @@ class ExercisesViewTopPart extends StatelessWidget {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            "Retry",
+                            "retry".tr(),
                             style: TextStyle(color: context.appTheme.primary),
                           ),
                         ],
@@ -153,11 +167,18 @@ class ExercisesViewTopPart extends StatelessWidget {
 
                   return DifficultyLevelsList(
                     levels: difficultyLevels,
-                    muscleId: "69d982ef85f6bfa972bf2248",
+                    muscleId: widget.muscle?.id ?? '',
                     selectedId: state.selectedDifficultyId,
                   );
+                } else if (state.difficultyLevelsState!.data!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      "no_difficulty_levels".tr(),
+                      style: TextStyle(color: context.appTheme.primary),
+                    ),
+                  );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return SizedBox.shrink();
                 }
               },
             ),
