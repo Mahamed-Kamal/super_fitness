@@ -8,4 +8,4 @@ abstract final class EndPoints {
   static const String verifyOtp = 'auth/verifyResetCode';
   static const String resetPassword = 'auth/resetPassword';
   static const String profile = 'auth/profile-data';
- }
+}

@@ -45,22 +45,15 @@ class RouteGenerator {
         return _buildRoute(
           MultiBlocProvider(
             providers: [
+              BlocProvider(create: (_) => AppSectionViewModel()),
               BlocProvider(
-                create: (_) => AppSectionViewModel(),
-              ),
-              BlocProvider(
-                create: (_) => getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
+                create: (_) =>
+                    getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
               ),
             ],
             child: const AppSectionView(),
           ),
         );
-
-
-
-
-
-
 
       case AppRoutes.forgetPassword:
         return MaterialPageRoute(

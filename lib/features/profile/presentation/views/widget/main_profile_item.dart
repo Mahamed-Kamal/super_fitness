@@ -25,9 +25,14 @@ class MainProfileItem extends StatelessWidget {
         children: [
           prefix ?? const SizedBox.shrink(),
           prefix != null ? const SizedBox(width: 4) : const SizedBox.shrink(),
-          Text(title, style: context.appTheme.regular14),
+          Text(title, style: context.appTheme.semiBold18),
           const Spacer(),
-          suffix ?? const SizedBox.shrink(),
+          suffix ??
+              const Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xFFFF4500),
+                size: 16,
+              ),
         ],
       ),
     ),

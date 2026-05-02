@@ -10,10 +10,7 @@ class ProfileResponse {
   @JsonKey(name: "user")
   final UserDto? userDto;
 
-  ProfileResponse ({
-    this.message,
-    this.userDto,
-  });
+  ProfileResponse({this.message, this.userDto});
 
   factory ProfileResponse.fromJson(Map<String, dynamic> json) {
     return _$ProfileResponseFromJson(json);
@@ -23,6 +20,3 @@ class ProfileResponse {
     return _$ProfileResponseToJson(this);
   }
 }
-
-
-

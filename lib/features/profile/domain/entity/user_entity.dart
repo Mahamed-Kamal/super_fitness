@@ -1,4 +1,3 @@
-
 class UserEntity {
   final String? id;
   final String? firstName;
@@ -13,7 +12,7 @@ class UserEntity {
   final String? photo;
   final String? createdAt;
 
-  UserEntity ({
+  UserEntity({
     this.id,
     this.firstName,
     this.lastName,
@@ -27,5 +26,4 @@ class UserEntity {
     this.photo,
     this.createdAt,
   });
-
 }

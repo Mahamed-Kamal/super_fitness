@@ -29,10 +29,16 @@ class ProfileViewModel extends Cubit<ProfileStates> with EquatableMixin {
 
   void doEvent(ProfileUiEvents event) {
     switch (event) {
-      case OnLanguageClickIntent():
-        _uiController.add(OnLanguageClickIntent());
       case OnLogoutClickIntent():
         _uiController.add(OnLogoutClickIntent());
+      case OnLSecurityClickIntent():
+        _uiController.add(OnLSecurityClickIntent());
+      case OnPrivacyClickIntent():
+        _uiController.add(OnPrivacyClickIntent());
+      case OnHeloClickIntent():
+        _uiController.add(OnHeloClickIntent());
+      case OnEditProfileClickIntent():
+        _uiController.add(OnEditProfileClickIntent());
     }
   }
 

@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../domain/entity/user_entity.dart';
@@ -31,7 +30,7 @@ class UserDto {
   @JsonKey(name: "createdAt")
   final String? createdAt;
 
-  UserDto ({
+  UserDto({
     this.id,
     this.firstName,
     this.lastName,
@@ -53,6 +52,7 @@ class UserDto {
   Map<String, dynamic> toJson() {
     return _$UserDtoToJson(this);
   }
+
   UserEntity toEntity() {
     return UserEntity(
       id: id,
@@ -67,7 +67,6 @@ class UserDto {
       goal: goal,
       photo: photo,
       createdAt: createdAt,
-
     );
   }
 }
