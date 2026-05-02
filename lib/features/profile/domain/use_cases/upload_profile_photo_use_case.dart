@@ -1,11 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
-import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
 import 'package:super_fitness/features/profile/domain/repo/profile_repo.dart';
 
 @injectable
-class GetProfileDataUseCase {
+class UploadProfilePhotoUseCase {
   final ProfileRepo _profileRepo;
-  const GetProfileDataUseCase(this._profileRepo);
-  Future<Result<UserEntity>> call() => _profileRepo.getProfileData();
+
+  UploadProfilePhotoUseCase(this._profileRepo);
+
+  Future<Result<String>> call({required MultipartFile photo}) =>
+      _profileRepo.uploadProfilePhoto(photo: photo);
 }

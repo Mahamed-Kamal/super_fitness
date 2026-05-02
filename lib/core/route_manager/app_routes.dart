@@ -14,4 +14,5 @@ class AppRoutes {
   static const String mealDetails = '/meal_details';
   static const String meals = '/meals';
   static const String changePassword = "/changePassword";
+  static const String editProfile = '/editProfile';
 }

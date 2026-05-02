@@ -5,11 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
 import 'package:super_fitness/features/profile/domain/use_cases/get_profile_data_use_case.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_states.dart';
-
-import '../../domain/entity/user_entity.dart' show UserEntity;
 
 @injectable
 // ignore: must_be_immutable

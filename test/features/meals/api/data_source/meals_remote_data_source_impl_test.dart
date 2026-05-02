@@ -10,7 +10,6 @@ import 'package:super_fitness/features/meals/data/data_source/meals_remote_data_
 import 'package:super_fitness/features/meals/api/models/responses/categories_response_dto.dart';
 import 'package:super_fitness/features/meals/api/models/responses/meals_filter_response_dto.dart';
 
-
 import 'meals_remote_data_source_impl_test.mocks.dart';
 
 @GenerateMocks([MealsApiClient])

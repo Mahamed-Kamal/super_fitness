@@ -26,4 +26,30 @@ class UserEntity {
     this.goal = UserGoal.loseWeight,
     this.profilePicture = "",
   });
+
+  UserEntity copyWith({
+    String? firstName,
+    String? lastName,
+    String? email,
+    UserGender? gender,
+    int? age,
+    int? weight,
+    int? height,
+    ActivityLevel? activityLevel,
+    UserGoal? goal,
+    String? profilePicture,
+  }) {
+    return UserEntity(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      gender: gender ?? this.gender,
+      age: age ?? this.age,
+      weight: weight ?? this.weight,
+      height: height ?? this.height,
+      activityLevel: activityLevel ?? this.activityLevel,
+      goal: goal ?? this.goal,
+      profilePicture: profilePicture ?? this.profilePicture,
+    );
+  }
 }
