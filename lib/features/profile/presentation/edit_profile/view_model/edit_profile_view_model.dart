@@ -11,7 +11,7 @@ import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
 import 'package:super_fitness/features/profile/domain/use_cases/edit_profile_use_case.dart';
-import 'package:super_fitness/features/profile/domain/use_cases/get_logged_user_data_use_case.dart';
+import 'package:super_fitness/features/profile/domain/use_cases/get_profile_data_use_case.dart';
 import 'package:super_fitness/features/profile/domain/use_cases/upload_profile_photo_use_case.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/view_model/edit_profile_intent.dart';
 
@@ -20,7 +20,7 @@ part 'edit_profile_state.dart';
 @injectable
 class EditProfileViewModel extends Cubit<EditProfileState> {
   final EditProfileUseCase _editProfileUseCase;
-  final GetLoggedUserDataUseCase _getLoggedUserDataUseCase;
+  final GetProfileDataUseCase _getProfileDataUseCase;
   final UploadProfilePhotoUseCase _uploadProfilePhotoUseCase;
 
   final _uiEvents = StreamController<EditProfileUIEvent>.broadcast();
@@ -28,7 +28,7 @@ class EditProfileViewModel extends Cubit<EditProfileState> {
 
   EditProfileViewModel(
     this._editProfileUseCase,
-    this._getLoggedUserDataUseCase,
+    this._getProfileDataUseCase,
     this._uploadProfilePhotoUseCase,
   ) : super(EditProfileState.init());
 
@@ -83,7 +83,7 @@ class EditProfileViewModel extends Cubit<EditProfileState> {
         ),
       ),
     );
-    final response = await _getLoggedUserDataUseCase.call();
+    final response = await _getProfileDataUseCase.call();
     switch (response) {
       case SuccessResponse<UserEntity>():
         emit(

@@ -10,14 +10,14 @@ class ExercisesListContent extends StatelessWidget {
     super.key,
     required this.index,
     required this.exercise,
-    required this.prime_equipment,
+    required this.primeEquipment,
     required this.thumbnail,
     required this.videoUrl,
     required this.exercises,
   });
   final int index;
   final String exercise;
-  final String prime_equipment;
+  final String primeEquipment;
   final String thumbnail;
   final String videoUrl;
   final List<ExerciseEntity> exercises;
@@ -82,7 +82,7 @@ class ExercisesListContent extends StatelessWidget {
                 const SizedBox(height: 2),
 
                 Text(
-                  prime_equipment,
+                  primeEquipment,
                   style: context.appTheme.regular14.copyWith(
                     fontWeight: FontWeight.w600,
                   ),

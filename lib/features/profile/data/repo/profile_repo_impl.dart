@@ -7,12 +7,8 @@ import 'package:super_fitness/features/auth/data/models/requests/update_user_dat
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
 import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
 import 'package:super_fitness/features/profile/data/data_source/profile_data_source.dart';
-import 'package:super_fitness/features/profile/data/models/response/profile_response.dart';
 import 'package:super_fitness/features/profile/data/models/upload_profile/upload_profile_message_response.dart';
 import 'package:super_fitness/features/profile/domain/repo/profile_repo.dart';
-
-import '../../domain/entity/user_entity.dart';
-import '../models/response/user_dto.dart';
 
 @Injectable(as: ProfileRepo)
 class ProfileRepoImpl implements ProfileRepo {
@@ -21,26 +17,7 @@ class ProfileRepoImpl implements ProfileRepo {
 
   @override
   Future<Result<UserEntity>> getProfileData() async {
-    var response = await _profileDataSource.getProfileData();
-    switch (response) {
-      case SuccessResponse<ProfileResponse>():
-        {
-          UserDto userDto = response.data.userDto ?? UserDto();
-          UserEntity userEntity = userDto.toEntity();
-          return SuccessResponse<UserEntity>(data: userEntity);
-        }
-      case FailureResponse<ProfileResponse>():
-        {
-          return FailureResponse<UserEntity>(
-            errorMessage: response.errorMessage,
-          );
-        }
-    }
-  }
-
-  @override
-  Future<Result<UserEntity>> getLoggedUserData() async {
-    final response = await _profileDataSource.getLoggedUserData();
+    final response = await _profileDataSource.getProfileData();
     switch (response) {
       case SuccessResponse<UpdateUserDataResponseDto>():
         return SuccessResponse<UserEntity>(
@@ -82,6 +59,4 @@ class ProfileRepoImpl implements ProfileRepo {
         return FailureResponse<UserEntity>(errorMessage: response.errorMessage);
     }
   }
-
-
 }

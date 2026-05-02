@@ -25,7 +25,6 @@ import 'package:super_fitness/features/explore/data/models/special_muscles.dart'
 import '../../features/exercises/data/models/difficulty_levels_response.dart';
 import '../../features/exercises/data/models/exercises_response.dart';
 import '../../features/explore/data/models/trainer_levels_response.dart';
-import 'package:super_fitness/features/profile/data/models/response/profile_response.dart';
 import 'package:super_fitness/features/workouts/data/models/all_muscles_by_muscle_group_id_response.dart';
 import 'package:super_fitness/features/workouts/data/models/all_muscles_group_response.dart';
 
@@ -79,8 +78,6 @@ abstract class ApiClient {
   Future<DifficultyLevelsResponse> getDifficultyLevels({
     @Query("primeMoverMuscleId") required String primeMoverMuscleId,
   });
-  @GET(EndPoints.profile)
-  Future<ProfileResponse> getUserData();
   @GET(EndPoints.getAllMusclesGroups)
   Future<AllMusclesGroupResponse> getAllMusclesGroups();
   @GET(EndPoints.getMusclesByMusclesGroupID)
@@ -120,5 +117,5 @@ abstract class ApiClient {
   });
 
   @GET(EndPoints.getProfileData)
-  Future<UpdateUserDataResponseDto> getLoggedUserData();
+  Future<UpdateUserDataResponseDto> getProfileData();
 }

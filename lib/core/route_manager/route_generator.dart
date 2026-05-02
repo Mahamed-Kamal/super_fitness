@@ -20,14 +20,11 @@ import 'package:super_fitness/features/exercises/presentation/view/exercise_view
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
-import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
-import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
-import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/views/edit_profile_view.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/view_model/edit_profile_view_model.dart';
@@ -65,10 +62,7 @@ class RouteGenerator {
           MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => AppSectionViewModel()),
-              BlocProvider(
-                create: (_) =>
-                    getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
-              ),
+              BlocProvider(create: (_) => getIt<ProfileViewModel>()),
               BlocProvider(
                 create: (context) => getIt.get<AppSectionViewModel>(),
               ),
@@ -77,12 +71,6 @@ class RouteGenerator {
                   ..doIntent(LoadDataEvent())
                   ..loadPopular(),
               ),
-
-              BlocProvider(
-                create: (_) =>
-                getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
-              ),
-
             ],
             child: const AppSectionView(),
           ),
@@ -125,17 +113,6 @@ class RouteGenerator {
             child: const ExerciseView(),
           ),
         );
-
-      case AppRoutes.mealDetails:
-        var vm = getIt.get<MealDetailsViewModel>();
-        final String mealId = setting.arguments as String;
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider<MealDetailsViewModel>(
-            create: (_) => vm,
-            child: MealDetailsView(id: mealId),
-          ),
-        );
-
 
       case AppRoutes.mealDetails:
         var vm = getIt.get<MealDetailsViewModel>();
