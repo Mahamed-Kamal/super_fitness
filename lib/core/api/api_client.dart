@@ -15,6 +15,8 @@ import 'package:super_fitness/features/auth/data/models/response/verify_reset_co
 import 'package:super_fitness/features/auth/data/models/responses/change_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
+import 'package:super_fitness/features/workouts/data/models/all_muscles_by_muscle_group_id_response.dart';
+import 'package:super_fitness/features/workouts/data/models/all_muscles_group_response.dart';
 
 part 'api_client.g.dart';
 
@@ -54,6 +56,12 @@ abstract class ApiClient {
   Future<ResetPasswordResponse> resetPassword({
     @Body() required ResetPasswordRequest resetPassword,
   });
+  @GET(EndPoints.getAllMusclesGroups)
+  Future<AllMusclesGroupResponse> getAllMusclesGroups();
+  @GET(EndPoints.getMusclesByMusclesGroupID)
+  Future<AllMusclesByMuscleGroupIdResponse> getMusclesByMusclesGroupID(
+    @Path("id") String id,
+  );
 
   @PATCH(EndPoints.changePassword)
   Future<ChangePasswordResponse> changePassword({

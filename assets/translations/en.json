@@ -128,6 +128,11 @@
   "advanced": "Advanced",
   "expert": "expert",
   "registration_successful": "Register successful, please login",
+  "workouts":{
+    "Workouts": "Workouts",
+    "untitled": "untitled",
+    "There is no Muscles yet": "There is no Muscles yet"
+  },
   "meals": {
     "food_recommendation": "Food Recommendation",
     "loading_categories": "Loading categories...",
