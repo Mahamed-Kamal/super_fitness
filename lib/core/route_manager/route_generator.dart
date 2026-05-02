@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/di/di.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
+import 'package:super_fitness/features/auth/presentation/change_password/view/change_password_view.dart';
+import 'package:super_fitness/features/auth/presentation/change_password/view_model/change_password_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/login/view_model/login_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/login/views/login_view.dart';
 import 'package:super_fitness/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
@@ -12,9 +14,21 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
+import 'package:super_fitness/features/exercises/presentation/view/exercise_view.dart';
+import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
+import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
+import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
+import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
+import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/views/edit_profile_view.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/view_model/edit_profile_view_model.dart';
 
@@ -30,8 +44,13 @@ class RouteGenerator {
             child: const LoginView(),
           ),
         );
-      case AppRoutes.onBoarding:
-        return _buildRoute(const OnBoardingView());
+      case AppRoutes.onboardingView:
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => getIt<ExercisesViewModel>(),
+            child: const OnBoardingView(),
+          ),
+        );
 
       case AppRoutes.registerAndCompleteRegistration:
         return _buildRoute(
@@ -43,9 +62,37 @@ class RouteGenerator {
 
       case AppRoutes.appSectionView:
         return _buildRoute(
-          BlocProvider(
-            create: (context) => AppSectionViewModel(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => AppSectionViewModel()),
+              BlocProvider(
+                create: (_) =>
+                    getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
+              ),
+              BlocProvider(
+                create: (context) => getIt.get<AppSectionViewModel>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt.get<ExploreViewModel>()
+                  ..doIntent(LoadDataEvent())
+                  ..loadPopular(),
+              ),
+
+              BlocProvider(
+                create: (_) =>
+                getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
+              ),
+
+            ],
             child: const AppSectionView(),
+          ),
+        );
+
+      case AppRoutes.smartChatAi:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: getIt<ChatViewModel>(),
+            child: const SmartCoachChatView(),
           ),
         );
       case AppRoutes.forgetPassword:
@@ -70,6 +117,36 @@ class RouteGenerator {
             child: const ResetPasswordView(),
           ),
         );
+
+      case AppRoutes.exercise:
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => getIt<ExercisesViewModel>(),
+            child: const ExerciseView(),
+          ),
+        );
+
+      case AppRoutes.mealDetails:
+        var vm = getIt.get<MealDetailsViewModel>();
+        final String mealId = setting.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<MealDetailsViewModel>(
+            create: (_) => vm,
+            child: MealDetailsView(id: mealId),
+          ),
+        );
+
+
+      case AppRoutes.mealDetails:
+        var vm = getIt.get<MealDetailsViewModel>();
+        final String mealId = setting.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<MealDetailsViewModel>(
+            create: (_) => vm,
+            child: MealDetailsView(id: mealId),
+          ),
+        );
+
       case AppRoutes.meals:
         return _buildRoute(
           BlocProvider(
@@ -84,6 +161,12 @@ class RouteGenerator {
             child: const EditProfileView(),
           ),
         );
+      case AppRoutes.changePassword:
+        var viewModel = getIt.get<ChangePasswordViewModel>();
+        return _buildRoute(
+          BlocProvider(create: (_) => viewModel, child: ChangePasswordView()),
+        );
+
       default:
         return null;
     }

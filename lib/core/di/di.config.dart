@@ -33,6 +33,18 @@ import '../../features/auth/presentation/login/view_model/login_view_model.dart'
     as _i671;
 import '../../features/auth/presentation/register/view_model/register_view_model.dart'
     as _i721;
+import '../../features/exercises/data/data_sources/exercises_data_source.dart'
+    as _i332;
+import '../../features/exercises/data/data_sources/exercises_data_source_impl.dart'
+    as _i414;
+import '../../features/exercises/data/repo/exercises_repo_impl.dart' as _i78;
+import '../../features/exercises/domain/repo/exercises_repo.dart' as _i335;
+import '../../features/exercises/domain/use_case/get_difficulty_levels_use_case.dart'
+    as _i750;
+import '../../features/exercises/domain/use_case/get_exercises_use_case.dart'
+    as _i676;
+import '../../features/exercises/presentation/view_model/exercises_view_model.dart'
+    as _i660;
 import '../../features/meals/api/client/meals_api_client.dart' as _i293;
 import '../../features/meals/api/di/meals_api_module.dart' as _i819;
 import '../api/api_client.dart' as _i277;
@@ -59,14 +71,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i277.ApiClient>(
       () => apiModule.provideApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i332.ExercisesDataSource>(
+      () => _i414.ExercisesDataSourceImpl(gh<_i277.ApiClient>()),
     gh.lazySingleton<_i293.MealsApiClient>(
       () => mealsApiModule.provideMealsApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i364.AuthDataSource>(
       () => _i985.AuthDataSourceImpl(gh<_i277.ApiClient>()),
     );
+    gh.factory<_i335.ExercisesRepo>(
+      () => _i78.ExercisesRepoImpl(gh<_i332.ExercisesDataSource>()),
+    );
     gh.factory<_i170.AuthRepo>(
       () => _i984.AuthRepoImpl(gh<_i364.AuthDataSource>()),
+    );
+    gh.factory<_i750.GetDifficultyLevelsUseCase>(
+      () => _i750.GetDifficultyLevelsUseCase(gh<_i335.ExercisesRepo>()),
+    );
+    gh.factory<_i676.GetExercisesUseCase>(
+      () => _i676.GetExercisesUseCase(gh<_i335.ExercisesRepo>()),
     );
     gh.factory<_i897.ForgetPasswordUseCase>(
       () => _i897.ForgetPasswordUseCase(gh<_i170.AuthRepo>()),
@@ -95,6 +118,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i671.LoginViewModel>(
       () => _i671.LoginViewModel(gh<_i1038.LoginUseCase>()),
+    );
+    gh.factory<_i660.ExercisesViewModel>(
+      () => _i660.ExercisesViewModel(
+        gh<_i750.GetDifficultyLevelsUseCase>(),
+        gh<_i676.GetExercisesUseCase>(),
+      ),
     );
     return this;
   }

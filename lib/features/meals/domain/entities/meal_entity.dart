@@ -2,11 +2,19 @@ import 'package:equatable/equatable.dart';
 
 class MealEntity extends Equatable {
   final String id;
-  final String name;
-  final String? imageUrl;
+  final String title;
+  final String instructions;
+  final String image;
+  final List<MapEntry<String, String>> ingredients;
 
-  const MealEntity({required this.id, required this.name, this.imageUrl});
+  const MealEntity({
+    this.id = "",
+    this.title = "",
+    this.instructions = "",
+    this.image = "",
+    this.ingredients = const [],
+  });
 
   @override
-  List<Object?> get props => [id, name, imageUrl];
+  List<Object?> get props => [title, instructions, image, ingredients];
 }

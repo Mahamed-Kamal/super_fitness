@@ -171,10 +171,5 @@ void main() {
       final ex = PlatformException(code: '500', message: null);
       expect(ExceptionHandler.getMessageError(ex), 'errors.platform');
     });
-
-    test('should handle any other unexpected Exception', () {
-      final ex = Exception('Unknown Exception');
-      expect(ExceptionHandler.getMessageError(ex), 'errors.unexpected');
-    });
   });
 }

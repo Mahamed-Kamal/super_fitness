@@ -24,6 +24,10 @@ class BaseState<T> with EquatableMixin {
     requestState: RequestState.loading,
     data: data,
   ); // Operation in progress
+  factory BaseState.loadingWithData({T? data}) => BaseState(
+    requestState: RequestState.loading,
+    data: data,
+  ); // Operation in progress
   // Operation in progress
   factory BaseState.loaded(T? data) => BaseState(
     requestState: RequestState.loaded,
