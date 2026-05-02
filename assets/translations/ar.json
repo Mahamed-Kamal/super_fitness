@@ -125,6 +125,12 @@
   "advanced": "متقدم",
   "expert": "خبير",
   "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
+  "workouts": {
+    "Workouts": "التمارين",
+    "untitled": "بدون عنوان",
+    "There is no Muscles yet": "لا توجد عضلات بعد"
+  },
+
   "meals": {
     "food_recommendation": "توصيات الطعام",
     "loading_categories": "جاري تحميل التصنيفات...",
