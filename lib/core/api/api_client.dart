@@ -15,6 +15,8 @@ import 'package:super_fitness/features/auth/data/models/responses/register_respo
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
 import 'package:super_fitness/features/exercises/data/models/difficulty_levels_response.dart';
 import 'package:super_fitness/features/exercises/data/models/exercises_response.dart';
+import 'package:super_fitness/features/workouts/data/models/all_muscles_by_muscle_group_id_response.dart';
+import 'package:super_fitness/features/workouts/data/models/all_muscles_group_response.dart';
 
 part 'api_client.g.dart';
 
@@ -64,4 +66,10 @@ abstract class ApiClient {
   Future<DifficultyLevelsResponse> getDifficultyLevels({
     @Query("primeMoverMuscleId") required String primeMoverMuscleId,
   });
+  @GET(EndPoints.getAllMusclesGroups)
+  Future<AllMusclesGroupResponse> getAllMusclesGroups();
+  @GET(EndPoints.getMusclesByMusclesGroupID)
+  Future<AllMusclesByMuscleGroupIdResponse> getMusclesByMusclesGroupID(
+    @Path("id") String id,
+  );
 }

@@ -45,6 +45,8 @@ import '../../features/exercises/domain/use_case/get_exercises_use_case.dart'
     as _i676;
 import '../../features/exercises/presentation/view_model/exercises_view_model.dart'
     as _i660;
+import '../../features/meals/api/client/meals_api_client.dart' as _i293;
+import '../../features/meals/api/di/meals_api_module.dart' as _i819;
 import '../api/api_client.dart' as _i277;
 import 'modules/remote_module.dart' as _i616;
 
@@ -56,6 +58,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final apiModule = _$ApiModule();
+    final mealsApiModule = _$MealsApiModule();
     gh.lazySingleton<_i361.BaseOptions>(() => apiModule.providerOption());
     gh.lazySingleton<_i528.PrettyDioLogger>(() => apiModule.provideLogger());
     await gh.lazySingletonAsync<_i361.Dio>(
@@ -70,6 +73,8 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i332.ExercisesDataSource>(
       () => _i414.ExercisesDataSourceImpl(gh<_i277.ApiClient>()),
+    gh.lazySingleton<_i293.MealsApiClient>(
+      () => mealsApiModule.provideMealsApiClient(gh<_i361.Dio>()),
     );
     gh.factory<_i364.AuthDataSource>(
       () => _i985.AuthDataSourceImpl(gh<_i277.ApiClient>()),
@@ -125,3 +130,5 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$ApiModule extends _i616.ApiModule {}
+
+class _$MealsApiModule extends _i819.MealsApiModule {}
