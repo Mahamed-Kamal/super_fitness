@@ -151,15 +151,9 @@
   "show_more": "Show more",
   "ingredients": "Ingredients",
   "instructions": "Instructions",
-  "registration_successful": "Register successful, please login",
-  "something_went_wrong": "Something went wrong",
-  "untitled_meal": "Untitled meal",
-  "no_ingredients_available": "No ingredients available.",
-  "show_less": "Show less",
-  "show_more": "Show more",
-  "ingredients": "Ingredients",
-  "instructions": "Instructions",
-  "registration_successful": "Register successful, please login",
+
+
+
   "workouts":{
     "Workouts": "Workouts",
     "untitled": "untitled",
