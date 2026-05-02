@@ -18,7 +18,6 @@ import 'package:super_fitness/features/meals/presentation/meals/view_model/meals
 import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
-
 import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
 
 class RouteGenerator {
