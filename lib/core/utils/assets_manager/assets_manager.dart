@@ -1,4 +1,5 @@
 const String _mainPath = "assets/svgs";
+const String _imagesPath = "assets/images";
 
 abstract final class AssetsManager {
   // =============== Animations ===============
@@ -44,4 +45,19 @@ abstract final class AssetsManager {
   static const String selectedChatSvg = '$_mainPath/select_chat_ai.svg';
   static const String selectedGymSvg = '$_mainPath/select_gym.svg';
   static const String selectedProfileSvg = '$_mainPath/select_profile.svg';
+  static const String arrowBackSvg = '$_mainPath/arrow_back.svg';
+  static const String drawerSvg = "$_mainPath/drawer.svg";
+
+  // ======================= Smart Chat =======================
+
+  static const String smartChatBg = 'assets/images/smart_chat_bg.png';
+  static const String robot = "assets/images/robot.png";
+  //===========================Explore===========================
+  static const String exploreBg = "$_imagesPath/explore_bg.png";
+  static const String trainer = "$_imagesPath/trainer.png";
+  static const String yoga = "$_imagesPath/yoga.png";
+  static const String gym = "$_imagesPath/gym.png";
+  static const String aerobics = "$_imagesPath/aerobics.png";
+  static const String fitness = "$_imagesPath/fitness.png";
+  static const String gymComingSoon = "$_imagesPath/gym_coming_soon.jpg";
 }

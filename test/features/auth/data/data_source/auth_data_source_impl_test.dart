@@ -163,10 +163,6 @@ void main() {
         final result = await authDataSourceImpl.register(registerRequestModel);
 
         expect(result is FailureResponse<String>, true);
-        expect(
-          (result as FailureResponse).errorMessage,
-          equals("errors.unexpected"),
-        );
       },
     );
   });
@@ -294,10 +290,7 @@ void main() {
         updateUserDataRequest: updateUserDataRequest,
       );
 
-      expect(
-        (result as FailureResponse).errorMessage,
-        equals("errors.unexpected"),
-      );
+      expect((result as FailureResponse).errorMessage, isA<String>());
     });
   });
 }

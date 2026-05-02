@@ -17,7 +17,7 @@ class _SuperFitnessAppState extends State<SuperFitnessApp> {
   Future<String?> checkInitRoute() async {
     // OnBoarding
     final seenOnBoarding = await AppLocalStorage.getBool(LocalKeys.onBoarding);
-    if (!seenOnBoarding) return AppRoutes.onBoarding;
+    if (!seenOnBoarding) return AppRoutes.onboardingView;
 
     // Auto Login
     final token = await AppLocalStorage.getSecuredString(

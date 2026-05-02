@@ -100,6 +100,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i277.ApiClient>(
       () => apiModule.provideApiClient(gh<_i361.Dio>()),
     );
+    gh.factory<_i332.ExercisesDataSource>(
+      () => _i414.ExercisesDataSourceImpl(gh<_i277.ApiClient>()),
     gh.lazySingleton<_i293.MealsApiClient>(
       () => mealsApiModule.provideMealsApiClient(gh<_i361.Dio>()),
     );

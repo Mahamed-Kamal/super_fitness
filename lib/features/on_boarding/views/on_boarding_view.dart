@@ -91,10 +91,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ),
           onPressed: _currentPage.value == _onBoardingModel.length - 1
               ? () {
+                  AppLocalStorage.set(LocalKeys.onBoarding, true);
                   Navigator.of(
                     context,
                   ).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
-                  AppLocalStorage.set(LocalKeys.onBoarding, true);
                 }
               : _pageController.navigateToNextPage,
           child: ValueListenableBuilder(

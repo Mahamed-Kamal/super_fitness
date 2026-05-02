@@ -1,8 +1,11 @@
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/api/models/users_dto.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/core/utils/local/app_local_storage.dart';
+import 'package:super_fitness/core/utils/local/local_keys.dart';
 import 'package:super_fitness/features/auth/data/data_source/auth_data_source.dart';
 import 'package:super_fitness/features/auth/data/mappers/user_mapper.dart';
+import 'package:super_fitness/features/auth/data/models/requests/change_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
@@ -24,6 +27,7 @@ class AuthRepoImpl implements AuthRepo {
   final AuthDataSource _authDataSource;
 
   AuthRepoImpl(this._authDataSource);
+
   @override
   Future<Result<LoginResponseDto>> login({
     required String email,
@@ -181,5 +185,27 @@ class AuthRepoImpl implements AuthRepo {
       case FailureResponse<UsersDto>():
         return FailureResponse(errorMessage: result.errorMessage);
     }
+  }
+
+  @override
+  Future<Result<String>> changeUserPassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    var request = ChangePasswordRequest(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    );
+    var result = await _authDataSource.changeUserPassword(request: request);
+    if (result is SuccessResponse<String>) {
+      _refreshUserToken(result.data);
+      return SuccessResponse(data: 'success');
+    }
+    return result;
+  }
+
+  void _refreshUserToken(String token) {
+    AppLocalStorage.clearSecuredData(key: LocalKeys.authToken);
+    AppLocalStorage.setSecuredString(key: LocalKeys.authToken, value: token);
   }
 }
