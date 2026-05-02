@@ -13,6 +13,7 @@ import 'package:super_fitness/features/auth/data/models/response/reset_password_
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
+import 'package:super_fitness/features/profile/data/models/response/profile_response.dart';
 
 part 'api_client.g.dart';
 
@@ -50,4 +51,6 @@ abstract class ApiClient {
   Future<ResetPasswordResponse> resetPassword({
     @Body() required ResetPasswordRequest resetPassword,
   });
+  @GET(EndPoints.profile)
+  Future<ProfileResponse> getUserData();
 }
