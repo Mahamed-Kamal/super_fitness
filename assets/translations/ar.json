@@ -30,7 +30,8 @@
     "defaultError": "خطأ في الخادم. حاول مرة أخرى.",
     "unauthorized": "يرجى تسجيل الدخول للمتابعة",
     "unAuthorized": "يرجى تسجيل الدخول للمتابعة",
-    "outOfStock": "المنتج غير متوفر في المخزون"
+    "outOfStock": "المنتج غير متوفر في المخزون",
+    "something_went_wrong": "حدث خطأ ما"
   },
   "navigation": {
     "explore": "استكشف",
@@ -124,5 +125,21 @@
   "intermediate": "متوسط",
   "advanced": "متقدم",
   "expert": "خبير",
-  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول"
+  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
+  "explore": {
+    "hi": "مرحباً",
+    "start_your_day": "لنبدأ يومك",
+    "category": "الفئات",
+    "food_recommendation": "توصيات الطعام",
+    "recommendation_to_day": "توصية اليوم",
+    "upcoming_workouts": "التمارين القادمة",
+    "gym": "الجيم",
+    "fitness": "اللياقة البدنية",
+    "yoga": "اليوجا",
+    "aerobics": "أيروبيكس",
+    "trainer": "المدرب",
+    "gym_experience": "تجربة الجيم",
+    "coming_soon": "قريباً",
+    "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك."
+  }
 }

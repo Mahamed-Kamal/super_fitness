@@ -26,7 +26,8 @@
     "error500": "Internal server error. Please try again later.",
     "error502": "Bad gateway. Server is temporarily unavailable.",
     "error503": "Service unavailable. Please try again later.",
-    "error504": "Gateway timeout. Please try again."
+    "error504": "Gateway timeout. Please try again.",
+    "something_went_wrong": "Something went wrong"
   },
   "navigation": {
     "explore": "Explore",
@@ -127,5 +128,21 @@
   "intermediate": "Intermediate",
   "advanced": "Advanced",
   "expert": "expert",
-  "registration_successful": "Register successful, please login"
+  "registration_successful": "Register successful, please login",
+  "explore": {
+    "hi":"Hi",
+    "start_your_day": "Let’s start your day",
+    "category": "Category",
+    "food_recommendation": "Food Recommendation",
+    "recommendation_to_day": "Recommendation to day",
+    "upcoming_workouts": "Upcoming Workouts",
+    "gym": "Gym",
+    "fitness": "Fitness",
+    "yoga": "Yoga",
+    "aerobics": "Aerobics",
+    "trainer": "Trainer",
+    "gym_experience": "GYM EXPERIENCE",
+    "coming_soon": "Coming Soon",
+    "gym_desc": "We are working hard to bring the ultimate gym tracking experience to your fingertips."
+  }
 }

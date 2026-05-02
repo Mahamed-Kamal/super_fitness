@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/widgets/glass_container.dart';
-import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/categories_entity.dart';
 
-class RecommendationToDay extends StatelessWidget {
-  const RecommendationToDay({super.key, required this.muscles});
-  final List<MusclesEntity> muscles;
+class FoodMeals extends StatelessWidget {
+  const FoodMeals({super.key, required this.foodCategories});
+  final List<CategoriesEntity> foodCategories;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,10 +14,10 @@ class RecommendationToDay extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         separatorBuilder: (context, index) => const SizedBox(width: 16),
-        itemCount: muscles.length,
+        itemCount: foodCategories.length,
         itemBuilder: (context, index) {
-          if (muscles.isEmpty) {
-            return SizedBox.shrink();
+          if (foodCategories.isEmpty) {
+            return const SizedBox.shrink();
           }
           return Container(
             decoration: BoxDecoration(
@@ -29,15 +30,18 @@ class RecommendationToDay extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: CachedNetworkImage(
-                    imageUrl: muscles[index].image ?? '',
+                    imageUrl: foodCategories[index].strCategoryThumb ?? '',
                     fit: BoxFit.cover,
                     placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
+                        const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) => Center(
                       child: Row(
                         spacing: 5,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("Error"), Icon(Icons.error_outline)],
+                        children: [
+                          Expanded(child: Text("errors.unknown".tr())),
+                          const Icon(Icons.error_outline),
+                        ],
                       ),
                     ),
                   ),
@@ -47,16 +51,16 @@ class RecommendationToDay extends StatelessWidget {
                   right: 0,
                   left: 0,
                   child: GlassContainer(
-                    padding: EdgeInsets.all(8),
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+                    padding: const EdgeInsets.all(8),
+                    bottomLeft: const Radius.circular(20),
+                    bottomRight: const Radius.circular(20),
 
                     child: Center(
                       child: Text(
                         maxLines: 1,
-
                         overflow: TextOverflow.ellipsis,
-                        muscles[index].name ?? "Not Found",
+                        foodCategories[index].strCategory ??
+                            "errors.notFound".tr(),
                       ),
                     ),
                   ),

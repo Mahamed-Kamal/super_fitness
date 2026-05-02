@@ -9,9 +9,9 @@ class CategoriesEntity {
   final String? strCategoryThumb;
   final String? strCategoryDescription;
   const CategoriesEntity({
-    required this.idCategory,
-    required this.strCategory,
-    required this.strCategoryThumb,
-    required this.strCategoryDescription,
+    this.idCategory,
+    this.strCategory,
+    this.strCategoryThumb,
+    this.strCategoryDescription,
   });
 }

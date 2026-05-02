@@ -4,8 +4,11 @@ import 'package:super_fitness/core/api/execute_api.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/explore/data/data_source/explore_data_source.dart';
 import 'package:super_fitness/features/explore/data/models/categories_response.dart';
+import 'package:super_fitness/features/explore/data/models/exercises_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
+import 'package:super_fitness/features/explore/data/models/trainer_levels_response.dart';
 
 @LazySingleton(as: ExploreDataSource)
 class ExploreDataSourceImpl implements ExploreDataSource {
@@ -20,11 +23,26 @@ class ExploreDataSourceImpl implements ExploreDataSource {
       executeApi(() => _apiClient.getMusclesGroup());
 
   @override
-  Future<Result<MusclesResponseDto>> getSpecificMusclesGroup({
+  Future<Result<SpecialMusclesResponse>> getSpecificMusclesGroup({
     required String id,
-  }) => executeApi(() => _apiClient.getSpecificMusclesGroup(id: id));
+  }) => executeApi(() => _apiClient.getSpecificMusclesGroup(id));
 
   @override
   Future<Result<CategoriesResponse>> getCategories() =>
       executeApi(() => _apiClient.getCategories());
+
+  @override
+  Future<Result<TrainerLevels>> getTrainerLevels() =>
+      executeApi(() => _apiClient.getTrainerLevels());
+
+  @override
+  Future<Result<ExercisesResponse>> getExerciseByPrimeMoverMuscleAndDiffLevel({
+    required String primeMoverMuscle,
+    required String difficultyLevel,
+  }) => executeApi(
+    () => _apiClient.getExerciseByPrimeMoverMuscleAndDiffLevel(
+      primeMoverMuscle,
+      difficultyLevel,
+    ),
+  );
 }

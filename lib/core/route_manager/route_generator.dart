@@ -12,6 +12,8 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 
 class RouteGenerator {
@@ -39,8 +41,17 @@ class RouteGenerator {
 
       case AppRoutes.appSectionView:
         return _buildRoute(
-          BlocProvider(
-            create: (context) => AppSectionViewModel(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt.get<AppSectionViewModel>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt.get<ExploreViewModel>()
+                  ..doIntent(LoadDataEvent())
+                  ..loadPopular(),
+              ),
+            ],
             child: const AppSectionView(),
           ),
         );

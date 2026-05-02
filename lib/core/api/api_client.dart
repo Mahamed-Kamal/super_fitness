@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:super_fitness/core/api/constants/end_points.dart';
+import 'package:super_fitness/core/api/constants/queries_constant.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
@@ -14,8 +15,12 @@ import 'package:super_fitness/features/auth/data/models/response/verify_reset_co
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
 import 'package:super_fitness/features/explore/data/models/categories_response.dart';
+import 'package:super_fitness/features/explore/data/models/exercises_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
+
+import '../../features/explore/data/models/trainer_levels_response.dart';
 
 part 'api_client.g.dart';
 
@@ -60,5 +65,12 @@ abstract class ApiClient {
   @GET(EndPoints.getCategories)
   Future<CategoriesResponse> getCategories();
   @GET(EndPoints.getSpecificMusclesGroup)
-  Future<MusclesResponseDto> getSpecificMusclesGroup({required String id});
+  Future<SpecialMusclesResponse> getSpecificMusclesGroup(@Path() String id);
+  @GET(EndPoints.getTrainerLevels)
+  Future<TrainerLevels> getTrainerLevels();
+  @GET(EndPoints.getExercisesByMuscleDifficulty)
+  Future<ExercisesResponse> getExerciseByPrimeMoverMuscleAndDiffLevel(
+    @Query(QueriesConstant.primeMoverMuscle) String primeMoverMuscle,
+    @Query(QueriesConstant.difficultyLevel) String difficultyLevel,
+  );
 }
