@@ -9,6 +9,7 @@ import 'package:super_fitness/features/explore/domain/entities/explore_section.d
 import 'package:super_fitness/features/explore/presentation/factory/categories_explore_section.dart';
 import 'package:super_fitness/features/explore/presentation/factory/muscles_explore_section.dart';
 import 'package:super_fitness/features/explore/presentation/factory/muscles_group_explore_section.dart';
+import 'package:super_fitness/features/explore/presentation/factory/popular_explore_section.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
 import 'package:super_fitness/features/explore/presentation/widgets/section_widget.dart';
@@ -125,6 +126,25 @@ class _ExploreViewState extends State<ExploreView> {
                                 ),
                             },
                           ),
+
+                        PopularSection() => PopularExploreSection().buildUI(
+                          switch (state.exploreData[index].requestState) {
+                            RequestState.init =>
+                              BaseState<PopularSection>.init(),
+
+                            RequestState.loading =>
+                              BaseState<PopularSection>.loading(),
+
+                            RequestState.loaded =>
+                              BaseState<PopularSection>.loaded(
+                                state.exploreData[index].data as PopularSection,
+                              ),
+                            RequestState.error =>
+                              BaseState<PopularSection>.error(
+                                state.exploreData[index].errorMessage!,
+                              ),
+                          },
+                        ),
                       };
                     },
                     separatorBuilder: (BuildContext context, int index) =>

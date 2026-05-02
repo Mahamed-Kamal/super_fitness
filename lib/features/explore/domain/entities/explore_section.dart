@@ -1,4 +1,5 @@
 import 'package:super_fitness/features/explore/domain/entities/categories_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/exercises_response_entity.dart';
 import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
 
 sealed class ExploreSection {
@@ -21,4 +22,10 @@ class CategoriesSection extends ExploreSection {
   final List<CategoriesEntity> categories;
 
   CategoriesSection(this.categories, super.index);
+}
+
+class PopularSection extends ExploreSection {
+  final ExercisesResponseEntity popularLevels;
+
+  PopularSection(this.popularLevels, super.index);
 }

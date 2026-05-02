@@ -47,8 +47,9 @@ class RouteGenerator {
                 create: (context) => getIt.get<AppSectionViewModel>(),
               ),
               BlocProvider(
-                create: (context) =>
-                    getIt.get<ExploreViewModel>()..doIntent(LoadDataEvent()),
+                create: (context) => getIt.get<ExploreViewModel>()
+                  ..doIntent(LoadDataEvent())
+                  ..loadPopular(),
               ),
             ],
             child: const AppSectionView(),
