@@ -109,6 +109,8 @@
   "male": "Male",
   "female": "Female",
   "next": "Next",
+  "done": "Done",
+  "save": "Save",
   "how_old_are_you": "How Old Are You?",
   "personalized_plan_subtitle": "This helps us create your personalized plan",
   "year": "Year",
@@ -252,6 +254,15 @@
     "meals_error": "Could not load meals",
     "no_meals": "No meals in this category",
     "no_categories": "No categories available"
+  },
+  "profile": {
+   "your_weight" : "Your Weight",
+   "your_goal" : "Your Goal",
+   "your_activity_level" : "Your Activity Level",
+   "tap_to_edit" : "Tap To Edit"
+
+
+  }
   },
 
   "create_a_new_password": "Create a new password",

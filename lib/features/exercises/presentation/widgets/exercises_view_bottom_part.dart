@@ -47,7 +47,7 @@ class _ExercisesViewBottomPartState extends State<ExercisesViewBottomPart> {
                 itemBuilder: (context, index) => ExercisesListContent(
                   index: index,
                   exercise: 'exercise'.tr(),
-                  prime_equipment: 'prime_equipment'.tr(),
+                  primeEquipment: 'prime_equipment'.tr(),
                   thumbnail: AssetsManager.placeholder,
                   videoUrl: '',
                   exercises: [],
