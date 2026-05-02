@@ -111,7 +111,7 @@ void main() {
     testWidgets('tapping meal card dispatches MealCardClickedIntent', (
       tester,
     ) async {
-      const mealEntity = MealEntity(id: '99', name: 'Tasty Bowl');
+      const mealEntity = MealEntity(id: '99', title: 'Tasty Bowl');
       setupMock(
         MealsState(
           categoriesState: BaseState.loaded([

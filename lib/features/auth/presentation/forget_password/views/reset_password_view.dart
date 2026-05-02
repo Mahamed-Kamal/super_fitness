@@ -44,7 +44,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
         .read<ForgetPasswordViewModel>()
         .forgetPasswordUiEvent
         .listen((intent) {
-          if (intent is NavigateToLoginViewIntent) {
+          if (intent is NavigateToLoginViewIntent && mounted) {
             Navigator.pushNamedAndRemoveUntil(
               context,
               AppRoutes.login,

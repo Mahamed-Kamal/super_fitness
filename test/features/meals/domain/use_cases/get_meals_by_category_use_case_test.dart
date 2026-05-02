@@ -21,7 +21,7 @@ void main() {
   });
 
   group('GetMealsByCategoryUseCase', () {
-    final meals = [const MealEntity(id: '1', name: 'Meal A')];
+    final meals = [const MealEntity(id: '1', title: 'Meal A')];
     late SuccessResponse<List<MealEntity>> success;
     late FailureResponse<List<MealEntity>> failure;
 

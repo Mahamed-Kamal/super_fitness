@@ -77,7 +77,7 @@ void main() {
         strMeal: 'Soup',
         strMealThumb: 'u',
       ).toEntity();
-      expect(entity, const MealEntity(id: '9', name: 'Soup', imageUrl: 'u'));
+      expect(entity, const MealEntity(id: '9', title: 'Soup', image: 'u'));
     });
   });
 
@@ -89,7 +89,7 @@ void main() {
           const MealListItemDto(idMeal: null, strMeal: 'Bad'),
         ],
       ).toEntityList();
-      expect(list.single.name, 'Ok');
+      expect(list.single.title, 'Ok');
     });
   });
 }

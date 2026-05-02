@@ -21,7 +21,7 @@ void main() {
 
   final catA = const MealCategoryEntity(id: 'a', name: 'Chicken');
   final catB = const MealCategoryEntity(id: 'b', name: 'Beef');
-  final meal = const MealEntity(id: '1', name: 'Grilled');
+  final meal = const MealEntity(id: '1', title: 'Grilled');
 
   const err = 'errors.connectionError';
 
@@ -192,7 +192,7 @@ void main() {
       ),
       setUp: () {
         final mealsOk = SuccessResponse<List<MealEntity>>(
-          data: [const MealEntity(id: '2', name: 'Steak')],
+          data: [const MealEntity(id: '2', title: 'Steak')],
         );
         provideDummy<Result<List<MealEntity>>>(mealsOk);
         when(
@@ -209,7 +209,7 @@ void main() {
         MealsState(
           categoriesState: BaseState.loaded([catA, catB]),
           mealsState: BaseState.loaded([
-            const MealEntity(id: '2', name: 'Steak'),
+            const MealEntity(id: '2', title: 'Steak'),
           ]),
           selectedCategoryIndex: 1,
         ),
