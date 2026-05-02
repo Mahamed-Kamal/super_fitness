@@ -8,9 +8,7 @@ void main() {
     return MaterialApp(
       theme: DarkTheme().themeData,
       home: Scaffold(
-        body: SingleChildScrollView(
-          child: InstructionsSection(text: text),
-        ),
+        body: SingleChildScrollView(child: InstructionsSection(text: text)),
       ),
     );
   }
@@ -18,7 +16,7 @@ void main() {
   group('InstructionsSection Tests', () {
     testWidgets(
       'should render full text and no button if text is shorter than preview length',
-          (WidgetTester tester) async {
+      (WidgetTester tester) async {
         const shortText = 'Small instruction set.';
 
         await tester.pumpWidget(createWidgetUnderTest(shortText));
@@ -28,23 +26,22 @@ void main() {
       },
     );
 
-    testWidgets(
-      'should truncate text and show "Show more" when text is long',
-          (WidgetTester tester) async {
-        final longText = 'A' * 350; // Greater than _previewLength (300)
-        final expectedTruncated = '${'A' * 300}…';
+    testWidgets('should truncate text and show "Show more" when text is long', (
+      WidgetTester tester,
+    ) async {
+      final longText = 'A' * 350; // Greater than _previewLength (300)
+      final expectedTruncated = '${'A' * 300}…';
 
-        await tester.pumpWidget(createWidgetUnderTest(longText));
+      await tester.pumpWidget(createWidgetUnderTest(longText));
 
-        expect(find.text(expectedTruncated), findsOneWidget);
-        expect(find.text('Show more'), findsOneWidget);
-        expect(find.text(longText), findsNothing);
-      },
-    );
+      expect(find.text(expectedTruncated), findsOneWidget);
+      expect(find.text('Show more'), findsOneWidget);
+      expect(find.text(longText), findsNothing);
+    });
 
     testWidgets(
       'should toggle between expanded and collapsed states when tapped',
-          (WidgetTester tester) async {
+      (WidgetTester tester) async {
         final longText = 'B' * 400;
         await tester.pumpWidget(createWidgetUnderTest(longText));
 
@@ -69,7 +66,7 @@ void main() {
 
     testWidgets(
       'should apply primary color and correct font weight to toggle button',
-          (WidgetTester tester) async {
+      (WidgetTester tester) async {
         final longText = 'C' * 310;
         await tester.pumpWidget(createWidgetUnderTest(longText));
 

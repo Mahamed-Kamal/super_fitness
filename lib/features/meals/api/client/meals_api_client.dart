@@ -3,8 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:super_fitness/features/meals/api/constants/meals_end_points.dart';
 import 'package:super_fitness/features/meals/api/models/responses/meal_details_response_dto.dart';
-import 'package:retrofit/retrofit.dart';
-import 'package:super_fitness/features/meals/api/constants/meals_end_points.dart';
 import 'package:super_fitness/features/meals/api/models/responses/categories_response_dto.dart';
 import 'package:super_fitness/features/meals/api/models/responses/meals_filter_response_dto.dart';
 

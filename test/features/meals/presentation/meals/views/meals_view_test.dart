@@ -108,8 +108,8 @@ void main() {
             const MealCategoryEntity(id: '2', name: 'Beef'),
           ]),
           mealsState: BaseState.loaded([
-            const MealEntity(id: '10', name: 'Meal One'),
-            const MealEntity(id: '11', name: 'Meal Two'),
+            const MealEntity(id: '10', title: 'Meal One'),
+            const MealEntity(id: '11', title: 'Meal Two'),
           ]),
           selectedCategoryIndex: 0,
         ),
