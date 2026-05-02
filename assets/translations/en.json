@@ -26,7 +26,8 @@
     "error500": "Internal server error. Please try again later.",
     "error502": "Bad gateway. Server is temporarily unavailable.",
     "error503": "Service unavailable. Please try again later.",
-    "error504": "Gateway timeout. Please try again."
+    "error504": "Gateway timeout. Please try again.",
+    "something_went_wrong": "Something went wrong"
   },
   "navigation": {
     "explore": "Explore",

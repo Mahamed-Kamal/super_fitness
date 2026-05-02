@@ -12,6 +12,8 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
+import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
@@ -31,7 +33,7 @@ class RouteGenerator {
             child: const LoginView(),
           ),
         );
-      case AppRoutes.onBoarding:
+      case AppRoutes.onboardingView:
         return _buildRoute(const OnBoardingView());
 
       case AppRoutes.registerAndCompleteRegistration:
@@ -46,8 +48,14 @@ class RouteGenerator {
         return _buildRoute(
           MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt<AppSectionViewModel>()),
-              BlocProvider(create: (context) => getIt<ChatViewModel>()),
+              BlocProvider(
+                create: (context) => getIt.get<AppSectionViewModel>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt.get<ExploreViewModel>()
+                  ..doIntent(LoadDataEvent())
+                  ..loadPopular(),
+              ),
             ],
             child: const AppSectionView(),
           ),

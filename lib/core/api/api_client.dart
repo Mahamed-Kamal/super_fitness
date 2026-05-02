@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:super_fitness/core/api/constants/end_points.dart';
+import 'package:super_fitness/core/api/constants/queries_constant.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/request/forgot_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
@@ -13,6 +14,13 @@ import 'package:super_fitness/features/auth/data/models/response/reset_password_
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
+import 'package:super_fitness/features/explore/data/models/categories_response.dart';
+import 'package:super_fitness/features/explore/data/models/exercises_response.dart';
+import 'package:super_fitness/features/explore/data/models/muscles_group_response.dart';
+import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
+import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
+
+import '../../features/explore/data/models/trainer_levels_response.dart';
 import 'package:super_fitness/features/workouts/data/models/all_muscles_by_muscle_group_id_response.dart';
 import 'package:super_fitness/features/workouts/data/models/all_muscles_group_response.dart';
 
@@ -57,5 +65,20 @@ abstract class ApiClient {
   @GET(EndPoints.getMusclesByMusclesGroupID)
   Future<AllMusclesByMuscleGroupIdResponse> getMusclesByMusclesGroupID(
     @Path("id") String id,
+  );
+  @GET(EndPoints.getMusclesRandom)
+  Future<MusclesRandomDto> getMusclesRandom();
+  @GET(EndPoints.getMusclesGroup)
+  Future<MusclesResponseDto> getMusclesGroup();
+  @GET(EndPoints.getCategories)
+  Future<CategoriesResponse> getCategories();
+  @GET(EndPoints.getSpecificMusclesGroup)
+  Future<SpecialMusclesResponse> getSpecificMusclesGroup(@Path() String id);
+  @GET(EndPoints.getTrainerLevels)
+  Future<TrainerLevels> getTrainerLevels();
+  @GET(EndPoints.getExercisesByMuscleDifficulty)
+  Future<ExercisesResponse> getExerciseByPrimeMoverMuscleAndDiffLevel(
+    @Query(QueriesConstant.primeMoverMuscle) String primeMoverMuscle,
+    @Query(QueriesConstant.difficultyLevel) String difficultyLevel,
   );
 }
