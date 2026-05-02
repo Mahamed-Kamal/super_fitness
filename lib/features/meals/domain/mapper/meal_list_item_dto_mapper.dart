@@ -7,7 +7,7 @@ extension MealListItemDtoMapperX on MealListItemDto {
     final name = strMeal?.trim();
     final id = idMeal;
     if (name == null || name.isEmpty || id == null || id.isEmpty) return null;
-    return MealEntity(id: id, name: name, imageUrl: strMealThumb);
+    return MealEntity(id: id, title: name, image: strMealThumb ?? "");
   }
 }
 

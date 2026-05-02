@@ -30,7 +30,8 @@
     "defaultError": "خطأ في الخادم. حاول مرة أخرى.",
     "unauthorized": "يرجى تسجيل الدخول للمتابعة",
     "unAuthorized": "يرجى تسجيل الدخول للمتابعة",
-    "outOfStock": "المنتج غير متوفر في المخزون"
+    "outOfStock": "المنتج غير متوفر في المخزون",
+    "something_went_wrong": "حدث خطأ ما"
   },
   "navigation": {
     "explore": "استكشف",
@@ -125,12 +126,34 @@
   "advanced": "متقدم",
   "expert": "خبير",
   "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
+  "something_went_wrong": "حدث خطأ ما",
+  "untitled_meal": "وجبة بدون عنوان",
+  "no_ingredients_available": "لا توجد مكونات متاحة.",
+  "show_less": "عرض أقل",
+  "show_more": "عرض المزيد",
+  "ingredients": "المكونات",
+  "instructions": "التعليمات",
+  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
   "workouts": {
     "Workouts": "التمارين",
     "untitled": "بدون عنوان",
     "There is no Muscles yet": "لا توجد عضلات بعد"
   },
 
+  "chat": {
+    "hiAhmed": "مرحباً أحمد",
+    "smartCoachSubtitle": "أنا مدربك الذكي",
+    "previousConversations": "المحادثات السابقة",
+    "newConversation": "محادثة جديدة",
+    "failedLoadConversations": "فشل تحميل المحادثات",
+    "noPreviousConversations": "لا توجد محادثات سابقة",
+    "delete": "حذف",
+    "typeAMessage": "اكتب رسالة",
+    "typing": "جارٍ الكتابة...",
+    "error": "خطأ",
+    "introTitle": "أنا مدربك الذكي اليوم؟",
+    "getStarted": "ابدأ الآن"
+  },
   "meals": {
     "food_recommendation": "توصيات الطعام",
     "loading_categories": "جاري تحميل التصنيفات...",
@@ -148,5 +171,26 @@
   "new_password": "كلمة السر الجديدة",
   "enter_new_password": "أدخل كلمة السر الجديدة",
   "confirm_new_password": "تأكيد كلمة السر الجديدة",
-  "confirm_your_new_password": "أكد كلمة السر الجديدة"
+  "confirm_your_new_password": "أكد كلمة السر الجديدة",
+
+
+  "explore": {
+    "hi": "مرحباً",
+    "start_your_day": "لنبدأ يومك",
+    "category": "الفئات",
+    "food_recommendation": "توصيات الطعام",
+    "recommendation_to_day": "توصية اليوم",
+    "upcoming_workouts": "التمارين القادمة",
+    "gym": "الجيم",
+    "fitness": "اللياقة البدنية",
+    "yoga": "اليوجا",
+    "aerobics": "أيروبيكس",
+    "trainer": "المدرب",
+    "gym_experience": "تجربة الجيم",
+    "coming_soon": "قريباً",
+    "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك."
+  }
+
+
+
 }
