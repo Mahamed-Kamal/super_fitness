@@ -11,6 +11,7 @@ import 'package:super_fitness/features/auth/data/models/requests/change_password
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/data/models/response/forgot_password_response.dart';
+import 'package:super_fitness/features/auth/data/models/response/logout_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/change_password_response.dart';
@@ -106,4 +107,7 @@ abstract class ApiClient {
     @Query(QueriesConstant.primeMoverMuscle) String primeMoverMuscle,
     @Query(QueriesConstant.difficultyLevel) String difficultyLevel,
   );
+
+  @GET(EndPoints.logout)
+  Future<LogoutResponseDto> logout();
 }

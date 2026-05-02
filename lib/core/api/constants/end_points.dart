@@ -7,6 +7,7 @@ abstract final class EndPoints {
   static const String forgotPassword = 'auth/forgotPassword';
   static const String verifyOtp = 'auth/verifyResetCode';
   static const String resetPassword = 'auth/resetPassword';
+  static const String logout = 'auth/logout';
   static const String getExercises = 'exercises/by-muscle-difficulty';
   static const String getDifficultyLevels =
       'levels/difficulty-levels/by-prime-mover';

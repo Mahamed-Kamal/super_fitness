@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:super_fitness/features/auth/presentation/widget/logout_dialog.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_states.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
@@ -28,7 +29,7 @@ class _ProfileViewState extends State<ProfileView> {
       if (!mounted) return;
       switch (event) {
         case OnLogoutClickIntent():
-        //showLogoutDialog(context);
+          showLogoutDialog(context);
         case OnPrivacyClickIntent():
           {
             Navigator.push(
@@ -232,6 +233,21 @@ class _ProfileViewState extends State<ProfileView> {
           ],
         ),
       ),
+    );
+  }
+
+  void showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: const LogOuDialog(),
+        );
+      },
     );
   }
 }
