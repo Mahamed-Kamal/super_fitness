@@ -18,7 +18,7 @@ class ExercisesList extends StatelessWidget {
           exercises: exercises,
           index: index,
           exercise: exercises[index].exercise ?? '',
-          prime_equipment: exercises[index].equipment ?? '',
+          primeEquipment: exercises[index].equipment ?? '',
           thumbnail: exercises[index].thumbnailUrl ?? AssetsManager.placeholder,
           videoUrl: exercises[index].videoUrl ?? '',
         );
