@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/di/di.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
+import 'package:super_fitness/features/auth/presentation/change_password/view/change_password_view.dart';
+import 'package:super_fitness/features/auth/presentation/change_password/view_model/change_password_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/login/view_model/login_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/login/views/login_view.dart';
 import 'package:super_fitness/features/auth/presentation/forget_password/view_model/forget_password_view_model.dart';
@@ -14,6 +16,8 @@ import 'package:super_fitness/features/auth/presentation/register/view_model/reg
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
+import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
+import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 
 class RouteGenerator {
@@ -77,6 +81,19 @@ class RouteGenerator {
             create: (_) => vm,
             child: MealDetailsView(id: mealId),
           ),
+        );
+
+      case AppRoutes.meals:
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => getIt<MealsViewModel>(),
+            child: const MealsView(),
+          ),
+        );
+      case AppRoutes.changePassword:
+        var viewModel = getIt.get<ChangePasswordViewModel>();
+        return _buildRoute(
+          BlocProvider(create: (_) => viewModel, child: ChangePasswordView()),
         );
 
       default:

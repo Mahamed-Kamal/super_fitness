@@ -14,10 +14,12 @@ abstract interface class AuthRepo {
   Future<Result<ForgotPasswordEntity>> forgotPassword({required String email});
 
   Future<Result<VerifyResetCodeEntity>> verifyOtp({required String resetCode});
+
   Future<Result<ResetPasswordEntity>> resetPassword({
     required String email,
     required String newPassword,
   });
+
   Future<Result<String>> register({
     required String firstName,
     required String lastName,
@@ -43,5 +45,10 @@ abstract interface class AuthRepo {
     int? age,
     String? goal,
     String? activityLevel,
+  });
+
+  Future<Result<String>> changeUserPassword({
+    required String currentPassword,
+    required String newPassword,
   });
 }
