@@ -9,23 +9,20 @@ class ExercisesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 1, bottom: 20),
-        physics: const BouncingScrollPhysics(),
-        itemCount: exercises.length,
-        itemBuilder: (context, index) {
-          return ExercisesListContent(
-            exercises: exercises,
-            index: index,
-            exercise: exercises[index].exercise ?? '',
-            primeEquipment: exercises[index].equipment ?? '',
-            thumbnail:
-                exercises[index].thumbnailUrl ?? AssetsManager.placeholder,
-            videoUrl: exercises[index].videoUrl ?? '',
-          );
-        },
-      ),
+    return ListView.builder(
+      padding: const EdgeInsets.only(top: 1, bottom: 20),
+      physics: const BouncingScrollPhysics(),
+      itemCount: exercises.length,
+      itemBuilder: (context, index) {
+        return ExercisesListContent(
+          exercises: exercises,
+          index: index,
+          exercise: exercises[index].exercise ?? '',
+          prime_equipment: exercises[index].equipment ?? '',
+          thumbnail: exercises[index].thumbnailUrl ?? AssetsManager.placeholder,
+          videoUrl: exercises[index].videoUrl ?? '',
+        );
+      },
     );
   }
 }
