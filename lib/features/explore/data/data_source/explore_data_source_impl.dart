@@ -36,7 +36,8 @@ class ExploreDataSourceImpl implements ExploreDataSource {
       executeApi(() => _apiClient.getTrainerLevels());
 
   @override
-  Future<Result<ExercisesResponse>> getExerciseByPrimeMoverMuscleAndDiffLevel({
+  Future<Result<ExercisesByPrimeResponse>>
+  getExerciseByPrimeMoverMuscleAndDiffLevel({
     required String primeMoverMuscle,
     required String difficultyLevel,
   }) => executeApi(

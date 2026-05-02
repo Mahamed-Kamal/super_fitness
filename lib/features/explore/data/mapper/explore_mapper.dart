@@ -67,7 +67,7 @@ extension LevelsEntityMapper on Levels {
   LevelEntity toEntity() => LevelEntity(id: id, name: name);
 }
 
-extension ExercisesResponseMapper on ExercisesResponse {
+extension ExercisesResponseMapper on ExercisesByPrimeResponse {
   ExercisesResponseEntity toEntity() => ExercisesResponseEntity(
     exercise: exercises?.map((e) => e.toEntity()).toList() ?? [],
     tasks: totalExercises ?? 0,

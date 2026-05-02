@@ -4,7 +4,6 @@ import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/widgets/glass_container.dart';
 import 'package:super_fitness/core/widgets/screen_image_background.dart';
-import 'package:super_fitness/features/chat_ai/presentation/widgets/chat_app_bar.dart';
 import 'package:super_fitness/features/chat_ai/presentation/widgets/chat_drawer.dart';
 import '../../../../core/utils/assets_manager/assets_manager.dart';
 
@@ -21,7 +20,7 @@ class ChatAiView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              ChatAppBar(),
+              // ChatAppBar(),
               Expanded(child: _GetStartView()),
             ],
           ),

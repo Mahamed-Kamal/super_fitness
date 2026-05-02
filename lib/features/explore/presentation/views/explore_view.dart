@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
+import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/screen_image_background.dart';
 import 'package:super_fitness/features/explore/domain/entities/explore_section.dart';
@@ -29,7 +30,9 @@ class _ExploreViewState extends State<ExploreView> {
     _exploreEvents = context.read<ExploreViewModel>().eventStream.listen((
       event,
     ) {
-      if (event is NavigateToFoodRecommendation) {}
+      if (event is NavigateToFoodRecommendation && mounted) {
+        Navigator.of(context).pushNamed(AppRoutes.meals);
+      }
     });
     super.initState();
   }

@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'exercises_response.g.dart';
 
 @JsonSerializable()
-class ExercisesResponse {
+class ExercisesByPrimeResponse {
   @JsonKey(name: "message")
   final String? message;
   @JsonKey(name: "totalExercises")
@@ -15,7 +15,7 @@ class ExercisesResponse {
   @JsonKey(name: "exercises")
   final List<Exercises>? exercises;
 
-  ExercisesResponse({
+  ExercisesByPrimeResponse({
     this.message,
     this.totalExercises,
     this.totalPages,
@@ -23,12 +23,12 @@ class ExercisesResponse {
     this.exercises,
   });
 
-  factory ExercisesResponse.fromJson(Map<String, dynamic> json) {
-    return _$ExercisesResponseFromJson(json);
+  factory ExercisesByPrimeResponse.fromJson(Map<String, dynamic> json) {
+    return _$ExercisesByPrimeResponseFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$ExercisesResponseToJson(this);
+    return _$ExercisesByPrimeResponseToJson(this);
   }
 }
 

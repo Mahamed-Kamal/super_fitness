@@ -14,7 +14,8 @@ abstract interface class ExploreDataSource {
   });
   Future<Result<CategoriesResponse>> getCategories();
   Future<Result<TrainerLevels>> getTrainerLevels();
-  Future<Result<ExercisesResponse>> getExerciseByPrimeMoverMuscleAndDiffLevel({
+  Future<Result<ExercisesByPrimeResponse>>
+  getExerciseByPrimeMoverMuscleAndDiffLevel({
     required String primeMoverMuscle,
     required String difficultyLevel,
   });

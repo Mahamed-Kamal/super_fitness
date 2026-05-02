@@ -144,6 +144,22 @@
     "getStarted": "Get Started"
   },
   "registration_successful": "Register successful, please login",
+  "explore": {
+    "hi":"Hi",
+    "start_your_day": "Let’s start your day",
+    "category": "Category",
+    "food_recommendation": "Food Recommendation",
+    "recommendation_to_day": "Recommendation to day",
+    "upcoming_workouts": "Upcoming Workouts",
+    "gym": "Gym",
+    "fitness": "Fitness",
+    "yoga": "Yoga",
+    "aerobics": "Aerobics",
+    "trainer": "Trainer",
+    "gym_experience": "GYM EXPERIENCE",
+    "coming_soon": "Coming Soon",
+    "gym_desc": "We are working hard to bring the ultimate gym tracking experience to your fingertips."
+  },
   "meals": {
     "food_recommendation": "Food Recommendation",
     "loading_categories": "Loading categories...",

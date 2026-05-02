@@ -89,9 +89,9 @@ class ExploreRepoImpl implements ExploreRepo {
           difficultyLevel: difficultyLevel,
         );
     switch (result) {
-      case SuccessResponse<ExercisesResponse>():
+      case SuccessResponse<ExercisesByPrimeResponse>():
         return SuccessResponse(data: result.data.toEntity());
-      case FailureResponse<ExercisesResponse>():
+      case FailureResponse<ExercisesByPrimeResponse>():
         return FailureResponse(errorMessage: result.errorMessage);
     }
   }

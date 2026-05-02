@@ -102,6 +102,8 @@ class RouteGenerator {
           BlocProvider(
             create: (context) => getIt<ExercisesViewModel>(),
             child: const ExerciseView(),
+          ),
+        );
       case AppRoutes.meals:
         return _buildRoute(
           BlocProvider(
