@@ -9,6 +9,7 @@ class MealRecommendationCard extends StatelessWidget {
     required this.meal,
     required this.onTap,
   });
+
   final MealEntity meal;
   final VoidCallback onTap;
 
@@ -22,9 +23,9 @@ class MealRecommendationCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            if (meal.imageUrl != null && meal.imageUrl!.isNotEmpty)
+            if (meal.image.isNotEmpty)
               CachedNetworkImage(
-                imageUrl: meal.imageUrl!,
+                imageUrl: meal.image,
                 fit: BoxFit.cover,
                 errorWidget: (_, _, _) => ColoredBox(
                   color: context.appTheme.neutral[800]!,
@@ -57,7 +58,7 @@ class MealRecommendationCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 20, 10, 12),
                   child: Text(
-                    meal.name,
+                    meal.title,
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

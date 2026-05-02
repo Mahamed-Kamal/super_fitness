@@ -60,7 +60,7 @@ void main() {
     test("When datasource returns failure "
         "repo returns same failure", () async {
       when(mockMealsRemoteDataSource.getMealDetails(id: id)).thenAnswer(
-            (_) async => FailureResponse(errorMessage: "errors.unexpected"),
+        (_) async => FailureResponse(errorMessage: "errors.unexpected"),
       );
 
       final result = await mealsRepo.getMealDetails(id: id);
@@ -160,7 +160,7 @@ void main() {
       final data = (result as SuccessResponse<List<MealEntity>>).data;
       expect(
         data.single,
-        const MealEntity(id: '10', name: 'Pie', imageUrl: 'http://m'),
+        const MealEntity(id: '10', title: 'Pie', image: 'http://m'),
       );
       verify(mockDataSource.fetchMealsByCategory(category: 'Beef')).called(1);
     });
@@ -182,5 +182,4 @@ void main() {
       );
     });
   });
-
 }

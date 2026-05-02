@@ -14,6 +14,8 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
+import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
 import 'package:super_fitness/features/exercises/presentation/view/exercise_view.dart';
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
@@ -116,6 +118,17 @@ class RouteGenerator {
             child: const ExerciseView(),
           ),
         );
+
+      case AppRoutes.mealDetails:
+        var vm = getIt.get<MealDetailsViewModel>();
+        final String mealId = setting.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<MealDetailsViewModel>(
+            create: (_) => vm,
+            child: MealDetailsView(id: mealId),
+          ),
+        );
+
 
       case AppRoutes.mealDetails:
         var vm = getIt.get<MealDetailsViewModel>();
