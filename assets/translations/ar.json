@@ -133,5 +133,14 @@
     "meals_error": "تعذر تحميل الوجبات",
     "no_meals": "لا توجد وجبات في هذا التصنيف",
     "no_categories": "لا توجد تصنيفات متاحة"
-  }
+  },
+  "create_a_new_password": "إنشاء كلمة سر جديدة",
+  "make_sure_its_8_characters_or_more": "يجب أن تتكون من 8 أحرف أو أكثر",
+  "password_changed_success": "تم تغيير كلمة السر بنجاح",
+  "current_password": "كلمة السر الحالية",
+  "enter_current_password": "أدخل كلمة السر الحالية",
+  "new_password": "كلمة السر الجديدة",
+  "enter_new_password": "أدخل كلمة السر الجديدة",
+  "confirm_new_password": "تأكيد كلمة السر الجديدة",
+  "confirm_your_new_password": "أكد كلمة السر الجديدة"
 }
