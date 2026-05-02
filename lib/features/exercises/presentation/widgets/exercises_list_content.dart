@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
@@ -152,18 +153,18 @@ class ExercisesListContent extends StatelessWidget {
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF1C1C1E),
         title: Text(
-          "Notice",
+          "notice".tr(),
           style: TextStyle(color: context.appTheme.textMuted),
         ),
         content: Text(
-          "Sorry, there is no video available for this exercise.",
+          "no_video".tr(),
           style: TextStyle(color: context.appTheme.textMuted),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              "OK",
+              "ok".tr(),
               style: TextStyle(color: context.appTheme.blackElevated),
             ),
           ),

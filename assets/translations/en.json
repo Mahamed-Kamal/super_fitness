@@ -127,8 +127,13 @@
   "intermediate": "Intermediate",
   "advanced": "Advanced",
   "expert": "expert",
+  "notice": "Notice",
+  "no_video": "Sorry, there is no video available for this exercise.",
+  "ok": "OK",
+  "30_min": "30 MIN",
+  "130_cal": "130 CAL",
   "registration_successful": "Register successful, please login",
-  "workouts":{
+  "workouts": {
     "Workouts": "Workouts",
     "untitled": "untitled",
     "There is no Muscles yet": "There is no Muscles yet"

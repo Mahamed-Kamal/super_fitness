@@ -29,6 +29,7 @@ class RouteGenerator {
             create: (context) => getIt<LoginViewModel>(),
             child: const LoginView(),
           ),
+          setting,
         );
       case AppRoutes.onBoarding:
         return _buildRoute(
@@ -36,6 +37,7 @@ class RouteGenerator {
             create: (context) => getIt<ExercisesViewModel>(),
             child: const OnBoardingView(),
           ),
+          setting,
         );
 
       case AppRoutes.registerAndCompleteRegistration:
@@ -44,6 +46,7 @@ class RouteGenerator {
             create: (_) => getIt.get<RegisterViewModel>(),
             child: const RegisterView(),
           ),
+          setting,
         );
 
       case AppRoutes.appSectionView:
@@ -52,6 +55,7 @@ class RouteGenerator {
             create: (context) => AppSectionViewModel(),
             child: const AppSectionView(),
           ),
+          setting,
         );
       case AppRoutes.forgetPassword:
         return MaterialPageRoute(
@@ -81,20 +85,26 @@ class RouteGenerator {
           BlocProvider(
             create: (context) => getIt<ExercisesViewModel>(),
             child: const ExerciseView(),
+          ),
+          setting,
+        );
+
       case AppRoutes.meals:
         return _buildRoute(
           BlocProvider(
             create: (context) => getIt<MealsViewModel>(),
             child: const MealsView(),
           ),
+          setting,
         );
       default:
         return null;
     }
   }
 
-  static Route _buildRoute(Widget page) {
+  static Route _buildRoute(Widget page, RouteSettings settings) {
     return PageRouteBuilder(
+      settings: settings,
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (_, _, _) => page,
       transitionsBuilder: (_, animation, _, child) {

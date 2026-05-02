@@ -40,7 +40,7 @@ class ExercisesViewModel
       case GetNextPageIntent():
         _nextPage();
       case LoadMoreIntent():
-        _loadMore('69d982ef85f6bfa972bf2248');
+        _loadMore(intent.muscleId);
       case ChangeDifficultyLevelIntent():
         _changeDifficulty(
           difficultyId: intent.difficultyId,
@@ -142,18 +142,13 @@ class ExercisesViewModel
   }) {
     if (state.selectedDifficultyId == difficultyId) return;
 
-    emit(
-      state.copyWith(
-        selectedDifficultyId: difficultyId,
-        currentPage: state.currentPage,
-      ),
-    );
+    emit(state.copyWith(selectedDifficultyId: difficultyId, currentPage: 1));
 
     doIntent(
       GetExercisesIntent(
         difficultyLevelId: difficultyId,
         primeMoverMuscleId: muscleId,
-        page: state.currentPage,
+        page: 1,
       ),
     );
   }

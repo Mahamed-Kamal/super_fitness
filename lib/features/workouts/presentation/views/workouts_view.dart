@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/di/di.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:super_fitness/core/route_manager/app_routes.dart';
+import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
 import 'package:super_fitness/features/workouts/domain/entity/muscles_group_entity.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_cubit.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_events.dart';
@@ -29,7 +31,7 @@ class _WorkoutsViewState extends State<WorkoutsView> {
             if (!mounted) return;
             Navigator.pushNamed(
               context,
-              "/exercise",
+              AppRoutes.exercise,
               arguments: event.musclesEntity,
             );
           }
@@ -153,10 +155,13 @@ class _WorkoutsViewState extends State<WorkoutsView> {
                               final muscle = musclesGroups[index];
                               return InkWell(
                                 onTap: () {
-                                  // occasionsCubit.doEvent(
-                                  //   NavigateToProductDetails(product: product),
-                                  // );
+                                  workoutsCubit.doEvent(
+                                    NavigateToExerciseViewEvent(
+                                      musclesEntity: muscle,
+                                    ),
+                                  );
                                 },
+
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(24),
                                   child: Stack(
