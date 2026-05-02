@@ -141,5 +141,14 @@
     "gym_experience": "تجربة الجيم",
     "coming_soon": "قريباً",
     "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك."
+  },
+  "meals": {
+    "food_recommendation": "توصيات الطعام",
+    "loading_categories": "جاري تحميل التصنيفات...",
+    "loading_meals": "جاري تحميل الوجبات...",
+    "categories_error": "تعذر تحميل التصنيفات",
+    "meals_error": "تعذر تحميل الوجبات",
+    "no_meals": "لا توجد وجبات في هذا التصنيف",
+    "no_categories": "لا توجد تصنيفات متاحة"
   }
 }

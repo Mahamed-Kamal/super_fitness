@@ -9,4 +9,5 @@ class AppRoutes {
   static const String forgetPassword = "/forgetPassword";
   static const String otp = '/otp';
   static const String resetPassword = '/resetPassword';
+  static const String meals = '/meals';
 }

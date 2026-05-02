@@ -167,7 +167,7 @@ class _LoginViewState extends State<LoginView> {
                             ForgetPasswordIntent(),
                           ),
                           child: Text(
-                            "auth_forget_password?".tr(),
+                            "auth.forget_password?".tr(),
                             textAlign: TextAlign.end,
                             style: context.appTheme.regular14.copyWith(
                               color: context.appTheme.primary,
@@ -185,8 +185,11 @@ class _LoginViewState extends State<LoginView> {
                                   ? _login
                                   : null,
                               child: isLoading
-                                  ? const CircularProgressIndicator(
-                                      color: Colors.white,
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
                                     )
                                   : Text("auth.login".tr()),
                             );
