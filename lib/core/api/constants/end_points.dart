@@ -12,6 +12,7 @@ abstract final class EndPoints {
       'levels/difficulty-levels/by-prime-mover';
   static const String getAllMusclesGroups = 'muscles';
   static const String getMusclesByMusclesGroupID = 'musclesGroup/{id}';
+  static const String changePassword = 'auth/change-password';
   static const String getMusclesRandom = 'muscles/random';
   static const String getMusclesGroup = 'muscles';
   static const String getCategories =

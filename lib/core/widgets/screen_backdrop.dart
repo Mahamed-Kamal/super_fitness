@@ -6,7 +6,15 @@ import 'package:super_fitness/core/widgets/custom_image_view.dart';
 class ScreenBackdrop extends StatelessWidget {
   final Widget child;
   final String image;
-  const ScreenBackdrop({super.key, required this.child, required this.image});
+  final Color? containerColor;
+
+  const ScreenBackdrop({
+    super.key,
+    required this.child,
+    required this.image,
+    this.containerColor,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,7 +29,7 @@ class ScreenBackdrop extends StatelessWidget {
             width: double.infinity,
           ),
         ),
-        Container(color: const Color(0x1A1A1A80)),
+        Container(color: containerColor ?? const Color(0x1A1A1A80)),
         child,
       ],
     );
