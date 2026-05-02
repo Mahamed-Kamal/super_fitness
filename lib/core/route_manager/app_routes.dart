@@ -13,4 +13,5 @@ class AppRoutes {
   static const String otp = '/otp';
   static const String resetPassword = '/resetPassword';
   static const String meals = '/meals';
+  static const String editProfile = '/editProfile';
 }
