@@ -127,7 +127,7 @@
   "intermediate": "Intermediate",
   "advanced": "Advanced",
   "expert": "expert",
-  "registration_successful": "Register successful, please login",
+
   "chat": {
     "hiAhmed": "Hi Ahmed",
     "smartCoachSubtitle": "I Am your Smart Coach",
@@ -141,5 +141,20 @@
     "error": "Error",
     "introTitle": "I am your smart coach today?",
     "getStarted": "Get Started"
+  },
+  "registration_successful": "Register successful, please login",
+  "workouts":{
+    "Workouts": "Workouts",
+    "untitled": "untitled",
+    "There is no Muscles yet": "There is no Muscles yet"
+  },
+  "meals": {
+    "food_recommendation": "Food Recommendation",
+    "loading_categories": "Loading categories...",
+    "loading_meals": "Loading meals...",
+    "categories_error": "Could not load categories",
+    "meals_error": "Could not load meals",
+    "no_meals": "No meals in this category",
+    "no_categories": "No categories available"
   }
 }
