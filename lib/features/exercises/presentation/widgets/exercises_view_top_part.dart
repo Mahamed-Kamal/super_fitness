@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/custom_image_view.dart';
@@ -10,6 +11,7 @@ import 'package:super_fitness/features/exercises/presentation/view_model/exercis
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_state.dart';
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/difficulty_levels_list.dart';
+import 'package:super_fitness/features/exercises/presentation/widgets/levels_loading.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/min_and_cal_container.dart';
 import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
 
@@ -135,7 +137,7 @@ class _ExercisesViewTopPartState extends State<ExercisesViewTopPart> {
             child: BlocBuilder<ExercisesViewModel, ExercisesState>(
               builder: (context, state) {
                 if (state.difficultyLevelsState!.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return LevelsLoading();
                 } else if (state.difficultyLevelsState!.isError) {
                   return InkWell(
                     onTap: () => context.read<ExercisesViewModel>().doIntent(

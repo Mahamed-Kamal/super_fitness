@@ -18,12 +18,8 @@ import 'package:super_fitness/features/exercises/presentation/view/exercise_view
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
-import 'package:super_fitness/features/exercises/presentation/view/exercise_view.dart';
-import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
-import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
-import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
@@ -45,7 +41,6 @@ class RouteGenerator {
           ),
           setting,
         );
-      case AppRoutes.onBoarding:
       case AppRoutes.onboardingView:
         return _buildRoute(
           BlocProvider(
@@ -79,9 +74,8 @@ class RouteGenerator {
 
               BlocProvider(
                 create: (_) =>
-                getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
+                    getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
               ),
-
             ],
             child: const AppSectionView(),
           ),
@@ -137,17 +131,6 @@ class RouteGenerator {
           ),
         );
 
-
-      case AppRoutes.mealDetails:
-        var vm = getIt.get<MealDetailsViewModel>();
-        final String mealId = setting.arguments as String;
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider<MealDetailsViewModel>(
-            create: (_) => vm,
-            child: MealDetailsView(id: mealId),
-          ),
-        );
-
       case AppRoutes.meals:
         return _buildRoute(
           BlocProvider(
@@ -160,6 +143,7 @@ class RouteGenerator {
         var viewModel = getIt.get<ChangePasswordViewModel>();
         return _buildRoute(
           BlocProvider(create: (_) => viewModel, child: ChangePasswordView()),
+          setting,
         );
 
       default:

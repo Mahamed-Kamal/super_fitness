@@ -140,13 +140,11 @@
   "show_more": "عرض المزيد",
   "ingredients": "المكونات",
   "instructions": "التعليمات",
-  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
   "workouts": {
     "Workouts": "التمارين",
     "untitled": "بدون عنوان",
     "There is no Muscles yet": "لا توجد عضلات بعد"
   },
-
   "chat": {
     "hiAhmed": "مرحباً أحمد",
     "smartCoachSubtitle": "أنا مدربك الذكي",
@@ -179,8 +177,6 @@
   "enter_new_password": "أدخل كلمة السر الجديدة",
   "confirm_new_password": "تأكيد كلمة السر الجديدة",
   "confirm_your_new_password": "أكد كلمة السر الجديدة",
-
-
   "explore": {
     "hi": "مرحباً",
     "start_your_day": "لنبدأ يومك",
@@ -197,7 +193,4 @@
     "coming_soon": "قريباً",
     "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك."
   }
-
-
-
 }

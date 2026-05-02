@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/di/di.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
 import 'package:super_fitness/features/workouts/domain/entity/muscles_group_entity.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_cubit.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_events.dart';
