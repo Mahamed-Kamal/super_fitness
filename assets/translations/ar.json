@@ -125,12 +125,19 @@
   "advanced": "متقدم",
   "expert": "خبير",
   "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
+  "something_went_wrong": "حدث خطأ ما",
+  "untitled_meal": "وجبة بدون عنوان",
+  "no_ingredients_available": "لا توجد مكونات متاحة.",
+  "show_less": "عرض أقل",
+  "show_more": "عرض المزيد",
+  "ingredients": "المكونات",
+  "instructions": "التعليمات",
+  "registration_successful": "تم التسجيل بنجاح، قم بتسجيل الدخول",
   "workouts": {
     "Workouts": "التمارين",
     "untitled": "بدون عنوان",
     "There is no Muscles yet": "لا توجد عضلات بعد"
   },
-
   "meals": {
     "food_recommendation": "توصيات الطعام",
     "loading_categories": "جاري تحميل التصنيفات...",

@@ -8,18 +8,21 @@ import 'package:super_fitness/core/di/modules/auth_interceptor.dart';
 @module
 abstract class ApiModule {
   @lazySingleton
-  ApiClient provideApiClient(Dio dio) {
-    return ApiClient(dio, baseUrl: ApiConstants.baseUrl);
-  }
+  ApiClient provideApiClient(@Named('mainDio') Dio dio) => ApiClient(dio);
 
-  @preResolve
   @lazySingleton
-  Future<Dio> provideDio(BaseOptions option, PrettyDioLogger logger) async {
-    var dio = Dio(option);
+  @Named('mainDio')
+  Dio provideMainDio(PrettyDioLogger logger) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstants.baseUrl,
+        sendTimeout: const Duration(seconds: 60),
+        receiveTimeout: const Duration(seconds: 60),
+      ),
+    );
+
     dio.interceptors.add(logger);
     dio.interceptors.add(AuthInterceptor());
-
-    dio.options.headers = {'Content-Type': 'application/json'};
 
     return dio;
   }
