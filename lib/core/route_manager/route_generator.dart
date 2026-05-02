@@ -12,6 +12,8 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/exercises/presentation/view/exercise_view.dart';
+import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_view_model.dart';
@@ -33,7 +35,12 @@ class RouteGenerator {
           ),
         );
       case AppRoutes.onboardingView:
-        return _buildRoute(const OnBoardingView());
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => getIt<ExercisesViewModel>(),
+            child: const OnBoardingView(),
+          ),
+        );
 
       case AppRoutes.registerAndCompleteRegistration:
         return _buildRoute(
@@ -89,6 +96,12 @@ class RouteGenerator {
             child: const ResetPasswordView(),
           ),
         );
+
+      case AppRoutes.exercise:
+        return _buildRoute(
+          BlocProvider(
+            create: (context) => getIt<ExercisesViewModel>(),
+            child: const ExerciseView(),
       case AppRoutes.meals:
         return _buildRoute(
           BlocProvider(
