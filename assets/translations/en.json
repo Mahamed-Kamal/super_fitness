@@ -141,5 +141,14 @@
     "meals_error": "Could not load meals",
     "no_meals": "No meals in this category",
     "no_categories": "No categories available"
-  }
+  },
+  "create_a_new_password": "Create a new password",
+  "make_sure_its_8_characters_or_more": "Make sure it's 8 characters or more",
+  "password_changed_success": "Password changed success",
+  "current_password": "Current password",
+  "enter_current_password": "Enter your current password",
+  "new_password": "New password",
+  "enter_new_password": "Enter your new password",
+  "confirm_new_password": "Confirm new password",
+  "confirm_your_new_password": "Confirm your new password"
 }
