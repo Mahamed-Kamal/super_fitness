@@ -25,6 +25,8 @@ import 'package:super_fitness/features/meals/presentation/meals/views/meals_view
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
 import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
+import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
+import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
 
 class RouteGenerator {
   static final _forgetPasswordViewModel = getIt.get<ForgetPasswordViewModel>();
@@ -66,6 +68,12 @@ class RouteGenerator {
                   ..doIntent(LoadDataEvent())
                   ..loadPopular(),
               ),
+
+              BlocProvider(
+                create: (_) =>
+                getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
+              ),
+
             ],
             child: const AppSectionView(),
           ),

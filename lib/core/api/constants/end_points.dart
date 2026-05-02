@@ -10,6 +10,7 @@ abstract final class EndPoints {
   static const String getExercises = 'exercises/by-muscle-difficulty';
   static const String getDifficultyLevels =
       'levels/difficulty-levels/by-prime-mover';
+  static const String profile = 'auth/profile-data';
   static const String getAllMusclesGroups = 'muscles';
   static const String getMusclesByMusclesGroupID = 'musclesGroup/{id}';
   static const String changePassword = 'auth/change-password';
