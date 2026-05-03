@@ -137,7 +137,7 @@
   "no_difficulty_levels": "No Difficulty Levels Available For This Exercise",
   "registration_successful": "Register successful, please login",
   "chat": {
-    "hiAhmed": "Hi Ahmed",
+    "hi": "Hi ",
     "smartCoachSubtitle": "I Am your Smart Coach",
     "previousConversations": "Previous conversations",
     "newConversation": "New Conversation",
@@ -166,7 +166,7 @@
     "There is no Muscles yet": "There is no Muscles yet"
   },
   "explore": {
-    "hi": "Hi",
+    "hi": "Hi ",
     "start_your_day": "Let’s start your day",
     "category": "Category",
     "food_recommendation": "Food Recommendation",

@@ -148,7 +148,7 @@
     "There is no Muscles yet": "لا توجد عضلات بعد"
   },
   "chat": {
-    "hiAhmed": "مرحباً أحمد",
+    "hi": "مرحبا ً",
     "smartCoachSubtitle": "أنا مدربك الذكي",
     "previousConversations": "المحادثات السابقة",
     "newConversation": "محادثة جديدة",
@@ -180,7 +180,7 @@
   "confirm_new_password": "تأكيد كلمة السر الجديدة",
   "confirm_your_new_password": "أكد كلمة السر الجديدة",
   "explore": {
-    "hi": "مرحباً",
+    "hi": "مرحبا ً",
     "start_your_day": "لنبدأ يومك",
     "category": "الفئات",
     "food_recommendation": "توصيات الطعام",

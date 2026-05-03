@@ -37,12 +37,12 @@ class ExploreViewModel
     _getPopularTrainingUseCase.call();
   }
 
+
   @override
   void doIntent(intent) {
     switch (intent) {
       case LoadDataEvent():
         _loadData();
-
       case SeeAllFoodRecommendationIntent():
         _navigateToFoodRecommendation();
       case LoadSpecialMuscles():
