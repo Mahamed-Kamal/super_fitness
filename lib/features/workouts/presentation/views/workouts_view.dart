@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/di/di.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
+import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
+import 'package:super_fitness/core/widgets/screen_image_background.dart';
 import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_cubit.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_events.dart';
@@ -40,11 +42,15 @@ class _WorkoutsViewState extends State<WorkoutsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScreenImageBackground(
+      imagePath: AssetsManager.exploreBg,
       appBar: AppBar(
-        title: Text("Workouts", style: context.appTheme.semiBold24).tr(),
+        title: Text(
+          "workouts.Workouts".tr(),
+          style: context.appTheme.semiBold24,
+        ).tr(),
       ),
-      body: BlocProvider<WorkoutsCubit>(
+      child: BlocProvider<WorkoutsCubit>(
         create: (context) =>
             workoutsCubit..doIntent(GetAllMusclesGroupsEvents()),
         child: BlocBuilder<WorkoutsCubit, WorkoutsStates>(
@@ -70,6 +76,7 @@ class _WorkoutsViewState extends State<WorkoutsView> {
               }
               return Column(
                 children: [
+                  SizedBox(height: 124),
                   DefaultTabController(
                     length: musclesGroups.length,
                     child: Builder(

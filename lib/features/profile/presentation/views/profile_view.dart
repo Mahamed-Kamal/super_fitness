@@ -5,12 +5,14 @@ import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/extensions/context_navigation_extension.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/route_manager/app_routes.dart';
+import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_states.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
 import 'package:super_fitness/features/profile/presentation/views/widget/app_web_view.dart';
 import 'package:super_fitness/features/profile/presentation/views/widget/main_profile_item.dart';
 import '../../../../core/widgets/custom_image_view.dart';
+import '../../../../core/widgets/screen_image_background.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -36,10 +38,10 @@ class _ProfileViewState extends State<ProfileView> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const AppWebView(
+                builder: (_) => AppWebView(
                   url:
                       "https://elevate-flutter-team.github.io/fitness-app-webviews/privacy-policy.html",
-                  title: "Privacy policy",
+                  title: "profile.privacy_policy".tr(),
                 ),
               ),
             );
@@ -49,10 +51,10 @@ class _ProfileViewState extends State<ProfileView> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const AppWebView(
+                builder: (_) => AppWebView(
                   url:
                       "https://elevate-flutter-team.github.io/fitness-app-webviews/security.html",
-                  title: "Help",
+                  title: "profile.help".tr(),
                 ),
               ),
             );
@@ -62,10 +64,10 @@ class _ProfileViewState extends State<ProfileView> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const AppWebView(
+                builder: (_) => AppWebView(
                   url:
                       "https://elevate-flutter-team.github.io/fitness-app-webviews/security.html",
-                  title: "Security",
+                  title: "profile.security".tr(),
                 ),
               ),
             );
@@ -79,14 +81,17 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     bool isArabic = context.locale.languageCode == 'ar';
-    return Scaffold(
+    return ScreenImageBackground(
+      imagePath: AssetsManager.exploreBg,
       appBar: AppBar(
-        title: Text("Profile", style: context.appTheme.medium20).tr(),
+        title: Text("profile.profile".tr(), style: context.appTheme.medium20),
       ),
-      body: Padding(
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+
           children: [
+          SizedBox(height: 140,),
             BlocBuilder<ProfileViewModel, ProfileStates>(
               builder: (context, state) {
                 if (state.userData?.requestState == RequestState.loading) {
@@ -123,7 +128,7 @@ class _ProfileViewState extends State<ProfileView> {
               },
             ),
             MainProfileItem(
-              title: 'Edit Profile'.tr(),
+              title: 'profile.edit_profile'.tr(),
               onTap: () => profileViewModel.doEvent(OnEditProfileClickIntent()),
               prefix: const Icon(
                 Icons.person,
@@ -144,9 +149,7 @@ class _ProfileViewState extends State<ProfileView> {
                 color: Color(0xFFFF4500),
               ),
               title:
-                  "${'Select Language '
-                          '(${context.locale.languageCode == 'ar' ? 'Arabic' : 'English'})'}  "
-                      .tr(),
+                  "${'profile.select_language'.tr()} (${context.locale.languageCode == 'ar' ? 'profile.arabic'.tr() : 'profile.english'.tr()})",
               suffix: Switch(
                 value: isArabic,
                 onChanged: (bool value) {
@@ -171,7 +174,7 @@ class _ProfileViewState extends State<ProfileView> {
             const SizedBox(height: 10),
 
             MainProfileItem(
-              title: 'Security'.tr(),
+              title: 'profile.security'.tr(),
               onTap: () => profileViewModel.doEvent(OnLSecurityClickIntent()),
               prefix: const Icon(
                 Icons.security,
@@ -187,7 +190,7 @@ class _ProfileViewState extends State<ProfileView> {
             const SizedBox(height: 10),
 
             MainProfileItem(
-              title: 'Privacy Policy'.tr(),
+              title: 'profile.privacy_policy'.tr(),
               onTap: () => profileViewModel.doEvent(OnPrivacyClickIntent()),
               prefix: const Icon(
                 Icons.policy,
@@ -203,7 +206,7 @@ class _ProfileViewState extends State<ProfileView> {
             const SizedBox(height: 10),
 
             MainProfileItem(
-              title: 'Help'.tr(),
+              title: 'profile.help'.tr(),
               onTap: () => profileViewModel.doEvent(OnHeloClickIntent()),
               prefix: const Icon(
                 Icons.help_outline,
@@ -218,7 +221,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 10),
             MainProfileItem(
-              title: 'logout'.tr(),
+              title: 'profile.logout'.tr(),
               onTap: () => profileViewModel.doEvent(OnLogoutClickIntent()),
               prefix: const Icon(
                 Icons.logout,

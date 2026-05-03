@@ -157,9 +157,6 @@
   "show_more": "Show more",
   "ingredients": "Ingredients",
   "instructions": "Instructions",
-
-
-
   "workouts":{
     "Workouts": "Workouts",
     "untitled": "untitled",
@@ -201,17 +198,19 @@
   "enter_new_password": "Enter your new password",
   "confirm_new_password": "Confirm new password",
   "confirm_your_new_password": "Confirm your new password",
-
-
-
-
-
   "profile": {
-    "your_weight" : "Your Weight",
-    "your_goal" : "Your Goal",
-    "your_activity_level" : "Your Activity Level",
-    "tap_to_edit" : "Tap To Edit"
-
-
+    "profile": "Profile",
+    "edit_profile": "Edit Profile",
+    "select_language": "Select Language",
+    "arabic": "Arabic",
+    "english": "English",
+    "security": "Security",
+    "privacy_policy": "Privacy Policy",
+    "help": "Help",
+    "logout": "Logout",
+    "your_weight": "Your Weight",
+    "your_goal": "Your Goal",
+    "your_activity_level": "Your Activity Level",
+    "tap_to_edit": "Tap To Edit"
   }
 }

@@ -196,5 +196,20 @@
     "coming_soon": "قريباً",
     "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك.",
     "seeAll": "مشاهده الجميع"
+  },
+  "profile": {
+    "profile": "الملف الشخصي",
+    "edit_profile": "تعديل الملف الشخصي",
+    "select_language": "اختر اللغة",
+    "arabic": "العربية",
+    "english": "الإنجليزية",
+    "security": "الأمان",
+    "privacy_policy": "سياسة الخصوصية",
+    "help": "المساعدة",
+    "logout": "تسجيل الخروج",
+    "your_weight": "وزنك",
+    "your_goal": "هدفك",
+    "your_activity_level": "مستوى نشاطك",
+    "tap_to_edit": "اضغط للتعديل"
   }
 }
