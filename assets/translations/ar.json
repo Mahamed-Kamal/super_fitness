@@ -87,6 +87,16 @@
       "doIt": "افعالها"
     }
   },
+  "auth": {
+    "don_t_have_an_account_yet": "ليس لديك حساب بعد؟",
+    "register": "إنشاء حساب",
+    "login": "تسجيل الدخول",
+    "forget_password?": "نسيت كلمة المرور؟",
+    "password": "كلمة المرور",
+    "email": "البريد الإلكتروني",
+    "welcome_back": "حمداً لله على سلامتك",
+    "hey_there": "أهلاً بك\n"
+  },
   "register": "إنشاء حساب",
   "first_name": "الاسم الأول",
   "last_name": "الاسم الأخير",

@@ -247,6 +247,7 @@ class _ProfileViewState extends State<ProfileView> {
       barrierDismissible: false,
       builder: (context) {
         return Dialog(
+          backgroundColor: context.appTheme.neutral,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
