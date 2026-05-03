@@ -7,6 +7,7 @@ import 'package:super_fitness/features/auth/data/models/request/forgot_password_
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/verify_reset_code_request.dart';
 import 'package:super_fitness/features/auth/data/models/response/forgot_password_response.dart';
+import 'package:super_fitness/features/auth/data/models/response/logout_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
@@ -39,4 +40,5 @@ abstract interface class AuthDataSource {
   Future<Result<String>> changeUserPassword({
     required ChangePasswordRequest request,
   });
+  Future<Result<LogoutResponseDto>> logout();
 }

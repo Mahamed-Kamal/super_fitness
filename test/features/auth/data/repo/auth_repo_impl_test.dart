@@ -11,6 +11,7 @@ import 'package:super_fitness/features/auth/data/models/request/verify_reset_cod
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/data/models/response/forgot_password_response.dart';
+import 'package:super_fitness/features/auth/data/models/response/logout_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 
@@ -180,6 +181,28 @@ void main() {
       );
 
       expect(result, isA<SuccessResponse<UsersDto>>());
+    });
+  });
+  group('logout test ', () {
+    var response = LogoutResponseDto(message: 'success');
+    provideDummy<Result<LogoutResponseDto>>(
+      SuccessResponse<LogoutResponseDto>(data: response),
+    );
+    test('should return success when logout is called', () async {
+      when(mockAuthDataSource.logout()).thenAnswer(
+        (_) async => SuccessResponse<LogoutResponseDto>(data: response),
+      );
+      final result = await mockAuthDataSource.logout();
+      expect(result, isA<SuccessResponse<LogoutResponseDto>>());
+      verify(mockAuthDataSource.logout()).called(1);
+    });
+    test('should return false when logout is called', () async {
+      when(mockAuthDataSource.logout()).thenAnswer(
+        (_) async => FailureResponse<LogoutResponseDto>(errorMessage: 'error'),
+      );
+      final result = await mockAuthDataSource.logout();
+      expect(result, isA<FailureResponse<LogoutResponseDto>>());
+      verify(mockAuthDataSource.logout()).called(1);
     });
   });
 }
