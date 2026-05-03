@@ -195,10 +195,6 @@
     "gym_experience": "تجربة الجيم",
     "coming_soon": "قريباً",
     "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك.",
-    "logout": "تسجيل الخروج",
-    "logout_success": "تم تسجيل الخروج بنجاح",
-    "cancel": "إلغاء",
-    "confirm_logout!!": "تأكيد تسجيل الخروج!!"
     "seeAll": "مشاهده الجميع"
   },
   "profile": {
@@ -215,5 +211,9 @@
     "your_goal": "هدفك",
     "your_activity_level": "مستوى نشاطك",
     "tap_to_edit": "اضغط للتعديل"
-  }
+  },
+  "logout": "تسجيل الخروج",
+  "logout_success": "تم تسجيل الخروج بنجاح",
+  "cancel": "إلغاء",
+  "confirm_logout!!": "تأكيد تسجيل الخروج!!"
 }

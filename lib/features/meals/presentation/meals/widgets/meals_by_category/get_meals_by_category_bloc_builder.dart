@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_fitness/core/widgets/lottie_error.dart';
 import 'package:super_fitness/features/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness/features/meals/presentation/meals/view_model/meals_intent.dart';
@@ -19,9 +20,26 @@ class GetMealsByCategoryBlocBuilder extends StatelessWidget {
           previous.selectedCategoryIndex != current.selectedCategoryIndex,
       builder: (context, state) {
         if (state.mealsState.isInitial || state.mealsState.isLoading) {
-          return const Padding(
-            padding: EdgeInsets.only(top: 24),
-            child: MealsAsyncLoading(messageKey: 'meals.loading_meals'),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Skeletonizer(
+              enabled: true,
+              child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: 8,
+                itemBuilder: (context, index) => MealRecommendationCard(
+                  meal: state.mealsState.data?[index] ?? MealEntity(),
+                  onTap: () {},
+                ),
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.72,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                ),
+              ),
+            ),
           );
         }
         if (state.mealsState.isError) {

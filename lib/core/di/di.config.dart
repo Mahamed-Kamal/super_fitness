@@ -106,8 +106,14 @@ import '../../features/profile/data/data_source/profile_data_source_impl.dart'
     as _i853;
 import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
 import '../../features/profile/domain/repo/profile_repo.dart' as _i364;
+import '../../features/profile/domain/use_cases/edit_profile_use_case.dart'
+    as _i199;
 import '../../features/profile/domain/use_cases/get_profile_data_use_case.dart'
     as _i238;
+import '../../features/profile/domain/use_cases/upload_profile_photo_use_case.dart'
+    as _i895;
+import '../../features/profile/presentation/edit_profile/view_model/edit_profile_view_model.dart'
+    as _i1023;
 import '../../features/profile/presentation/view_model/profile_view_model.dart'
     as _i15;
 import '../../features/workouts/data/data_source/workouts_data_source.dart'
@@ -233,8 +239,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i676.GetExercisesUseCase>(
       () => _i676.GetExercisesUseCase(gh<_i335.ExercisesRepo>()),
     );
+    gh.factory<_i199.EditProfileUseCase>(
+      () => _i199.EditProfileUseCase(gh<_i364.ProfileRepo>()),
+    );
     gh.factory<_i238.GetProfileDataUseCase>(
       () => _i238.GetProfileDataUseCase(gh<_i364.ProfileRepo>()),
+    );
+    gh.factory<_i895.UploadProfilePhotoUseCase>(
+      () => _i895.UploadProfilePhotoUseCase(gh<_i364.ProfileRepo>()),
     );
     gh.factory<_i8.ChangeUserPasswordUseCase>(
       () => _i8.ChangeUserPasswordUseCase(gh<_i170.AuthRepo>()),
@@ -292,7 +304,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i385.GetMealsByCategoryUseCase>(),
       ),
     );
-    gh.factory<_i15.ProfileViewModel>(
+    gh.factory<_i1023.EditProfileViewModel>(
+      () => _i1023.EditProfileViewModel(
+        gh<_i199.EditProfileUseCase>(),
+        gh<_i238.GetProfileDataUseCase>(),
+        gh<_i895.UploadProfilePhotoUseCase>(),
+      ),
+    );
+    gh.singleton<_i15.ProfileViewModel>(
       () => _i15.ProfileViewModel(gh<_i238.GetProfileDataUseCase>()),
     );
     gh.factory<_i45.LogoutCubit>(

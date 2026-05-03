@@ -54,7 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
               MaterialPageRoute(
                 builder: (_) => AppWebView(
                   url:
-                      "https://elevate-flutter-team.github.io/fitness-app-webviews/security.html",
+                      "https://elevate-flutter-team.github.io/fitness-app-webviews/help.html",
                   title: "profile.help".tr(),
                 ),
               ),
@@ -90,9 +90,8 @@ class _ProfileViewState extends State<ProfileView> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-
           children: [
-          SizedBox(height: 140,),
+            SizedBox(height: 140),
             BlocBuilder<ProfileViewModel, ProfileStates>(
               builder: (context, state) {
                 if (state.userData?.requestState == RequestState.loading) {
