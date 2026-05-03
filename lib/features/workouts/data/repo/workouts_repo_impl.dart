@@ -4,8 +4,6 @@ import 'package:super_fitness/features/explore/domain/entities/muscles_entity.da
 import 'package:super_fitness/features/workouts/data/data_source/workouts_data_source.dart';
 import 'package:super_fitness/features/workouts/data/models/muscles_dto.dart';
 import 'package:super_fitness/features/workouts/data/models/muscles_group_dto.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_group_entity.dart';
 import 'package:super_fitness/features/workouts/domain/repo/workouts_repo.dart';
 
 @Injectable(as: WorkoutsRepo)

@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_group_entity.dart';
 import 'package:super_fitness/features/workouts/domain/use_cases/get_all_muscles_by_muscles_groups_use_case.dart';
 import 'package:super_fitness/features/workouts/domain/use_cases/get_all_muscles_groups_use_case.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_events.dart';
