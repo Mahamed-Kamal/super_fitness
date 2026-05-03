@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
+import 'package:super_fitness/core/extensions/context_navigation_extension.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/features/auth/presentation/widget/logout_dialog.dart';
+import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_states.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
@@ -70,7 +72,7 @@ class _ProfileViewState extends State<ProfileView> {
             );
           }
         case OnEditProfileClickIntent():
-        // TODO: Handle this case.
+          context.pushNamed(AppRoutes.editProfile);
       }
     });
   }
@@ -104,7 +106,8 @@ class _ProfileViewState extends State<ProfileView> {
                         padding: const EdgeInsets.all(8.0),
                         child: CustomImageView(
                           imagePath:
-                              data?.photo ?? "assets/images/ic_profile.svg",
+                              data?.profilePicture ??
+                              "assets/images/ic_profile.svg",
                           width: 80,
                           height: 80,
                           radius: const BorderRadius.all(Radius.circular(40)),

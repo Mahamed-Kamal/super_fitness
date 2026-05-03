@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
-import '../../domain/entity/user_entity.dart' show UserEntity;
+import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
 
 class ProfileStates extends Equatable {
   final BaseState<UserEntity>? userData;

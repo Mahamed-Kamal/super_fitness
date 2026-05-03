@@ -14,6 +14,7 @@ import 'package:super_fitness/features/app_section/view_model/app_section_view_m
 import 'package:super_fitness/features/app_section/views/app_section_view.dart';
 import 'package:super_fitness/features/auth/presentation/register/view_model/register_view_model.dart';
 import 'package:super_fitness/features/auth/presentation/register/views/register_view.dart';
+import 'package:super_fitness/features/chat_ai/presentation/views/smart_coach_view.dart';
 import 'package:super_fitness/features/exercises/presentation/view/exercise_view.dart';
 import 'package:super_fitness/features/exercises/presentation/view_model/exercises_view_model.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/meal_details_view.dart';
@@ -24,9 +25,10 @@ import 'package:super_fitness/features/meals/presentation/meals/view_model/meals
 import 'package:super_fitness/features/meals/presentation/meals/views/meals_view.dart';
 import 'package:super_fitness/features/chat_ai/presentation/view_model/chat_view_model.dart';
 import 'package:super_fitness/features/on_boarding/views/on_boarding_view.dart';
-import '../../features/chat_ai/presentation/views/smart_coach_view.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
+import 'package:super_fitness/features/profile/presentation/edit_profile/views/edit_profile_view.dart';
+import 'package:super_fitness/features/profile/presentation/edit_profile/view_model/edit_profile_view_model.dart';
 
 class RouteGenerator {
   static final _forgetPasswordViewModel = getIt.get<ForgetPasswordViewModel>();
@@ -64,10 +66,7 @@ class RouteGenerator {
           MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => AppSectionViewModel()),
-              BlocProvider(
-                create: (_) =>
-                    getIt<ProfileViewModel>()..doIntent(GetUserDataEvent()),
-              ),
+              BlocProvider(create: (_) => getIt<ProfileViewModel>()),
               BlocProvider(
                 create: (context) => getIt.get<AppSectionViewModel>(),
               ),
@@ -141,6 +140,14 @@ class RouteGenerator {
           BlocProvider(
             create: (context) => getIt<MealsViewModel>(),
             child: const MealsView(),
+          ),
+          setting,
+        );
+      case AppRoutes.editProfile:
+        return _buildRoute(
+          BlocProvider(
+            create: (_) => getIt<EditProfileViewModel>(),
+            child: const EditProfileView(),
           ),
           setting,
         );

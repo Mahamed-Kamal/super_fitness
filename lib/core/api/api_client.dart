@@ -17,6 +17,7 @@ import 'package:super_fitness/features/auth/data/models/response/verify_reset_co
 import 'package:super_fitness/features/auth/data/models/responses/change_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/responses/update_user_data_response_dto.dart';
+import 'package:super_fitness/features/profile/data/models/upload_profile/upload_profile_message_response.dart';
 import 'package:super_fitness/features/exercises/data/models/difficulty_levels_response.dart';
 import 'package:super_fitness/features/exercises/data/models/exercises_response.dart';
 import 'package:super_fitness/features/explore/data/models/categories_response.dart';
@@ -25,7 +26,6 @@ import 'package:super_fitness/features/explore/data/models/muscles_group_respons
 import 'package:super_fitness/features/explore/data/models/muscles_random_response.dart';
 import 'package:super_fitness/features/explore/data/models/special_muscles.dart';
 import '../../features/explore/data/models/trainer_levels_response.dart';
-import 'package:super_fitness/features/profile/data/models/response/profile_response.dart';
 import 'package:super_fitness/features/workouts/data/models/all_muscles_by_muscle_group_id_response.dart';
 import 'package:super_fitness/features/workouts/data/models/all_muscles_group_response.dart';
 
@@ -79,8 +79,6 @@ abstract class ApiClient {
   Future<DifficultyLevelsResponse> getDifficultyLevels({
     @Query("primeMoverMuscleId") required String primeMoverMuscleId,
   });
-  @GET(EndPoints.profile)
-  Future<ProfileResponse> getUserData();
   @GET(EndPoints.getAllMusclesGroups)
   Future<AllMusclesGroupResponse> getAllMusclesGroups();
   @GET(EndPoints.getMusclesByMusclesGroupID)
@@ -110,4 +108,17 @@ abstract class ApiClient {
 
   @GET(EndPoints.logout)
   Future<LogoutResponseDto> logout();
+  @PUT(EndPoints.updateUserData)
+  Future<UpdateUserDataResponseDto> editProfile({
+    @Body() required UpdateUserDataRequest updateUserDataRequest,
+  });
+
+  @MultiPart()
+  @PUT(EndPoints.uploadProfilePhoto)
+  Future<UploadProfileMessageResponse> uploadProfilePhoto({
+    @Part(name: 'photo') required MultipartFile photo,
+  });
+
+  @GET(EndPoints.getProfileData)
+  Future<UpdateUserDataResponseDto> getProfileData();
 }

@@ -109,6 +109,8 @@
   "male": "Male",
   "female": "Female",
   "next": "Next",
+  "done": "Done",
+  "save": "Save",
   "how_old_are_you": "How Old Are You?",
   "personalized_plan_subtitle": "This helps us create your personalized plan",
   "year": "Year",
@@ -242,4 +244,6 @@
   "logout_success": "Logout successfully",
   "cancel": "Cancel",
   "confirm_logout!!": "Confirm Logout!!"
+}
+  "confirm_your_new_password": "Confirm your new password"
 }

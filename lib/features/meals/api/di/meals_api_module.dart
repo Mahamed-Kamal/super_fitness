@@ -32,17 +32,17 @@ abstract class MealsApiModule {
   // );
 }
 
-String _toAbsoluteMealsBaseUrl(String raw) {
-  var s = raw.trim();
-  if (s.isEmpty) {
-    return s;
-  }
-  final lower = s.toLowerCase();
-  if (!lower.startsWith('http://') && !lower.startsWith('https://')) {
-    s = 'https://$s';
-  }
-  if (!s.endsWith('/')) {
-    s = '$s/';
-  }
-  return s;
-}
+// String _toAbsoluteMealsBaseUrl(String raw) {
+//   var s = raw.trim();
+//   if (s.isEmpty) {
+//     return s;
+//   }
+//   final lower = s.toLowerCase();
+//   if (!lower.startsWith('http://') && !lower.startsWith('https://')) {
+//     s = 'https://$s';
+//   }
+//   if (!s.endsWith('/')) {
+//     s = '$s/';
+//   }
+//   return s;
+// }
