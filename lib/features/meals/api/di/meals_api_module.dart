@@ -15,7 +15,7 @@ abstract class MealsApiModule {
   Dio provideMealsDio(PrettyDioLogger logger) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstants.mealsBaseUrl,
+        baseUrl: _toAbsoluteMealsBaseUrl(ApiConstants.mealsBaseUrl),
         sendTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
       ),
@@ -25,24 +25,19 @@ abstract class MealsApiModule {
 
     return dio;
   }
-
-  // MealsApiClient provideMealsApiClient(Dio dio) => MealsApiClient(
-  //   dio,
-  //   baseUrl: _toAbsoluteMealsBaseUrl(ApiConstants.mealsBaseUrl),
-  // );
 }
 
-// String _toAbsoluteMealsBaseUrl(String raw) {
-//   var s = raw.trim();
-//   if (s.isEmpty) {
-//     return s;
-//   }
-//   final lower = s.toLowerCase();
-//   if (!lower.startsWith('http://') && !lower.startsWith('https://')) {
-//     s = 'https://$s';
-//   }
-//   if (!s.endsWith('/')) {
-//     s = '$s/';
-//   }
-//   return s;
-// }
+String _toAbsoluteMealsBaseUrl(String raw) {
+  var s = raw.trim();
+  if (s.isEmpty) {
+    return s;
+  }
+  final lower = s.toLowerCase();
+  if (!lower.startsWith('http://') && !lower.startsWith('https://')) {
+    s = 'https://$s';
+  }
+  if (!s.endsWith('/')) {
+    s = '$s/';
+  }
+  return s;
+}

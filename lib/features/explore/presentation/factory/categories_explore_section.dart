@@ -28,7 +28,7 @@ class CategoriesExploreSection
   @override
   Widget buildSuccessUI(BaseState<CategoriesSection> data) {
     return SectionWidget(
-      title: 'explore.food_recommendation'.tr(),
+      title: 'explore.food_recommendation',
       widget: FoodMeals(foodCategories: data.data?.categories ?? []),
       onTap: () {
         getIt.get<ExploreViewModel>().doIntent(

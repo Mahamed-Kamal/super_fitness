@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 
@@ -23,12 +24,12 @@ class SectionWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: theme.semiBold16),
+            Text(title.tr(), style: theme.semiBold16),
             if (onTap != null)
               GestureDetector(
                 onTap: onTap,
                 child: Text(
-                  "See All",
+                  "explore.seeAll".tr(),
                   style: theme.regular14.copyWith(
                     decoration: TextDecoration.underline,
                     color: theme.primary,

@@ -10,7 +10,7 @@ import 'package:super_fitness/features/profile/domain/use_cases/get_profile_data
 import 'package:super_fitness/features/profile/presentation/view_model/profile_events.dart';
 import 'package:super_fitness/features/profile/presentation/view_model/profile_states.dart';
 
-@injectable
+@singleton
 // ignore: must_be_immutable
 class ProfileViewModel extends Cubit<ProfileStates> with EquatableMixin {
   final GetProfileDataUseCase _getProfileDataUseCase;

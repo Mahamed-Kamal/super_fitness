@@ -37,22 +37,28 @@ class ExploreViewModel
     _getPopularTrainingUseCase.call();
   }
 
+
   @override
   void doIntent(intent) {
     switch (intent) {
       case LoadDataEvent():
         _loadData();
-
       case SeeAllFoodRecommendationIntent():
         _navigateToFoodRecommendation();
       case LoadSpecialMuscles():
         _loadSpecialMuscles(intent.id);
       case UpdateIndexMuscles():
         _updateIndex(intent.currentIndex);
+      case GoToPrimeExerciseIntent():
+        _navigateToExercise();
     }
   }
 
   void _navigateToFoodRecommendation() {
+    emitEvent(NavigateToFoodRecommendation());
+  }
+
+  void _navigateToExercise() {
     emitEvent(NavigateToFoodRecommendation());
   }
 

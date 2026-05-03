@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
 
 part 'muscles_dto.g.dart';
 

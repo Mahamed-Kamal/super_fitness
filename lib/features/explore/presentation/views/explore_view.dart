@@ -14,6 +14,8 @@ import 'package:super_fitness/features/explore/presentation/factory/popular_expl
 import 'package:super_fitness/features/explore/presentation/view_model/explore_state.dart';
 import 'package:super_fitness/features/explore/presentation/view_model/explore_view_model.dart';
 import 'package:super_fitness/features/explore/presentation/widgets/section_widget.dart';
+import '../../../profile/presentation/view_model/profile_states.dart';
+import '../../../profile/presentation/view_model/profile_view_model.dart';
 import '../widgets/fitness_categories.dart';
 
 class ExploreView extends StatefulWidget {
@@ -52,11 +54,26 @@ class _ExploreViewState extends State<ExploreView> {
         child: Column(
           children: [
             const SizedBox(height: 32),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text("explore.hi".tr()),
-              subtitle: Text("explore.start_your_day".tr()),
-              trailing: const CircleAvatar(),
+            BlocBuilder<ProfileViewModel, ProfileStates>(
+              builder: (context, state) {
+                final user = state.userData?.data;
+                if (user != null) {
+                  return ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("explore.hi".tr()+ user.firstName),
+                    subtitle: Text("explore.start_your_day".tr()),
+                    trailing: CircleAvatar(
+                      foregroundImage: NetworkImage(user.profilePicture),
+                    ),
+                  );
+                }
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text("explore.hi".tr()),
+                  subtitle: Text("explore.start_your_day".tr()),
+                  trailing: CircleAvatar(),
+                );
+              },
             ),
             const SizedBox(height: 24),
             SectionWidget(
