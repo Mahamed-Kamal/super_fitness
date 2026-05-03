@@ -29,19 +29,23 @@ import 'package:super_fitness/features/profile/presentation/view_model/profile_e
 import 'package:super_fitness/features/profile/presentation/view_model/profile_view_model.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/views/edit_profile_view.dart';
 import 'package:super_fitness/features/profile/presentation/edit_profile/view_model/edit_profile_view_model.dart';
+import 'package:super_fitness/features/splash/splash_view.dart';
 
 class RouteGenerator {
   static final _forgetPasswordViewModel = getIt.get<ForgetPasswordViewModel>();
 
-  static Route<dynamic>? getRoute(RouteSettings setting) {
-    switch (setting.name) {
+  static Route<dynamic>? getRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRoutes.splash:
+        return _buildRoute(SplashView(), settings);
+
       case AppRoutes.login:
         return _buildRoute(
           BlocProvider(
             create: (context) => getIt<LoginViewModel>(),
             child: const LoginView(),
           ),
-          setting,
+          settings,
         );
       case AppRoutes.onboardingView:
         return _buildRoute(
@@ -49,7 +53,7 @@ class RouteGenerator {
             create: (context) => getIt<ExercisesViewModel>(),
             child: const OnBoardingView(),
           ),
-          setting,
+          settings,
         );
 
       case AppRoutes.registerAndCompleteRegistration:
@@ -58,7 +62,7 @@ class RouteGenerator {
             create: (_) => getIt.get<RegisterViewModel>(),
             child: const RegisterView(),
           ),
-          setting,
+          settings,
         );
 
       case AppRoutes.appSectionView:
@@ -83,7 +87,7 @@ class RouteGenerator {
             ],
             child: const AppSectionView(),
           ),
-          setting,
+          settings,
         );
 
       case AppRoutes.smartChatAi:
@@ -122,12 +126,12 @@ class RouteGenerator {
             create: (context) => getIt<ExercisesViewModel>(),
             child: const ExerciseView(),
           ),
-          setting,
+          settings,
         );
 
       case AppRoutes.mealDetails:
         var vm = getIt.get<MealDetailsViewModel>();
-        final String mealId = setting.arguments as String;
+        final String mealId = settings.arguments as String;
         return MaterialPageRoute(
           builder: (context) => BlocProvider<MealDetailsViewModel>(
             create: (_) => vm,
@@ -141,7 +145,7 @@ class RouteGenerator {
             create: (context) => getIt<MealsViewModel>(),
             child: const MealsView(),
           ),
-          setting,
+          settings,
         );
       case AppRoutes.editProfile:
         return _buildRoute(
@@ -149,13 +153,13 @@ class RouteGenerator {
             create: (_) => getIt<EditProfileViewModel>(),
             child: const EditProfileView(),
           ),
-          setting,
+          settings,
         );
       case AppRoutes.changePassword:
         var viewModel = getIt.get<ChangePasswordViewModel>();
         return _buildRoute(
           BlocProvider(create: (_) => viewModel, child: ChangePasswordView()),
-          setting,
+          settings,
         );
 
       default:
