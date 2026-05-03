@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -14,6 +16,7 @@ import 'package:super_fitness/features/auth/data/models/request/verify_reset_cod
 import 'package:super_fitness/features/auth/data/models/requests/register_request_model.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
 import 'package:super_fitness/features/auth/data/models/response/forgot_password_response.dart';
+import 'package:super_fitness/features/auth/data/models/response/logout_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/data/models/responses/register_response_dto.dart';
@@ -43,6 +46,7 @@ void main() {
   late UpdateUserDataRequest updateUserDataRequest;
   late UpdateUserDataResponseDto updateUserDataResponseDto;
   late DioException dioException;
+  late LogoutResponseDto logoutResponseDto;
 
   setUp(() {
     mockApiClient = MockApiClient();
@@ -86,6 +90,8 @@ void main() {
       requestOptions: RequestOptions(),
       type: DioExceptionType.connectionError,
     );
+
+    logoutResponseDto = LogoutResponseDto(message: "success");
   });
 
   // 1. LOGIN TESTS
@@ -291,6 +297,23 @@ void main() {
       );
 
       expect((result as FailureResponse).errorMessage, isA<String>());
+    });
+  });
+  group("Logout Tests", () {
+    test("should return SuccessResponse on logout", () async {
+      when(mockApiClient.logout()).thenAnswer((_) async => logoutResponseDto);
+      final result = await authDataSourceImpl.logout();
+      expect(result is SuccessResponse, true);
+      expect((result as SuccessResponse).data, isA<LogoutResponseDto>());
+      verify(mockApiClient.logout()).called(1);
+    });
+
+    test("should return FailureResponse on logout exception", () async {
+      when(mockApiClient.logout()).thenThrow(Exception());
+      final result = await authDataSourceImpl.logout();
+      expect(result is FailureResponse, true);
+      expect((result as FailureResponse).errorMessage, isA<String>());
+      verify(mockApiClient.logout()).called(1);
     });
   });
 }
