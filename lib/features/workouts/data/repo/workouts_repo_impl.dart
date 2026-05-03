@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
 import 'package:super_fitness/features/workouts/data/data_source/workouts_data_source.dart';
 import 'package:super_fitness/features/workouts/data/models/muscles_dto.dart';
 import 'package:super_fitness/features/workouts/data/models/muscles_group_dto.dart';

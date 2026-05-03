@@ -2,12 +2,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:super_fitness/core/error_handling/result.dart';
+import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
 import 'package:super_fitness/features/workouts/data/data_source/workouts_data_source.dart';
 import 'package:super_fitness/features/workouts/data/models/muscles_dto.dart';
 import 'package:super_fitness/features/workouts/data/models/muscles_group_dto.dart';
 import 'package:super_fitness/features/workouts/data/repo/workouts_repo_impl.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_group_entity.dart';
 
 import 'workouts_repo_impl_test.mocks.dart';
 

@@ -27,7 +27,7 @@ class MusclesGroupExploreSection
   @override
   Widget buildSuccessUI(BaseState<MusclesGroupSection> data) {
     return SectionWidget(
-      title: "explore.upcoming_workouts".tr(),
+      title: "explore.upcoming_workouts",
       widget: UpcomingWorkout(musclesGroup: data.data?.musclesGroup ?? []),
       onTap: () {
         getIt.get<AppSectionViewModel>().doIntent(2);

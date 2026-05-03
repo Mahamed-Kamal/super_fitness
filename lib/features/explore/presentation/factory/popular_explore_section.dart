@@ -25,7 +25,7 @@ class PopularExploreSection extends ExploreSectionFactory<PopularSection> {
       return SizedBox.shrink();
     }
     return SectionWidget(
-      title: "popular training",
+      title: "explore.popular_training",
       widget: PopularTrainingCard(popularLevels: data.data!.popularLevels),
     );
   }

@@ -49,10 +49,16 @@ class ExploreViewModel
         _loadSpecialMuscles(intent.id);
       case UpdateIndexMuscles():
         _updateIndex(intent.currentIndex);
+      case GoToPrimeExerciseIntent():
+        _navigateToExercise();
     }
   }
 
   void _navigateToFoodRecommendation() {
+    emitEvent(NavigateToFoodRecommendation());
+  }
+
+  void _navigateToExercise() {
     emitEvent(NavigateToFoodRecommendation());
   }
 

@@ -10,6 +10,8 @@ import 'package:super_fitness/features/workouts/domain/use_cases/get_all_muscles
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_events.dart';
 import 'package:super_fitness/features/workouts/presentation/view_model/workouts_states.dart';
 
+import '../../../explore/domain/entities/muscles_entity.dart';
+
 @injectable
 class WorkoutsCubit extends Cubit<WorkoutsStates> {
   final GetAllMusclesByMusclesGroupsUseCase
