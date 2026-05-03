@@ -199,8 +199,7 @@
       "confirm_new_password": "Confirm new password",
       "confirm_your_new_password": "Confirm your new password"
     }
-  }
-
+  },
   "chat": {
     "hiAhmed": "Hi Ahmed",
     "smartCoachSubtitle": "I Am your Smart Coach",
@@ -215,70 +214,6 @@
     "introTitle": "I am your smart coach today?",
     "getStarted": "Get Started"
   },
-
-  "something_went_wrong": "Something went wrong",
-  "untitled_meal": "Untitled meal",
-  "no_ingredients_available": "No ingredients available.",
-  "show_less": "Show less",
-  "show_more": "Show more",
-  "ingredients": "Ingredients",
-  "instructions": "Instructions",
-  "registration_successful": "Register successful, please login",
-  "something_went_wrong": "Something went wrong",
-  "untitled_meal": "Untitled meal",
-  "no_ingredients_available": "No ingredients available.",
-  "show_less": "Show less",
-  "show_more": "Show more",
-  "ingredients": "Ingredients",
-  "instructions": "Instructions",
-  "registration_successful": "Register successful, please login",
-  "something_went_wrong": "Something went wrong",
-  "untitled_meal": "Untitled meal",
-  "no_ingredients_available": "No ingredients available.",
-  "show_less": "Show less",
-  "show_more": "Show more",
-  "ingredients": "Ingredients",
-  "instructions": "Instructions",
-  "registration_successful": "Register successful, please login",
-  "workouts":{
-    "Workouts": "Workouts",
-    "untitled": "untitled",
-    "There is no Muscles yet": "There is no Muscles yet",
-  "explore": {
-    "hi":"Hi",
-    "start_your_day": "Let’s start your day",
-    "category": "Category",
-    "food_recommendation": "Food Recommendation",
-    "recommendation_to_day": "Recommendation to day",
-    "upcoming_workouts": "Upcoming Workouts",
-    "gym": "Gym",
-    "fitness": "Fitness",
-    "yoga": "Yoga",
-    "aerobics": "Aerobics",
-    "trainer": "Trainer",
-    "gym_experience": "GYM EXPERIENCE",
-    "coming_soon": "Coming Soon",
-    "gym_desc": "We are working hard to bring the ultimate gym tracking experience to your fingertips."
-  },
-  "meals": {
-    "food_recommendation": "Food Recommendation",
-    "loading_categories": "Loading categories...",
-    "loading_meals": "Loading meals...",
-    "categories_error": "Could not load categories",
-    "meals_error": "Could not load meals",
-    "no_meals": "No meals in this category",
-    "no_categories": "No categories available"
-  },
-  "profile": {
-   "your_weight" : "Your Weight",
-   "your_goal" : "Your Goal",
-   "your_activity_level" : "Your Activity Level",
-   "tap_to_edit" : "Tap To Edit"
-
-
-  }
-  },
-
   "create_a_new_password": "Create a new password",
   "make_sure_its_8_characters_or_more": "Make sure it's 8 characters or more",
   "password_changed_success": "Password changed success",
@@ -288,6 +223,4 @@
   "enter_new_password": "Enter your new password",
   "confirm_new_password": "Confirm new password",
   "confirm_your_new_password": "Confirm your new password"
-
- }
 }
