@@ -12,7 +12,7 @@ import 'package:super_fitness/features/exercises/presentation/view_model/exercis
 import 'package:super_fitness/features/exercises/presentation/widgets/difficulty_levels_list.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/levels_loading.dart';
 import 'package:super_fitness/features/exercises/presentation/widgets/min_and_cal_container.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
+import 'package:super_fitness/features/explore/domain/entities/muscles_entity.dart';
 
 class ExercisesViewTopPart extends StatefulWidget {
   const ExercisesViewTopPart({super.key, required this.muscle});

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_entity.dart';
-import 'package:super_fitness/features/workouts/domain/entity/muscles_group_entity.dart';
+
+import '../../../explore/domain/entities/muscles_entity.dart';
 
 class WorkoutsStates extends Equatable {
   final BaseState<List<MusclesEntity>>? allMusclesByMusclesGroupsID;

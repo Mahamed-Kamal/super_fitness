@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
@@ -67,18 +68,22 @@ class GymComingSoonDialog extends StatelessWidget {
 
           const SizedBox(height: 24),
           Text(
-            "GYM EXPERIENCE",
+            "explore.gym_experience".tr(),
             style: theme.regular14.copyWith(color: theme.primary),
           ),
 
           const SizedBox(height: 8),
 
-          Text("Coming Soon", style: theme.semiBold24),
+          Text(
+            "explore.coming_soon".tr(),
+            textAlign: TextAlign.center,
+            style: theme.semiBold24,
+          ),
 
           const SizedBox(height: 12),
 
           Text(
-            "We are working hard to bring the ultimate gym tracking experience to your fingertips.",
+            "explore.gym_desc".tr(),
             textAlign: TextAlign.center,
             style: theme.regular14.copyWith(color: theme.inputOutline),
           ),

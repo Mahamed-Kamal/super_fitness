@@ -43,6 +43,10 @@ class UpdateIndexMuscles extends ExploreIntent {
 
 class SeeAllFoodRecommendationIntent extends ExploreIntent {}
 
+class GoToPrimeExerciseIntent extends ExploreIntent {}
+
 sealed class ExploreEvents {}
 
 class NavigateToFoodRecommendation extends ExploreEvents {}
+
+class NavigateToExercise extends ExploreEvents {}

@@ -148,7 +148,7 @@
     "There is no Muscles yet": "لا توجد عضلات بعد"
   },
   "chat": {
-    "hiAhmed": "مرحباً أحمد",
+    "hi": "مرحبا ً",
     "smartCoachSubtitle": "أنا مدربك الذكي",
     "previousConversations": "المحادثات السابقة",
     "newConversation": "محادثة جديدة",
@@ -180,12 +180,13 @@
   "confirm_new_password": "تأكيد كلمة السر الجديدة",
   "confirm_your_new_password": "أكد كلمة السر الجديدة",
   "explore": {
-    "hi": "مرحباً",
+    "hi": "مرحبا ً",
     "start_your_day": "لنبدأ يومك",
     "category": "الفئات",
     "food_recommendation": "توصيات الطعام",
     "recommendation_to_day": "توصية اليوم",
     "upcoming_workouts": "التمارين القادمة",
+    "popular_training": "التمارين المحبوبه",
     "gym": "الجيم",
     "fitness": "اللياقة البدنية",
     "yoga": "اليوجا",
@@ -193,6 +194,22 @@
     "trainer": "المدرب",
     "gym_experience": "تجربة الجيم",
     "coming_soon": "قريباً",
-    "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك."
+    "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك.",
+    "seeAll": "مشاهده الجميع"
+  },
+  "profile": {
+    "profile": "الملف الشخصي",
+    "edit_profile": "تعديل الملف الشخصي",
+    "select_language": "اختر اللغة",
+    "arabic": "العربية",
+    "english": "الإنجليزية",
+    "security": "الأمان",
+    "privacy_policy": "سياسة الخصوصية",
+    "help": "المساعدة",
+    "logout": "تسجيل الخروج",
+    "your_weight": "وزنك",
+    "your_goal": "هدفك",
+    "your_activity_level": "مستوى نشاطك",
+    "tap_to_edit": "اضغط للتعديل"
   }
 }
