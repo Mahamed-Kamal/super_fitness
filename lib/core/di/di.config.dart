@@ -26,6 +26,7 @@ import '../../features/auth/domain/use_cases/change_user_password_use_case.dart'
 import '../../features/auth/domain/use_cases/forgot_password_use_case.dart'
     as _i897;
 import '../../features/auth/domain/use_cases/login_use_case.dart' as _i1038;
+import '../../features/auth/domain/use_cases/logout_use_case.dart' as _i698;
 import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
 import '../../features/auth/domain/use_cases/reset_password_use_case.dart'
     as _i169;
@@ -37,6 +38,7 @@ import '../../features/auth/presentation/forget_password/view_model/forget_passw
     as _i346;
 import '../../features/auth/presentation/login/view_model/login_view_model.dart'
     as _i671;
+import '../../features/auth/presentation/logout/logout_view_model.dart' as _i45;
 import '../../features/auth/presentation/register/view_model/register_view_model.dart'
     as _i721;
 import '../../features/chat_ai/data/data_source/chat_ai_data_source.dart'
@@ -252,6 +254,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i449.VerifyResetCodeUseCase>(
       () => _i449.VerifyResetCodeUseCase(gh<_i170.AuthRepo>()),
     );
+    gh.lazySingleton<_i698.LogoutUseCase>(
+      () => _i698.LogoutUseCase(gh<_i170.AuthRepo>()),
+    );
     gh.factory<_i721.RegisterViewModel>(
       () => _i721.RegisterViewModel(gh<_i1010.RegisterUseCase>()),
     );
@@ -289,6 +294,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i15.ProfileViewModel>(
       () => _i15.ProfileViewModel(gh<_i238.GetProfileDataUseCase>()),
+    );
+    gh.factory<_i45.LogoutCubit>(
+      () => _i45.LogoutCubit(gh<_i698.LogoutUseCase>()),
     );
     gh.factory<_i629.MealDetailsViewModel>(
       () => _i629.MealDetailsViewModel(gh<_i514.GetMealDetailsUseCase>()),

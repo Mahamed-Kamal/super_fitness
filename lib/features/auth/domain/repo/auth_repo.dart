@@ -1,6 +1,7 @@
 import 'package:super_fitness/core/error_handling/result.dart';
 import 'package:super_fitness/features/auth/data/models/login/login_response_dto.dart';
 import 'package:super_fitness/features/auth/domain/entity/forget_password_entity.dart';
+import 'package:super_fitness/features/auth/domain/entity/logout_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/reset_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/verify_reset_code_entity.dart';
 import 'package:super_fitness/features/auth/domain/entities/user_entity.dart';
@@ -51,4 +52,6 @@ abstract interface class AuthRepo {
     required String currentPassword,
     required String newPassword,
   });
+
+  Future<Result<LogoutEntity>> logout();
 }

@@ -13,9 +13,11 @@ import 'package:super_fitness/features/auth/data/models/request/forgot_password_
 import 'package:super_fitness/features/auth/data/models/request/reset_password_request.dart';
 import 'package:super_fitness/features/auth/data/models/request/verify_reset_code_request.dart';
 import 'package:super_fitness/features/auth/data/models/response/forgot_password_response.dart';
+import 'package:super_fitness/features/auth/data/models/response/logout_response_dto.dart';
 import 'package:super_fitness/features/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness/features/auth/data/models/response/verify_reset_code_response.dart';
 import 'package:super_fitness/features/auth/domain/entity/forget_password_entity.dart';
+import 'package:super_fitness/features/auth/domain/entity/logout_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/reset_password_entity.dart';
 import 'package:super_fitness/features/auth/domain/entity/verify_reset_code_entity.dart';
 import 'package:super_fitness/features/auth/data/models/requests/update_user_data_request.dart';
@@ -207,5 +209,16 @@ class AuthRepoImpl implements AuthRepo {
   void _refreshUserToken(String token) {
     AppLocalStorage.clearSecuredData(key: LocalKeys.authToken);
     AppLocalStorage.setSecuredString(key: LocalKeys.authToken, value: token);
+  }
+
+  @override
+  Future<Result<LogoutEntity>> logout() async {
+    var result = await _authDataSource.logout();
+    switch (result) {
+      case SuccessResponse<LogoutResponseDto>():
+        return SuccessResponse(data: result.data.toEntity());
+      case FailureResponse<LogoutResponseDto>():
+        return FailureResponse(errorMessage: result.errorMessage);
+    }
   }
 }
