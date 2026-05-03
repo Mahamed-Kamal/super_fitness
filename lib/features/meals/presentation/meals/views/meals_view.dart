@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness/core/route_manager/app_routes.dart';
 import 'package:super_fitness/core/utils/assets_manager/assets_manager.dart';
 import 'package:super_fitness/core/widgets/screen_backdrop.dart';
 import 'package:super_fitness/core/widgets/super_fitness_app_bar.dart';
@@ -38,7 +39,11 @@ class _MealsViewState extends State<MealsView> {
           if (!mounted) return;
           switch (event) {
             case NavigateToMealsDetails():
-            // TODO: Add Navigation to MealsDetails .
+              Navigator.pushNamed(
+                context,
+                AppRoutes.mealDetails,
+                arguments: event.meal.id,
+              );
           }
         });
   }
