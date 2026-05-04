@@ -36,7 +36,7 @@ class _ExercisesViewTopPartState extends State<ExercisesViewTopPart> {
     return Stack(
       children: [
         CustomImageView(
-          imagePath: widget.muscle!.image,
+          imagePath: widget.muscle!.image ?? AssetsManager.placeholder,
           width: double.infinity,
           height: 350,
           fit: BoxFit.cover,

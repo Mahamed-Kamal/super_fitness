@@ -26,7 +26,13 @@ class PopularExploreSection extends ExploreSectionFactory<PopularSection> {
     }
     return SectionWidget(
       title: "explore.popular_training",
-      widget: PopularTrainingCard(popularLevels: data.data!.popularLevels),
+      widget: InkWell(
+        child: PopularTrainingCard(
+          popularLevels: data.data!.popularLevels,
+          imageUrl:
+              data.data!.popularLevels.exercise[data.data!.index].story ?? '',
+        ),
+      ),
     );
   }
 }
