@@ -78,6 +78,23 @@ extension ExercisesMapper on Exercises {
   ExerciseEntity toEntity() => ExerciseEntity(
     name: exercise ?? '',
     level: difficultyLevel ?? '',
-    story: shortYoutubeDemonstration,
+    story: _extractThumbnail(shortYoutubeDemonstrationLink),
   );
+  String _extractThumbnail(String? url) {
+    if (url == null || url.isEmpty) return "assets/images/placeholder.png";
+
+    final uri = Uri.tryParse(url);
+    if (uri == null) return "assets/images/placeholder.png";
+
+    String videoId = "";
+    if (uri.host == 'youtu.be') {
+      videoId = uri.pathSegments.first;
+    } else {
+      videoId = uri.queryParameters['v'] ?? "";
+    }
+
+    return videoId.isNotEmpty
+        ? "https://img.youtube.com/vi/$videoId/0.jpg"
+        : "assets/images/placeholder.png";
+  }
 }

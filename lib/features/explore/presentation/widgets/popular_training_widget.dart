@@ -5,19 +5,24 @@ import 'package:super_fitness/core/widgets/glass_container.dart';
 import 'package:super_fitness/features/explore/domain/entities/exercises_response_entity.dart';
 
 class PopularTrainingCard extends StatelessWidget {
-  const PopularTrainingCard({super.key, required this.popularLevels});
+  const PopularTrainingCard({
+    super.key,
+    required this.popularLevels,
+    required this.imageUrl,
+  });
   final ExercisesResponseEntity popularLevels;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     final theme = context.appTheme;
     return Container(
       width: 200,
-      height: 176,
+      height: 120,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: CachedNetworkImageProvider("https://iili.io/33pYHNI.png"),
+          image: CachedNetworkImageProvider(imageUrl),
         ),
         borderRadius: BorderRadius.circular(20),
       ),

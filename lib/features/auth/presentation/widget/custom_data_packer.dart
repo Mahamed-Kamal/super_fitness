@@ -71,45 +71,64 @@ class _CustomDataPickerState extends State<CustomDataPicker> {
           GlassContainer(
             child: Column(
               children: [
-                Text(
-                  widget.unit,
-                  style: TextStyle(
-                    color: context.appTheme.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                SizedBox(
+                  width: double.infinity,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              widget.unit,
+                              style: TextStyle(
+                                color: context.appTheme.primary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          NumberPicker(
+                            value: _currentValue,
+                            minValue: widget.minValue,
+                            maxValue: widget.maxValue,
+                            step: 1,
+                            itemHeight: 62,
+                            itemWidth: 65,
+                            itemCount: 5,
+                            axis: Axis.horizontal,
+                            onChanged: (value) {
+                              setState(() => _currentValue = value);
+                              widget.onValueChanged(value);
+                            },
+                            selectedTextStyle: context.appTheme.semiBold24
+                                .copyWith(
+                                  fontSize: 38,
+                                  color: context.appTheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            textStyle: context.appTheme.semiBold24.copyWith(
+                              fontSize: 30,
+                              color: context.appTheme.textMuted,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Icon(
+                              Icons.arrow_drop_up_sharp,
+                              size: 35,
+                              color: context.appTheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 15),
-
-                NumberPicker(
-                  value: _currentValue,
-                  minValue: widget.minValue,
-                  maxValue: widget.maxValue,
-                  step: 1,
-                  itemHeight: 62,
-                  itemWidth: 69,
-                  itemCount: 5,
-                  axis: Axis.horizontal,
-                  onChanged: (value) {
-                    setState(() => _currentValue = value);
-                    widget.onValueChanged(value);
-                  },
-                  selectedTextStyle: context.appTheme.semiBold24.copyWith(
-                    fontSize: 45,
-                    color: context.appTheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textStyle: context.appTheme.semiBold24.copyWith(
-                    fontSize: 25,
-                    color: context.appTheme.textMuted,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                Icon(
-                  Icons.arrow_drop_up_sharp,
-                  size: 35,
-                  color: context.appTheme.primary,
                 ),
 
                 const SizedBox(height: 24),
@@ -124,6 +143,7 @@ class _CustomDataPickerState extends State<CustomDataPicker> {
               ],
             ),
           ),
+
           const SizedBox(height: 40),
         ],
       ),
