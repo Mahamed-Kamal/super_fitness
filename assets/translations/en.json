@@ -157,8 +157,7 @@
   "show_more": "Show more",
   "ingredients": "Ingredients",
   "instructions": "Instructions",
-  "registration_successful": "Register successful, please login",
-  "workouts":{
+  "workouts": {
     "Workouts": "Workouts",
     "untitled": "untitled",
     "There is no Muscles yet": "There is no Muscles yet"
@@ -202,9 +201,7 @@
   "logout": "Logout",
   "logout_success": "Logout successfully",
   "cancel": "Cancel",
-  "confirm_logout!!": "Confirm Logout!!"
-}
-  "confirm_your_new_password": "Confirm your new password"
+  "confirm_logout!!": "Confirm Logout!!",
   "profile": {
     "profile": "Profile",
     "edit_profile": "Edit Profile",

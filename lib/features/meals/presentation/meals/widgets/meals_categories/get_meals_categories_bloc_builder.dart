@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_fitness/core/extensions/context_spacing_extension.dart';
 import 'package:super_fitness/core/widgets/lottie_error.dart';
 import 'package:super_fitness/features/meals/domain/entities/meal_category_entity.dart';
@@ -20,8 +21,23 @@ class GetMealsCategoriesBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state.categoriesState.isInitial ||
             state.categoriesState.isLoading) {
-          return const MealsAsyncLoading(
-            messageKey: 'meals.loading_categories',
+          return SizedBox(
+            height: 48,
+            child: Skeletonizer(
+              enabled: true,
+
+              child: ListView.separated(
+                separatorBuilder: (context, index) => context.w(12),
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
+                ),
+                itemBuilder: (context, index) =>
+                    MealsCategoryPill(label: '', selected: false, onTap: () {}),
+                itemCount: 8,
+              ),
+            ),
           );
         }
         if (state.categoriesState.isError) {

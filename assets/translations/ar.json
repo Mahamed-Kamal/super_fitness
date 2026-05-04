@@ -87,6 +87,16 @@
       "doIt": "افعالها"
     }
   },
+  "auth": {
+    "don_t_have_an_account_yet": "ليس لديك حساب بعد؟",
+    "register": "إنشاء حساب",
+    "login": "تسجيل الدخول",
+    "forget_password?": "نسيت كلمة المرور؟",
+    "password": "كلمة المرور",
+    "email": "البريد الإلكتروني",
+    "welcome_back": "حمداً لله على سلامتك",
+    "hey_there": "أهلاً بك\n"
+  },
   "register": "إنشاء حساب",
   "first_name": "الاسم الأول",
   "last_name": "الاسم الأخير",
@@ -195,10 +205,6 @@
     "gym_experience": "تجربة الجيم",
     "coming_soon": "قريباً",
     "gym_desc": "نحن نعمل بجد لتوفير أفضل تجربة لتتبع الجيم بين يديك.",
-    "logout": "تسجيل الخروج",
-    "logout_success": "تم تسجيل الخروج بنجاح",
-    "cancel": "إلغاء",
-    "confirm_logout!!": "تأكيد تسجيل الخروج!!"
     "seeAll": "مشاهده الجميع"
   },
   "profile": {
@@ -215,5 +221,9 @@
     "your_goal": "هدفك",
     "your_activity_level": "مستوى نشاطك",
     "tap_to_edit": "اضغط للتعديل"
-  }
+  },
+  "logout": "تسجيل الخروج",
+  "logout_success": "تم تسجيل الخروج بنجاح",
+  "cancel": "إلغاء",
+  "confirm_logout!!": "تأكيد تسجيل الخروج!!"
 }
