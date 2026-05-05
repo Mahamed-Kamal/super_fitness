@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:super_fitness/features/meals/api/models/responses/meal_dto.dart';
-import 'package:super_fitness/features/meals/data/mappers/meal_details_mapper.dart';
+import 'package:super_fitness/features/meals/domain/mapper/meal_details_mapper.dart';
 import 'package:super_fitness/features/meals/domain/entities/meal_entity.dart';
 
 void main() {
@@ -127,7 +127,7 @@ void main() {
       final result = buildMealDto(
         strMealThumb: 'https://img.com/meal.jpg',
       ).toMealEntity();
-      expect(result.image, 'https://img.com/meal.jpg');
+      expect(result.imageUrl, 'https://img.com/meal.jpg');
     });
 
     // ─── Null fallbacks ───────────────────────────────────────────────────────
@@ -144,7 +144,7 @@ void main() {
 
     test('falls back to empty string for null image', () {
       final result = buildMealDto(strMealThumb: null).toMealEntity();
-      expect(result.image, '');
+      expect(result.imageUrl, '');
     });
 
     // ─── Ingredients list ─────────────────────────────────────────────────────

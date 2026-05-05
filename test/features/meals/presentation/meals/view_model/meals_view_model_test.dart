@@ -254,7 +254,7 @@ void main() {
           vm.uiEventsStream,
           emits(predicate<NavigateToMealsDetails>((e) => e.meal == meal)),
         );
-        vm.doIntent(MealCardClickedIntent(meal));
+        vm.doIntent(MealCardClickedIntent(meal, []));
       },
       expect: () => <MealsState>[],
     );

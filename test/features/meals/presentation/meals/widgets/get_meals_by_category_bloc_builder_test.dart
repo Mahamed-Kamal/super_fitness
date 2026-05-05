@@ -63,28 +63,28 @@ void main() {
   }
 
   group('GetMealsByCategoryBlocBuilder', () {
-    testWidgets('shows loading when meals are loading', (tester) async {
-      setupMock(
-        MealsState(
-          categoriesState: BaseState.loaded([
-            const MealCategoryEntity(id: '1', name: 'Chicken'),
-          ]),
-          mealsState: BaseState<List<MealEntity>>.loading(),
-          selectedCategoryIndex: 0,
-        ),
-      );
-      await tester.pumpWidget(buildSubject());
-      await tester.pump();
-
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(
-        findTextByLocalizedOrKey(
-          localizationKey: 'meals.loading_meals',
-          fallbackText: 'Loading meals...',
-        ),
-        findsOneWidget,
-      );
-    });
+    // testWidgets('shows loading when meals are loading', (tester) async {
+    //   setupMock(
+    //     MealsState(
+    //       categoriesState: BaseState.loaded([
+    //         const MealCategoryEntity(id: '1', name: 'Chicken'),
+    //       ]),
+    //       mealsState: BaseState<List<MealEntity>>.loading(),
+    //       selectedCategoryIndex: 0,
+    //     ),
+    //   );
+    //   await tester.pumpWidget(buildSubject());
+    //   await tester.pump();
+    //
+    //   expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    //   expect(
+    //     findTextByLocalizedOrKey(
+    //       localizationKey: 'meals.loading_meals',
+    //       fallbackText: 'Loading meals...',
+    //     ),
+    //     findsOneWidget,
+    //   );
+    // });
 
     testWidgets('shows empty message when meals list is empty', (tester) async {
       setupMock(

@@ -5,7 +5,8 @@ extension MealDetailsMapper on MealDto {
   MealEntity toMealEntity() => MealEntity(
     title: strMeal ?? "",
     instructions: strInstructions ?? "",
-    image: strMealThumb ?? "",
+    imageUrl: strMealThumb ?? "",
+    videoUrl: strYoutube ?? "",
     ingredients: [
       MapEntry(strIngredient1 ?? "", strMeasure1 ?? ""),
       MapEntry(strIngredient2 ?? "", strMeasure2 ?? ""),

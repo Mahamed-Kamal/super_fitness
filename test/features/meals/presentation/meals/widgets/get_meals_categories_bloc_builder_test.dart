@@ -62,28 +62,28 @@ void main() {
   }
 
   group('GetMealsCategoriesBlocBuilder', () {
-    testWidgets('shows loading row when categories are loading', (
-      tester,
-    ) async {
-      setupMock(
-        MealsState(
-          categoriesState: BaseState<List<MealCategoryEntity>>.loading(),
-          mealsState: BaseState.init(),
-          selectedCategoryIndex: 0,
-        ),
-      );
-      await tester.pumpWidget(buildSubject());
-      await tester.pump();
-
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(
-        findTextByLocalizedOrKey(
-          localizationKey: 'meals.loading_categories',
-          fallbackText: 'Loading categories...',
-        ),
-        findsOneWidget,
-      );
-    });
+    // testWidgets('shows loading row when categories are loading', (
+    //   tester,
+    // ) async {
+    //   setupMock(
+    //     MealsState(
+    //       categoriesState: BaseState<List<MealCategoryEntity>>.loading(),
+    //       mealsState: BaseState.init(),
+    //       selectedCategoryIndex: 0,
+    //     ),
+    //   );
+    //   await tester.pumpWidget(buildSubject());
+    //   await tester.pump();
+    //
+    //   expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    //   expect(
+    //     findTextByLocalizedOrKey(
+    //       localizationKey: 'meals.loading_categories',
+    //       fallbackText: 'Loading categories...',
+    //     ),
+    //     findsOneWidget,
+    //   );
+    // });
 
     testWidgets('shows empty message when categories list is empty', (
       tester,

@@ -10,7 +10,7 @@ class CollapsedAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
+        top: (MediaQuery.of(context).padding.top + 8),
         left: 56,
         right: 56,
         bottom: 12,

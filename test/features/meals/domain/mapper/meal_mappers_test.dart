@@ -77,7 +77,7 @@ void main() {
         strMeal: 'Soup',
         strMealThumb: 'u',
       ).toEntity();
-      expect(entity, const MealEntity(id: '9', title: 'Soup', image: 'u'));
+      expect(entity, const MealEntity(id: '9', title: 'Soup', imageUrl: 'u'));
     });
   });
 

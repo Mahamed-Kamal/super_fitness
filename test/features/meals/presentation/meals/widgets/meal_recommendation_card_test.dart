@@ -28,7 +28,7 @@ void main() {
             width: 180,
             height: 220,
             child: MealRecommendationCard(
-              meal: const MealEntity(id: '1', title: 'Protein Bowl', image: ''),
+              meal: const MealEntity(id: '1', title: 'Protein Bowl', imageUrl: ''),
               onTap: () => tapped = true,
             ),
           ),

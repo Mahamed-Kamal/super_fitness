@@ -18,6 +18,7 @@ class MealsViewModel extends Cubit<MealsState> {
   final GetMealsCategoriesUseCase _getMealsCategoriesUseCase;
   final GetMealsByCategoryUseCase _getMealsByCategoryUseCase;
   final _uiEventsController = StreamController<MealsUIEvents>.broadcast();
+
   Stream<MealsUIEvents> get uiEventsStream => _uiEventsController.stream;
 
   MealsViewModel(
@@ -34,7 +35,9 @@ class MealsViewModel extends Cubit<MealsState> {
       case GetMealsByCategoryIntent():
         await _fetchMealsBySelectedCategory();
       case MealCardClickedIntent():
-        _uiEventsController.add(NavigateToMealsDetails(intent.meal));
+        _uiEventsController.add(
+          NavigateToMealsDetails(intent.meal, intent.meals),
+        );
     }
   }
 

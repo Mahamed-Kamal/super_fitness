@@ -19,7 +19,7 @@ void main() {
 
       expect(entity.title, '');
       expect(entity.instructions, '');
-      expect(entity.image, '');
+      expect(entity.imageUrl, '');
       expect(entity.ingredients, isEmpty);
     });
 
@@ -27,13 +27,13 @@ void main() {
       final entity = MealEntity(
         title: 'Pizza',
         instructions: 'Bake it',
-        image: 'https://img.com/pizza.jpg',
+        imageUrl: 'https://img.com/pizza.jpg',
         ingredients: [MapEntry('Flour', '2 cups')],
       );
 
       expect(entity.title, 'Pizza');
       expect(entity.instructions, 'Bake it');
-      expect(entity.image, 'https://img.com/pizza.jpg');
+      expect(entity.imageUrl, 'https://img.com/pizza.jpg');
       expect(entity.ingredients.length, 1);
       expectIngredient(entity.ingredients[0], 'Flour', '2 cups');
     });
@@ -41,8 +41,8 @@ void main() {
     // ─── Equatable equality ─────────────────────────────────────────────────
 
     test('two instances with same scalar values are equal', () {
-      const a = MealEntity(title: 'Pizza', instructions: 'Bake', image: 'img');
-      const b = MealEntity(title: 'Pizza', instructions: 'Bake', image: 'img');
+      const a = MealEntity(title: 'Pizza', instructions: 'Bake', imageUrl: 'img');
+      const b = MealEntity(title: 'Pizza', instructions: 'Bake', imageUrl: 'img');
 
       expect(a, equals(b));
     });
@@ -62,8 +62,8 @@ void main() {
     });
 
     test('two instances with different image are not equal', () {
-      const a = MealEntity(image: 'img1.jpg');
-      const b = MealEntity(image: 'img2.jpg');
+      const a = MealEntity(imageUrl: 'img1.jpg');
+      const b = MealEntity(imageUrl: 'img2.jpg');
 
       expect(a, isNot(equals(b)));
     });
@@ -94,7 +94,7 @@ void main() {
       final entity = MealEntity(
         title: 'Pizza',
         instructions: 'Bake',
-        image: 'img.jpg',
+        imageUrl: 'img.jpg',
         ingredients: ingredients,
       );
 
