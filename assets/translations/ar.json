@@ -225,5 +225,6 @@
   "logout": "تسجيل الخروج",
   "logout_success": "تم تسجيل الخروج بنجاح",
   "cancel": "إلغاء",
-  "confirm_logout!!": "تأكيد تسجيل الخروج!!"
+  "confirm_logout!!": "تأكيد تسجيل الخروج!!",
+  "recommended_meals": "الوجبات المقترحه"
 }

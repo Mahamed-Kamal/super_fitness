@@ -78,7 +78,7 @@ class GetMealsByCategoryBlocBuilder extends StatelessWidget {
                 return MealRecommendationCard(
                   meal: list[index],
                   onTap: () => context.read<MealsViewModel>().doIntent(
-                    MealCardClickedIntent(list[index]),
+                    MealCardClickedIntent(list[index], list),
                   ),
                 );
               },

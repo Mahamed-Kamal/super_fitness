@@ -26,7 +26,7 @@ void main() {
       theme: DarkTheme().themeData,
       home: BlocProvider<MealDetailsViewModel>.value(
         value: mockViewModel,
-        child: const MealDetailsView(id: testId),
+        child: const MealDetailsView(id: testId, meals: [],),
       ),
     );
   }

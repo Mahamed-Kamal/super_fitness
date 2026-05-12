@@ -160,7 +160,7 @@ void main() {
       final data = (result as SuccessResponse<List<MealEntity>>).data;
       expect(
         data.single,
-        const MealEntity(id: '10', title: 'Pie', image: 'http://m'),
+        const MealEntity(id: '10', title: 'Pie', imageUrl: 'http://m'),
       );
       verify(mockDataSource.fetchMealsByCategory(category: 'Beef')).called(1);
     });

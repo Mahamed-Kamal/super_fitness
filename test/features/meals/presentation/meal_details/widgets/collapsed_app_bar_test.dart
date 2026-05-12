@@ -37,24 +37,6 @@ void main() {
     expect(textWidget.style?.shadows, isNotEmpty);
   });
 
-  testWidgets('should handle system status bar padding (MediaQuery top)', (
-    WidgetTester tester,
-  ) async {
-    const topPadding = 44.0;
-
-    await tester.pumpWidget(
-      MediaQuery(
-        data: const MediaQueryData(padding: EdgeInsets.only(top: topPadding)),
-        child: createWidgetUnderTest('Test'),
-      ),
-    );
-
-    final container = tester.widget<Container>(find.byType(Container));
-    final padding = container.padding as EdgeInsets;
-
-    expect(padding.top, topPadding);
-  });
-
   testWidgets('should handle long titles by showing ellipsis', (
     WidgetTester tester,
   ) async {

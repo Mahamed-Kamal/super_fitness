@@ -10,6 +10,7 @@ final class GetMealsCategoriesIntent extends MealsIntent {
 
 final class SelectMealCategoryIntent extends MealsIntent {
   final int selectedIndex;
+
   const SelectMealCategoryIntent(this.selectedIndex);
 }
 
@@ -19,12 +20,16 @@ final class GetMealsByCategoryIntent extends MealsIntent {
 
 final class MealCardClickedIntent extends MealsIntent {
   final MealEntity meal;
-  const MealCardClickedIntent(this.meal);
+  final List<MealEntity> meals;
+
+  const MealCardClickedIntent(this.meal, this.meals);
 }
 
 sealed class MealsUIEvents {}
 
 final class NavigateToMealsDetails extends MealsUIEvents {
   final MealEntity meal;
-  NavigateToMealsDetails(this.meal);
+  final List<MealEntity> meals;
+
+  NavigateToMealsDetails(this.meal, this.meals);
 }

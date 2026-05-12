@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness/core/bloc/base_state.dart';
 import 'package:super_fitness/core/extensions/theme_context_extension.dart';
+import 'package:super_fitness/features/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_intent.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_state.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/widgets/meal_detail_body.dart';
 import 'package:super_fitness/features/meals/presentation/meal_details/view_model/meal_details_view_model.dart';
 
 class MealDetailsView extends StatefulWidget {
+  final List<MealEntity> meals;
   final String id;
 
-  const MealDetailsView({super.key, required this.id});
+  const MealDetailsView({super.key, required this.id, required this.meals});
 
   @override
   State<MealDetailsView> createState() => _MealDetailsViewState();
@@ -21,31 +23,35 @@ class _MealDetailsViewState extends State<MealDetailsView> {
   @override
   void initState() {
     super.initState();
+    getMealDetails();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: BlocBuilder<MealDetailsViewModel, MealDetailsState>(
+      builder: (context, state) {
+        return switch (state.requestState) {
+          RequestState.init || RequestState.loading => Center(
+            child: CircularProgressIndicator(color: context.appTheme.primary),
+          ),
+          RequestState.error => _ErrorBody(
+            message: state.errorMessage ?? 'something_went_wrong'.tr(),
+            id: widget.id,
+          ),
+          RequestState.loaded => SafeArea(
+            child: MealDetailBody(meal: state.data!, allMeals: widget.meals),
+          ),
+        };
+      },
+    ),
+  );
+
+  void getMealDetails() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<MealDetailsViewModel>().doIntent(
         GetMealDetails(id: widget.id),
       );
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<MealDetailsViewModel, MealDetailsState>(
-        builder: (context, state) {
-          return switch (state.requestState) {
-            RequestState.init || RequestState.loading => Center(
-              child: CircularProgressIndicator(color: context.appTheme.primary),
-            ),
-            RequestState.error => _ErrorBody(
-              message: state.errorMessage ?? 'something_went_wrong'.tr(),
-              id: widget.id,
-            ),
-            RequestState.loaded => MealDetailBody(meal: state.data!),
-          };
-        },
-      ),
-    );
   }
 }
 

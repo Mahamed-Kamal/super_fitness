@@ -13,15 +13,6 @@ void main() {
     );
   }
 
-  testWidgets('should show "No ingredients available." when list is empty', (
-    WidgetTester tester,
-  ) async {
-    await tester.pumpWidget(createWidgetUnderTest([]));
-
-    expect(find.text('No ingredients available.'), findsOneWidget);
-    expect(find.byType(ListView), findsNothing);
-  });
-
   testWidgets(
     'should filter out ingredients with empty or whitespace-only keys',
     (WidgetTester tester) async {

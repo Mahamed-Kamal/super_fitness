@@ -42,7 +42,7 @@ class _MealsViewState extends State<MealsView> {
               Navigator.pushNamed(
                 context,
                 AppRoutes.mealDetails,
-                arguments: event.meal.id,
+                arguments: [event.meal.id, event.meals],
               );
           }
         });

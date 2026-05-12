@@ -23,9 +23,9 @@ class MealRecommendationCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            if (meal.image.isNotEmpty)
+            if (meal.imageUrl.isNotEmpty)
               CachedNetworkImage(
-                imageUrl: meal.image,
+                imageUrl: meal.imageUrl,
                 fit: BoxFit.cover,
                 errorWidget: (_, _, _) => ColoredBox(
                   color: context.appTheme.neutral[800]!,

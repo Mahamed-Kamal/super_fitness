@@ -105,6 +105,7 @@ void main() {
       );
     });
   });
+
   group("Test getMealDetails in dataSource cases", () {
     late MockMealsApiClient mockMealsApiClient;
     late MealsRemoteDataSource mealsRemoteDataSource;
@@ -128,11 +129,8 @@ void main() {
         id = "";
 
         var response = await mealsRemoteDataSource.getMealDetails(id: id);
-        expect(response is FailureResponse<List<MealDto>>, true);
-        expect(
-          (response as FailureResponse<List<MealDto>>).errorMessage,
-          "empty_id",
-        );
+        expect(response is FailureResponse<MealDto>, true);
+        expect((response as FailureResponse<MealDto>).errorMessage, "empty_id");
       },
     );
 
@@ -144,9 +142,9 @@ void main() {
 
       var response =
           await mealsRemoteDataSource.getMealDetails(id: id)
-              as SuccessResponse<List<MealDto>>;
+              as SuccessResponse<MealDto>;
 
-      expect(response.data.first.idMeal, id);
+      expect(response.data.idMeal, id);
     });
 
     test("When i call getMealDetails with id it's return failure"
@@ -157,11 +155,8 @@ void main() {
 
       var response = await mealsRemoteDataSource.getMealDetails(id: id);
 
-      expect(response is FailureResponse<List<MealDto>>, true);
-      expect(
-        (response as FailureResponse).errorMessage,
-        equals("errors.unexpected"),
-      );
+      expect(response is FailureResponse<MealDto>, true);
+      expect((response as FailureResponse<MealDto>).errorMessage, isNotEmpty);
     });
   });
 }

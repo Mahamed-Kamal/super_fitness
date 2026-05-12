@@ -8,45 +8,42 @@ import 'placeholder_hero.dart';
 class HeroSliver extends StatelessWidget {
   final MealEntity meal;
   final double heroHeight;
+  final Widget? player;
 
-  const HeroSliver({super.key, required this.meal, required this.heroHeight});
+  const HeroSliver({
+    super.key,
+    required this.meal,
+    required this.heroHeight,
+    this.player,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: heroHeight,
-      pinned: false,
-      stretch: true,
-      backgroundColor: Colors.transparent,
-      automaticallyImplyLeading: false,
-      flexibleSpace: FlexibleSpaceBar(
-        stretchModes: const [StretchMode.zoomBackground],
-        background: Stack(
+    final screenWidth = MediaQuery.of(context).size.width;
+    final playerHeight = screenWidth * 9 / 16;
+
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: heroHeight,
+        child: Stack(
           fit: StackFit.expand,
           children: [
-            if (meal.image.isNotEmpty)
+            if (player != null)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                height: playerHeight,
+                child: player!,
+              )
+            else if (meal.imageUrl.isNotEmpty)
               Image.network(
-                meal.image,
+                meal.imageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => const PlaceholderHero(),
               )
             else
               const PlaceholderHero(),
-
-            DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: const [0.0, 0.45, 1.0],
-                  colors: [
-                    Colors.black.withValues(alpha: 0.25),
-                    Colors.transparent,
-                    Colors.black,
-                  ],
-                ),
-              ),
-            ),
 
             Positioned(
               left: 20,
@@ -60,7 +57,7 @@ class HeroSliver extends StatelessWidget {
                   height: 1.2,
                   fontSize: 28,
                   fontWeight: FontWeight.w800,
-                  shadows: [
+                  shadows: const [
                     Shadow(
                       blurRadius: 8,
                       color: Colors.black54,
